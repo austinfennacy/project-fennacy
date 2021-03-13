@@ -31,9 +31,14 @@ WHEN IN DOUBT, YAGNI
   - "In flux pattern, data flows in a single direction. Additionally, all the logic for updating state is contained in the store itself and no other parts of the application need to know how to update the state. It is hard to understand an application if every part of the application can mutate state. This is not the case in a flux application."
 - how can I write the least SQL possible, create the db using code, and update the db schema using code-first migrations?
 
-## todo sandbox
+## learning objectives for sandbox
 - FLUX app to better understand React/Redux
   - https://github.com/facebook/flux/tree/master/examples/flux-todomvc
 - Sequelize tutorial
   - will it solve my "SQL-less" needs? is it all code first?
   - https://www.esparkinfo.com/node-js-with-mysql-using-sequelize-express.html
+- "know" js
+  - https://github.com/getify/You-Dont-Know-JS
+
+## motivation
+- You may have been told, or felt yourself, that JS is a deeply flawed language that was poorly designed and inconsistently implemented. Many have asserted that it's the worst most popular language in the world; that nobody writes JS because they want to, only because they have to given its place at the center of the web. That's a ridiculous, unhealthy, and wholly condescending claim. Millions of developers write JavaScript every day, and many of them appreciate and respect the language. (https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/preface.md)
