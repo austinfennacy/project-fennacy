@@ -1,0 +1,27 @@
+{
+  "name": "project-fennacy",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/austinfennacy/project-fennacy.git"
+  },
+  "author": "Austin Fennacy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/austinfennacy/project-fennacy/issues"
+  },
+  "homepage": "https://github.com/austinfennacy/project-fennacy#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
+  }
+}

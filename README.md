@@ -19,7 +19,8 @@ WHEN IN DOUBT, YAGNI
 - express (backend API/framework)
 - sequelize (ORM between models/db)
 - MySQL (db)
-
+### other tools
+ - dotenv (loads private keys from local env to protect them in shared git repos)
 ### stack design research/sources
 - https://css-tricks.com/project-need-react/
 - https://facebook.github.io/flux/
