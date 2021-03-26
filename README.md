@@ -11,20 +11,32 @@ WHEN IN DOUBT, YAGNI
 ### frontend nice-to-have
 - ESlint, AirBnB javascript style (code style enforcement)
 - Prettier (code format enforcement)
-- Formik (form validation)
-- Yup (schema builder that reduces boilerplate validation from Formik)
 - ant, material, or evergreen? (css library)
 - jest, react testing library? (testing)
+### validation considerations
+on frontend, could use
+- Formik (form validation)
+- Yup (schema builder that reduces boilerplate validation from Formik)
+however, sequelize has what looks to be very robust validation. if sequelize
+can communicate it's validation constraints automatically to the react 
+project then that would be perfect, so that validation is DRY and stored in
+the sequelize model.
+sequelize has fleshed out basic validation but also supports custom validation
+rules, so this seems like a fantastic option
 ### backend must-have
 - express (backend API/framework)
 - sequelize (ORM between models/db)
 - MySQL (db)
 ### other tools
  - dotenv (loads private keys from local env to protect them in shared git repos)
+ - (?) body-parser if I need to parse JSON?
 ### stack design research/sources
 - https://css-tricks.com/project-need-react/
 - https://facebook.github.io/flux/
 - https://sidetrade-tech-hub.medium.com/modern-2020-react-stack-or-how-we-switched-away-from-angular-a9efb65d51e5
+
+### style guide thoughts
+- Sequelize has the option to have Models named differently than MySQL Tables, so that js model naming convention of PascalCase can be enforced while MySQL table naming convention of snake_case can be enforced simultaneously. However, since I plan on using Sequelize for all database interactions and want this project to be strictly code-first for all migrations, seeding etc, I don't care if the MySQL database breaks convention. enforcing the convention will only increase the boilerplate I have to write for every model and every model field. I will not be overriding Sequelize's database naming conventions to reduce boilerplate in models.
 
 ## questions to answer
 - where will the business logic live in my architecture?
