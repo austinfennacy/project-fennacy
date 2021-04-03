@@ -21,6 +21,7 @@ WHEN IN DOUBT, YAGNI, KISS
 - https://www.sitepoint.com/organize-large-react-application/
 - https://create-react-app.dev/docs/importing-a-component/#absolute-imports
 - https://nx.dev/react
+  - [Nx: Extensible Dev Tools for Monorepos](https://www.youtube.com/watch?v=E188J7E_MDU)
 - I want to get react working first before I add structure/complexity
 ### frontend nice-to-have
 - ESlint, AirBnB javascript style (code style enforcement)
