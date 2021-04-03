@@ -1,18 +1,34 @@
-WHEN IN DOUBT, YAGNI
+WHEN IN DOUBT, YAGNI, KISS
 
 ## stack
 ### frontend must-have
 - react (frontend framework)
-- create-react-app (boilerplate)
-- Redux (state management)
-- react router
+  - jsx (html markup inside js, similar to .NET razor functions)
+  - create-react-app (boilerplate)
+  - react router
+  - Redux (state management)
+- material UI (css library)
 - passport (authentication)
 - axios (HTTP requests client, to access backend API)
+### backend must-have
+- express (backend API/framework)
+- sequelize (ORM between models/db)
+- MySQL (db)
 ### frontend nice-to-have
 - ESlint, AirBnB javascript style (code style enforcement)
+  - will this enforce strict mode implicitly?
 - Prettier (code format enforcement)
-- ant, material, or evergreen? (css library)
+- [ant's suggested third-party libraries for react](https://ant.design/docs/react/recommendation)
 - jest, react testing library? (testing)
+- Redux would technically be a nice-to-have, but I'm so excited by immutability/functional programming concepts that I want to enforce and learn more about it, so making this nice-to-have a must-have for learning's sake
+### css library considerations
+- ant, material, or evergreen?
+- evergreen doesn't have enough of an ecosystem, thought it is beautiful out of the box. non-starter for lack of support. getting a bad impression from youtube.
+- material has a ton of customization and is very fleshed out / supported 
+- ant design comes from alibaba where material comes from google, so while ant's ecosystem and robustness is on par with material, a lot of it's support may be in a language I can't speak, so I may not have access to the fully robust ecosystem in the same way that I may with material
+- honestly at this point I'm just nitpicking and I would be well off with virtually any of the 5 css libraries I've researched - there's no way I encounter an edge case with my basic project. KISS.
+- **Material UI** it is! :)
+
 ### validation considerations
 on frontend, could use
 - Formik (form validation)
@@ -23,10 +39,6 @@ project then that would be perfect, so that validation is DRY and stored in
 the sequelize model.
 sequelize has fleshed out basic validation but also supports custom validation
 rules, so this seems like a fantastic option
-### backend must-have
-- express (backend API/framework)
-- sequelize (ORM between models/db)
-- MySQL (db)
 ### other tools
  - dotenv (loads private keys from local env to protect them in shared git repos)
  - (?) body-parser if I need to parse JSON?
@@ -36,6 +48,12 @@ rules, so this seems like a fantastic option
 - https://sidetrade-tech-hub.medium.com/modern-2020-react-stack-or-how-we-switched-away-from-angular-a9efb65d51e5
 
 ### stack thoughts
+next.js framework?
+- official react docs reccomend it for [static and server-rendered applications](https://reactjs.org/docs/create-a-new-react-app.html#nextjs)
+- not sure if it will be the right tool given backend considerations, but I don't know enough about it to be sure
+- yagni? kiss?
+- **considering education**: it's important to have a thorough understanding of the "vanilla" core tools such as react, so while next.js could likely make life easier in certain use cases, given that a strong focus on this project is learning about tools like react, I will not use next.js. I want to use this project to really learn about React, and I may as well focus on vanilla unencumbered React.
+
 sequelize: `.sync()` vs migrations
 - sequelize CAVEAT - migrations do not automatically sync with changes to models, so if a model/migration is created from the CLI, 2 sources of truth must be updated.
 - sequelize.sync() and migrations perform different purposes, migrations are like git version controlled changes whereas sync can only show you the latest version
