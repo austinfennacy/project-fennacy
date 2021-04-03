@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { Sequelize } = require('sequelize');
 const { sequelize, ShopDrawing } = require('./models');
 const config = require('./config/config.js');
@@ -22,7 +23,7 @@ app.post('/shopDrawing', async (req, res) => {
   }
 })
 
-app.get('/shopDrawings', async (req, res) => {
+app.get('/shopDrawings', cors(), async (req, res) => {
   try {
     const shopDrawings = await ShopDrawing.findAll();
     
