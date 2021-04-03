@@ -17,6 +17,10 @@ WHEN IN DOUBT, YAGNI, KISS
 
 ### Project Organization?
 - React is opinionless on how to organize a project, for dev flexibility
+- create-react-app has very mild opinions, still may not be enough structure
+  - interesting templating, could be used for inspiration
+  - https://create-react-app.dev/docs/custom-templates/
+  - https://www.npmjs.com/search?q=cra-template-*
 - https://reboot.studio/blog/folder-structures-to-organize-react-project/
 - https://www.sitepoint.com/organize-large-react-application/
 - https://create-react-app.dev/docs/importing-a-component/#absolute-imports
