@@ -9,11 +9,40 @@ app.use(express.json())
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
-app.post('/shopDrawings', async (req, res) => {
+app.post('/shopDrawing', async (req, res) => {
   const { shopDrawingNumber, description } = req.body
 
   try {
     const shopDrawing = await ShopDrawing.create({ shopDrawingNumber, description })
+
+    return res.json(shopDrawing)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
+app.get('/shopDrawings', async (req, res) => {
+  try {
+    const shopDrawings = await ShopDrawing.findAll();
+    
+    return res.json(shopDrawings)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
+
+app.get('/shopDrawing/:id', async (req, res) => {
+  const idParam = req.params.id;
+
+  try {
+    const shopDrawing = await ShopDrawing.findAll({
+      where: {
+        id: idParam,
+      }
+    });
 
     return res.json(shopDrawing)
   } catch (err) {

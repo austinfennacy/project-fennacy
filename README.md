@@ -4,7 +4,7 @@ WHEN IN DOUBT, YAGNI, KISS
 ### frontend must-have
 - react (frontend framework)
   - jsx (html markup inside js, similar to .NET razor functions)
-  - create-react-app (boilerplate)
+  - create-react-app (boilerplate / toolchain initializer)
   - react router
   - Redux (state management)
 - material UI (css library)
@@ -14,13 +14,25 @@ WHEN IN DOUBT, YAGNI, KISS
 - express (backend API/framework)
 - sequelize (ORM between models/db)
 - MySQL (db)
+
+### Project Organization?
+- React is opinionless on how to organize a project, for dev flexibility
+- https://reboot.studio/blog/folder-structures-to-organize-react-project/
+- https://www.sitepoint.com/organize-large-react-application/
+- https://create-react-app.dev/docs/importing-a-component/#absolute-imports
+- https://nx.dev/react
+- I want to get react working first before I add structure/complexity
 ### frontend nice-to-have
 - ESlint, AirBnB javascript style (code style enforcement)
   - will this enforce strict mode implicitly?
 - Prettier (code format enforcement)
 - [ant's suggested third-party libraries for react](https://ant.design/docs/react/recommendation)
-- jest, react testing library? (testing)
+- jest, react testing library, Cypress? (testing)
+  - via nx: "And let’s face it: writing Jest tests for presentational components does not work well. For instance, we often use animations in design to engage and delight users — and animations are important to test. When testing details like animations, we want to make sure the necessary UI components are visible before clicking. Cypress does that. Jest does not, and isn’t suitable for this job."
 - Redux would technically be a nice-to-have, but I'm so excited by immutability/functional programming concepts that I want to enforce and learn more about it, so making this nice-to-have a must-have for learning's sake
+### repo organization considerations
+- create-react-app vs [nx](https://nx.dev/react) ?
+
 ### css library considerations
 - ant, material, or evergreen?
 - evergreen doesn't have enough of an ecosystem, thought it is beautiful out of the box. non-starter for lack of support. getting a bad impression from youtube.
@@ -51,6 +63,7 @@ rules, so this seems like a fantastic option
 next.js framework?
 - official react docs reccomend it for [static and server-rendered applications](https://reactjs.org/docs/create-a-new-react-app.html#nextjs)
 - not sure if it will be the right tool given backend considerations, but I don't know enough about it to be sure
+  - **update** - it's absolutely not the right tool, I'm not building a static server-rendered app
 - yagni? kiss?
 - **considering education**: it's important to have a thorough understanding of the "vanilla" core tools such as react, so while next.js could likely make life easier in certain use cases, given that a strong focus on this project is learning about tools like react, I will not use next.js. I want to use this project to really learn about React, and I may as well focus on vanilla unencumbered React.
 
