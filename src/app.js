@@ -10,6 +10,17 @@ app.use(express.json())
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
+app.get('/shopDrawings', cors(), async (req, res) => {
+  try {
+    const shopDrawings = await ShopDrawing.findAll();
+    
+    return res.json(shopDrawings)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 app.post('/shopDrawing', async (req, res) => {
   const { shopDrawingNumber, description } = req.body
 
@@ -23,28 +34,16 @@ app.post('/shopDrawing', async (req, res) => {
   }
 })
 
-app.get('/shopDrawings', cors(), async (req, res) => {
-  try {
-    const shopDrawings = await ShopDrawing.findAll();
-    
-    return res.json(shopDrawings)
-  } catch (err) {
-    console.log(err)
-    return res.status(500).json(err)
-  }
-})
-
-
 app.get('/shopDrawing/:id', async (req, res) => {
   const idParam = req.params.id;
-
+  
   try {
     const shopDrawing = await ShopDrawing.findAll({
       where: {
         id: idParam,
       }
     });
-
+    
     return res.json(shopDrawing)
   } catch (err) {
     console.log(err)
@@ -52,8 +51,27 @@ app.get('/shopDrawing/:id', async (req, res) => {
   }
 })
 
+app.delete('/shopDrawing/:id', async (req, res) => {
+  const idParam = req.params.id;
+
+  try {
+    const numAddectedRows = await ShopDrawing.destroy({
+      where: {
+        id: idParam,
+      }
+    });
+    
+    const recordDeletedSuccessfully = numAddectedRows == 1;
+
+    return res.json({ success: recordDeletedSuccessfully })
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 const db = new Sequelize(config.development.database, config.development.username, config.development.password, {
-    host: config.development.host,
+  host: config.development.host,
     dialect: 'mysql'
   });
 
@@ -61,9 +79,9 @@ const db = new Sequelize(config.development.database, config.development.usernam
 //   .then(() => console.log('db connected...'))
 //   .catch(err => console.log('error: ' + err));
 
-// async function main() {
-//   // note - alter: true / force: true are not reccomended for production use
-//   await sequelize.sync({ alter: true })
-// }
-
-// main()
+// comment out this block to prevent updates to the database schema
+async function main() {
+  // note - alter: true / force: true are not reccomended for production use
+  await sequelize.sync({ alter: true })
+}
+main()
