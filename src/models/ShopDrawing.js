@@ -12,10 +12,38 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
+    toJSON() {
+      return {...this.get(), 
+        createdAt: undefined,
+        updatedAt: undefined,
+        deletedAt: undefined 
+      }
+    }
   };
   ShopDrawing.init({
-    shopDrawingNumber: DataTypes.INTEGER,
-    description: DataTypes.STRING
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
+    shopDrawingNumber: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'shop drawing number is required' },
+        notEmpty: { msg: 'shop drawing number is required' },
+      },
+    },
+    description: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notNull: { msg: 'description is required' },
+        notEmpty: { msg: 'description is required' },
+      },
+    },
   }, {
     sequelize,
     modelName: 'ShopDrawing',

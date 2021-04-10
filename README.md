@@ -35,6 +35,8 @@ WHEN IN DOUBT, YAGNI, KISS
 - jest, react testing library, Cypress? (testing)
   - via nx: "And let’s face it: writing Jest tests for presentational components does not work well. For instance, we often use animations in design to engage and delight users — and animations are important to test. When testing details like animations, we want to make sure the necessary UI components are visible before clicking. Cypress does that. Jest does not, and isn’t suitable for this job."
 - Redux would technically be a nice-to-have, but I'm so excited by immutability/functional programming concepts that I want to enforce and learn more about it, so making this nice-to-have a must-have for learning's sake
+- TypeScript
+  - I really want it, the only reason I wouldn't put it in this project was to become a stronger "vanilla" javascript developer...
 ### repo organization considerations
 - create-react-app vs [nx](https://nx.dev/react) ?
 
