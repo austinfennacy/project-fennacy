@@ -35,14 +35,10 @@ app.post('/shopDrawing', async (req, res) => {
 })
 
 app.get('/shopDrawing/:id', async (req, res) => {
-  const idParam = req.params.id;
+  const id = req.params.id;
   
   try {
-    const shopDrawing = await ShopDrawing.findAll({
-      where: {
-        id: idParam,
-      }
-    });
+    const shopDrawing = await ShopDrawing.findOne({ where: { id } });
     
     return res.json(shopDrawing)
   } catch (err) {
@@ -51,13 +47,31 @@ app.get('/shopDrawing/:id', async (req, res) => {
   }
 })
 
+app.put('/shopDrawing/:id', async (req, res) => {
+  const id = req.params.id;
+  const { shopDrawingNumber, description } = req.body;
+  try {
+    const shopDrawing = await ShopDrawing.findOne({ where: { id } });
+    
+    shopDrawing.shopDrawingNumber = shopDrawingNumber
+    shopDrawing.description = description
+
+    await shopDrawing.save()
+
+    return res.json(shopDrawing)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 app.delete('/shopDrawing/:id', async (req, res) => {
-  const idParam = req.params.id;
+  const id = req.params.id;
 
   try {
     const numAddectedRows = await ShopDrawing.destroy({
       where: {
-        id: idParam,
+        id: id,
       }
     });
     
@@ -75,13 +89,10 @@ const db = new Sequelize(config.development.database, config.development.usernam
     dialect: 'mysql'
   });
 
-// db.authenticate()
-//   .then(() => console.log('db connected...'))
-//   .catch(err => console.log('error: ' + err));
-
 // comment out this block to prevent updates to the database schema
 async function main() {
-  // note - alter: true / force: true are not reccomended for production use
+  // note - alter: true / force: true are not reccomended for production use,
+  // need to consider migration system once deploying
   await sequelize.sync({ alter: true })
 }
 main()
