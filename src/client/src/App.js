@@ -1,17 +1,16 @@
 import './App.css';
 import ShopDrawingTable from './components/shopDrawingTable/shopDrawingTable';
-import { Button } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 
 function App() {
   return (
     <div className="App">
-      <h1>
-        Main component
-      </h1>
-      <Button variant="contained" color="primary">
-        Material-UI proof of concept
-      </Button>
-      <ShopDrawingTable />
+      <Container maxWidth="xl">
+        <h1>
+          Main component
+        </h1>
+        <ShopDrawingTable />
+      </Container>
     </div>
   );
 }
