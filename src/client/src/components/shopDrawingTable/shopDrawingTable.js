@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import './shopDrawings.css';
+import './shopDrawingTable.css';
 
-class ShopDrawings extends Component {
+class ShopDrawingRow extends Component {
+  render() {
+    return (
+      <li key={this.props.shopDrawing.id}>
+        {this.props.shopDrawing.shopDrawingNumber} - {this.props.shopDrawing.description}
+      </li>
+    );
+  }
+}
+
+class ShopDrawingTable extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,7 +24,7 @@ class ShopDrawings extends Component {
       .then(res => res.json())
       .then(shopDrawings => this.setState({shopDrawings}));
   }
-  
+
   render() {
     return (
       <div>
@@ -23,13 +33,11 @@ class ShopDrawings extends Component {
         </h3>
         <ul>
           {this.state.shopDrawings.map(shopDrawing => 
-            <li key={shopDrawing.id}>
-              {shopDrawing.shopDrawingNumber} - {shopDrawing.description}
-            </li>)}
+            <ShopDrawingRow shopDrawing={shopDrawing} />)}
         </ul>
       </div>
     );
   }
 }
 
-export default ShopDrawings;
+export default ShopDrawingTable;

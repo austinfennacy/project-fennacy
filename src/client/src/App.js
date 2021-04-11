@@ -1,5 +1,5 @@
 import './App.css';
-import ShopDrawings from './components/shopDrawings/shopDrawings';
+import ShopDrawingTable from './components/shopDrawingTable/shopDrawingTable';
 import { Button } from '@material-ui/core';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Button variant="contained" color="primary">
         Material-UI proof of concept
       </Button>
-      <ShopDrawings />
+      <ShopDrawingTable />
     </div>
   );
 }
