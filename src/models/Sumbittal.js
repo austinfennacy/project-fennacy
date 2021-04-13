@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class ShopDrawing extends Model {
+  class Submittal extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -21,19 +21,19 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   };
-  ShopDrawing.init({
+  Submittal.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },
-    shopDrawingNumber: {
+    submittalNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        notNull: { msg: 'shop drawing number is required' },
-        notEmpty: { msg: 'shop drawing number is required' },
+        notNull: { msg: 'submittal number is required' },
+        notEmpty: { msg: 'submittal number is required' },
       },
     },
     description: {
@@ -46,8 +46,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'ShopDrawing',
+    modelName: 'Submittal',
     paranoid: true,
   });
-  return ShopDrawing;
+  return Submittal;
 };

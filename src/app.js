@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { Sequelize } = require('sequelize');
-const { sequelize, ShopDrawing } = require('./models');
+const { sequelize, Submittal } = require('./models');
 const config = require('./config/config.js');
 
 const app = express();
@@ -10,66 +10,66 @@ app.use(express.json())
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
-app.get('/shopDrawings', cors(), async (req, res) => {
+app.get('/submittals', cors(), async (req, res) => {
   try {
-    const shopDrawings = await ShopDrawing.findAll();
+    const submittals = await Submittal.findAll();
     
-    return res.json(shopDrawings)
+    return res.json(submittals)
   } catch (err) {
     console.log(err)
     return res.status(500).json(err)
   }
 })
 
-app.post('/shopDrawing', async (req, res) => {
-  const { shopDrawingNumber, description } = req.body
+app.post('/submittal', async (req, res) => {
+  const { submittalNumber, description } = req.body
 
   try {
-    const shopDrawing = await ShopDrawing.create({ shopDrawingNumber, description })
+    const submittal = await Submittal.create({ submittalNumber, description })
 
-    return res.json(shopDrawing)
+    return res.json(submittal)
   } catch (err) {
     console.log(err)
     return res.status(500).json(err)
   }
 })
 
-app.get('/shopDrawing/:id', async (req, res) => {
+app.get('/submittal/:id', async (req, res) => {
   const id = req.params.id;
   
   try {
-    const shopDrawing = await ShopDrawing.findOne({ where: { id } });
+    const submittal = await Submittal.findOne({ where: { id } });
     
-    return res.json(shopDrawing)
+    return res.json(submittal)
   } catch (err) {
     console.log(err)
     return res.status(500).json(err)
   }
 })
 
-app.put('/shopDrawing/:id', async (req, res) => {
+app.put('/submittal/:id', async (req, res) => {
   const id = req.params.id;
-  const { shopDrawingNumber, description } = req.body;
+  const { submittalNumber, description } = req.body;
   try {
-    const shopDrawing = await ShopDrawing.findOne({ where: { id } });
+    const submittal = await Submittal.findOne({ where: { id } });
     
-    shopDrawing.shopDrawingNumber = shopDrawingNumber
-    shopDrawing.description = description
+    submittal.submittalNumber = submittalNumber
+    submittal.description = description
 
-    await shopDrawing.save()
+    await submittal.save()
 
-    return res.json(shopDrawing)
+    return res.json(submittal)
   } catch (err) {
     console.log(err)
     return res.status(500).json(err)
   }
 })
 
-app.delete('/shopDrawing/:id', async (req, res) => {
+app.delete('/submittal/:id', async (req, res) => {
   const id = req.params.id;
 
   try {
-    const numAddectedRows = await ShopDrawing.destroy({
+    const numAddectedRows = await Submittal.destroy({
       where: {
         id: id,
       }
@@ -93,6 +93,6 @@ const db = new Sequelize(config.development.database, config.development.usernam
 async function main() {
   // note - alter: true / force: true are not reccomended for production use,
   // need to consider migration system once deploying
-  await sequelize.sync({ alter: true })
+  await sequelize.sync({ force: true })
 }
 main()

@@ -1,5 +1,5 @@
 import './App.css';
-import ShopDrawingTable from './components/shopDrawingTable/shopDrawingTable';
+import SubmittalTable from './components/submittalTable/submittalTable';
 import Container from '@material-ui/core/Container';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
         <h1>
           Main component
         </h1>
-        <ShopDrawingTable />
+        <SubmittalTable />
       </Container>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './shopDrawingTable.css';
+import './submittalTable.css';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,33 +8,33 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-class ShopDrawingRow extends Component {
+class SubmittalRow extends Component {
   render() {
     return (
-      <TableRow key={this.props.shopDrawing.id}>
+      <TableRow key={this.props.submittal.id}>
         <TableCell align="right">
-          {this.props.shopDrawing.shopDrawingNumber}
+          {this.props.submittal.submittalNumber}
         </TableCell>
         <TableCell>
-          {this.props.shopDrawing.description}
+          {this.props.submittal.description}
         </TableCell>
       </TableRow>
     );
   }
 }
 
-class ShopDrawingTable extends Component {
+class SubmittalTable extends Component {
   constructor() {
     super();
     this.state = {
-      shopDrawings: []
+      submittals: []
     }
   }
 
   componentDidMount() {
-    fetch('/shopDrawings')
+    fetch('/submittals')
     .then(res => res.json())
-    .then(shopDrawings => this.setState({shopDrawings}));
+    .then(submittals => this.setState({submittals}));
   }
 
   render() {
@@ -52,8 +52,8 @@ class ShopDrawingTable extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.shopDrawings.map(shopDrawing => 
-                <ShopDrawingRow shopDrawing={shopDrawing} />)}
+              {this.state.submittals.map(submittal => 
+                <SubmittalRow submittal={submittal} />)}
             </TableBody>
           </Table>
         </TableContainer>
@@ -64,4 +64,4 @@ class ShopDrawingTable extends Component {
   }
 }
 
-export default ShopDrawingTable;
+export default SubmittalTable;
