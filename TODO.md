@@ -23,3 +23,8 @@ set up code style
 - ESlint
 - AirBnB javascript style
 - Prettier
+
+refactor layout - I want 2 folders in `src`, `src\client` and `src\server`
+or possibly 3? client, server, and db? should server and db be coupled?
+
+also I really want typescript now there is no learning-objective-oriented reason to not have it, from what I can tell
