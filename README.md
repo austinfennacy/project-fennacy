@@ -47,7 +47,7 @@
 
 ### repo organization considerations
 
-- create-react-app vs [nx](https://nx.dev/react) ?
+- currently just running with a working directory layout, probalby could be better organized
 
 ### css library considerations
 
@@ -104,17 +104,27 @@ sequelize: `.sync()` vs migrations
 
 - Sequelize has the option to have Models named differently than MySQL Tables, so that js model naming convention of PascalCase can be enforced while MySQL table naming convention of snake_case can be enforced simultaneously. However, since I plan on using Sequelize for all database interactions and want this project to be strictly code-first for all migrations, seeding etc, I don't care if the MySQL database breaks convention. enforcing the convention will only increase the boilerplate I have to write for every model and every model field. I will not be overriding Sequelize's database naming conventions to reduce boilerplate in models.
 
+### what to do with enums
+
+- enums are data, not code
+- enums should have data stored in a reference table
+  - foreign keys enforce data validity
+- <https://web.archive.org/web/20180324095351/http://komlenic.com/244/8-reasons-why-mysqls-enum-data-type-is-evil/>
+- [sql naming conventions](https://www.sqlshack.com/learn-sql-naming-conventions/)
+- for clarity I'll put them in schema `enum`
+  - hackey but worthwhile to avoid confusion, imo
+  - everything else in `dbo` or default schema
+
 ## questions to answer
 
 - where will the business logic live in my architecture?
+- how should I organize my projects (frontend/backend?)
 - what is FLUX architecture? what problems does it solve? will it tell me where to put my business logic?
   - "In flux pattern, data flows in a single direction. Additionally, all the logic for updating state is contained in the store itself and no other parts of the application need to know how to update the state. It is hard to understand an application if every part of the application can mutate state. This is not the case in a flux application."
 - how can I write the least SQL possible, create the db using code, and update the db schema using code-first migrations?
 
 ## learning objectives for sandbox
 
-- FLUX app to better understand React/Redux
-  - <https://github.com/facebook/flux/tree/master/examples/flux-todomvc>
 - Sequelize tutorial
   - will it solve my "SQL-less" needs? is it all code first?
   - <https://www.esparkinfo.com/node-js-with-mysql-using-sequelize-express.html>

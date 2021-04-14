@@ -1,7 +1,9 @@
+# todo
+
 create CRUD grid, single view, single update
   create should always share code with update, create uses new model, update uses one populated from the database
 
-add Address model - proposed - 
+add Address model - proposed
   Street1
   Street2
   City
@@ -10,13 +12,14 @@ add Address model - proposed -
   IsMailing
   IsBilling
 
-flesh out ShopDrawingModel
+flesh out Submittal model
 
 create model Project
   number (e.g. 17100)
   name (FUSD McLane High School)
 
 set up code style
+
 - ESlint
 - AirBnB javascript style
 - Prettier
