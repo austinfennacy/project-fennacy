@@ -1,5 +1,27 @@
 # WHEN IN DOUBT, YAGNI, KISS
 
+## getting started from fresh clone
+
+- npm install in root and in ./src/client
+- install MySQL, create user & save db_myusername and db_mypassword
+- create .env and populate it
+  - note: there are no quotes used surrounding db_myusername and db_mypassword
+  - (see npm dotenv for more)
+```
+DB_HOST=localhost
+DB_USER=db_myusername
+DB_PASS=db_mypassword
+```
+- start MySQL server
+- in terminal at project root, run
+```
+npm run init_db
+```
+- then run 
+```
+npm run dev
+```
+
 ## stack
 
 ### frontend must-have
