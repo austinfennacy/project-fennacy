@@ -27,10 +27,7 @@ function SubmittalRow(props) {
 
   const handleDelete = () => {
     fetch(`/submittal/${props.submittal.id}`, {
-      method: 'DELETE',
-      // headers: {
-      //   'Content-Type': 'application/json'
-      // }
+      method: 'DELETE'
     });
 
     setOpen(false);
