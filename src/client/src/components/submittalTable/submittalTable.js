@@ -35,7 +35,7 @@ function SubmittalRow(props) {
       </TableCell>
       <TableCell>
         <Button
-          variant="contained"
+          variant="outlined"
           color="secondary"
           onClick={handleClickOpen}
           startIcon={<DeleteIcon />}>
