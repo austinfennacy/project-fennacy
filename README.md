@@ -13,6 +13,7 @@ DB_USER=db_myusername
 DB_PASS=db_mypassword
 ```
 - start MySQL server
+  - if unsuccessfull, check Windows>Start>Services>MySQL80
 - in terminal at project root, run
 ```
 npm run init_db
