@@ -27,7 +27,7 @@ function SubmittalRow(props) {
   );
 }
 
-function SubmittalTable() {
+export default function SubmittalTable() {
   const [submittals, setSubmittals] = useState([]);
 
   useEffect(() => fetch('/submittals')
@@ -61,5 +61,3 @@ function SubmittalTable() {
     </div>
   );
 }
-
-export default SubmittalTable;
