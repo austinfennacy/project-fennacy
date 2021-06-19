@@ -25,6 +25,17 @@ function SubmittalRow(props) {
     setOpen(false);
   };
 
+  const handleDelete = () => {
+    fetch(`/submittal/${props.submittal.id}`, {
+      method: 'DELETE',
+      // headers: {
+      //   'Content-Type': 'application/json'
+      // }
+    });
+
+    setOpen(false);
+  };
+
   return (
     <TableRow>
       <TableCell align="right">
@@ -56,7 +67,7 @@ function SubmittalRow(props) {
             <Button onClick={handleClose} color="default">
               Cancel
             </Button>
-            <Button onClick={handleClose} color="secondary" autoFocus>
+            <Button onClick={handleDelete} color="secondary" autoFocus>
               Delete
             </Button>
           </DialogActions>
