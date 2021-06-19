@@ -4,6 +4,7 @@
 
 - npm install in root and in ./src/client
 - install MySQL, create user & save db_myusername and db_mypassword
+  - to keep it simple, have server (MySQL80 Service) automatically start on windows startup
 - create .env and populate it
   - note: there are no quotes used surrounding db_myusername and db_mypassword
   - (see npm dotenv for more)
