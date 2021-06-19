@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 class SubmittalRow extends Component {
   render() {
@@ -17,6 +18,11 @@ class SubmittalRow extends Component {
         </TableCell>
         <TableCell>
           {this.props.submittal.description}
+        </TableCell>
+        <TableCell>
+          <Button variant="contained" color="secondary">
+            Delete
+          </Button>
         </TableCell>
       </TableRow>
     );
@@ -41,14 +47,15 @@ class SubmittalTable extends Component {
     return (
       <div>
         <h3>
-          Shop Drawings
+          Submittals
         </h3>
         <TableContainer component={Paper}>
           <Table size="small" >
             <TableHead>
               <TableRow>
-                <TableCell align="right">SD No.</TableCell>
+                <TableCell align="right">Submittal No.</TableCell>
                 <TableCell>Description</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

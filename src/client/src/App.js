@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <Container maxWidth="xl">
         <h1>
-          Main component
+          Project Fennacy
         </h1>
         <SubmittalTable />
       </Container>
