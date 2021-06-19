@@ -93,6 +93,6 @@ const db = new Sequelize(config.development.database, config.development.usernam
 async function main() {
   // note - alter: true / force: true are not reccomended for production use,
   // need to consider migration system once deploying
-  await sequelize.sync({ force: true })
+  await sequelize.sync({ alter: true })
 }
 main()
