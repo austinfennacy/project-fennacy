@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './submittalTable.css';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
