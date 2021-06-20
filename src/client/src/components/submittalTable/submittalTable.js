@@ -19,7 +19,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 function SubmittalRow(props) {
-  const [isVisible, setVisibilty] = useState(true);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -37,7 +36,7 @@ function SubmittalRow(props) {
       .then(res => res.json())
       .then(function (data) {
         if (data.success) {
-          setVisibilty(false);
+          props.refreshSubmittals();
         }
       })
       .catch(error => console.log(error));
@@ -45,54 +44,55 @@ function SubmittalRow(props) {
     setOpen(false);
   };
 
-  return ( isVisible
-    ? <TableRow>
-        <TableCell align="right">
-          {props.submittal.submittalNumber}
-        </TableCell>
-        <TableCell>
-          {props.submittal.description}
-        </TableCell>
-        <TableCell>
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={handleClickOpen}
-            startIcon={<DeleteIcon />}>
-            Delete
-          </Button>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Are you sure you would like to delete this submittal?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="default">
-                Cancel
-              </Button>
-              <Button onClick={handleDelete} color="secondary" autoFocus>
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </TableCell>
-      </TableRow>
-    : null
+  return (
+    <TableRow>
+      <TableCell align="right">
+        {props.submittal.submittalNumber}
+      </TableCell>
+      <TableCell>
+        {props.submittal.description}
+      </TableCell>
+      <TableCell>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={handleClickOpen}
+          startIcon={<DeleteIcon />}>
+          Delete
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you would like to delete this submittal?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="default">
+              Cancel
+            </Button>
+            <Button onClick={handleDelete} color="secondary" autoFocus>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </TableCell>
+    </TableRow>
   );
 }
 
 export default function SubmittalTable() {
   const [submittals, setSubmittals] = useState([]);
 
-  useEffect(() => fetch('/submittals')
+  useEffect(() => fetchSubmittals(), []);
+
+  const fetchSubmittals = () => fetch('/submittals')
     .then(res => res.json())
-    .then((submittals) => setSubmittals(submittals)), []);
+    .then((submittals) => setSubmittals(submittals));
 
   const [formValues, setFormValues] = useState({});
   const handleInputChange = (e) => {
@@ -126,7 +126,7 @@ export default function SubmittalTable() {
     })
       .then(res => res.json())
       .then(function (data) {
-        console.log(data.id)
+        fetchSubmittals();
       })
       .catch(error => console.log(error));
 
@@ -208,7 +208,8 @@ export default function SubmittalTable() {
             {submittals.map(submittal =>
               <SubmittalRow
                 submittal={submittal}
-                key={submittal.id} />)}
+                key={submittal.id}
+                refreshSubmittals={fetchSubmittals} />)}
           </TableBody>
         </Table>
       </TableContainer>
