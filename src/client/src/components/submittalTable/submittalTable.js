@@ -13,9 +13,7 @@ import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 
 export default function SubmittalTable() {
   const [submittals, setSubmittals] = useState([]);
-
   useEffect(() => fetchSubmittals(), []);
-
   const fetchSubmittals = () => fetch('/submittals')
     .then(res => res.json())
     .then((submittals) => setSubmittals(submittals));

@@ -7,19 +7,17 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DeleteIcon from '@material-ui/icons/Delete';
+import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 
 export default function SubmittalRow(props) {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [openDelete, setOpenDelete] = useState(false);
+  const handleOpenDelete = () => {
+    setOpenDelete(true);
   };
-
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
   };
-
-  const handleDelete = () => {
+  const handleSubmitDelete = () => {
     fetch(`/submittal/${props.submittal.id}`, {
       method: 'DELETE'
     })
@@ -31,7 +29,15 @@ export default function SubmittalRow(props) {
       })
       .catch(error => console.log(error));
 
-    setOpen(false);
+    setOpenDelete(false);
+  };
+
+  const [openUpdate, setOpenUpdate] = useState(false);
+  const handleOpenUpdate = () => {
+    setOpenUpdate(true);
+  };
+  const handleCloseUpdate = () => {
+    setOpenUpdate(false);
   };
 
   return (
@@ -43,16 +49,28 @@ export default function SubmittalRow(props) {
         {props.submittal.description}
       </TableCell>
       <TableCell>
+      <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleOpenUpdate}
+          startIcon={<DeleteIcon />}>
+          Update
+        </Button>
+        <SubmittalCreateUpdateDialog 
+          isDialogOpen={openUpdate}
+          setOpen={handleOpenUpdate}
+          handleClose={handleCloseUpdate}
+          fetchSubmittals={props.refreshSubmittals}/>
         <Button
           variant="outlined"
           color="secondary"
-          onClick={handleClickOpen}
+          onClick={handleOpenDelete}
           startIcon={<DeleteIcon />}>
           Delete
         </Button>
         <Dialog
-          open={open}
-          onClose={handleClose}
+          open={openDelete}
+          onClose={handleCloseDelete}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -62,10 +80,10 @@ export default function SubmittalRow(props) {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="default">
+            <Button onClick={handleCloseDelete} color="default">
               Cancel
             </Button>
-            <Button onClick={handleDelete} color="secondary" autoFocus>
+            <Button onClick={handleSubmitDelete} color="secondary" autoFocus>
               Delete
             </Button>
           </DialogActions>
