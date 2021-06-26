@@ -60,7 +60,12 @@ export default function SubmittalRow(props) {
           isDialogOpen={openUpdate}
           setOpen={handleOpenUpdate}
           handleClose={handleCloseUpdate}
-          fetchSubmittals={props.refreshSubmittals}/>
+          fetchSubmittals={props.refreshSubmittals}
+          values={{
+            id: props.submittal.id,
+            submittalNumber: props.submittal.submittalNumber,
+            description: props.submittal.description,
+          }}/>
         <Button
           variant="outlined"
           color="secondary"
