@@ -22,10 +22,32 @@ app.get('/submittals', cors(), async (req, res) => {
 })
 
 app.post('/submittal', async (req, res) => {
-  const { submittalNumber, description } = req.body
+  const { 
+    submittalNumber,
+    numberReccomended,
+    specificationSection,
+    ahjRequired,
+    ahjApproved,
+    description,
+    subcontractorSupplier,
+    dateReceived,
+    respondBefore,
+    responseDate,
+  } = req.body;
 
   try {
-    const submittal = await Submittal.create({ submittalNumber, description })
+    const submittal = await Submittal.create({ 
+      submittalNumber,
+      numberReccomended,
+      specificationSection,
+      ahjRequired,
+      ahjApproved,
+      description,
+      subcontractorSupplier,
+      dateReceived,
+      respondBefore,
+      responseDate,
+    })
 
     return res.json(submittal)
   } catch (err) {
@@ -49,12 +71,32 @@ app.get('/submittal/:id', async (req, res) => {
 
 app.put('/submittal/:id', async (req, res) => {
   const id = req.params.id;
-  const { submittalNumber, description } = req.body;
+  const { 
+    submittalNumber,
+    numberReccomended,
+    specificationSection,
+    ahjRequired,
+    ahjApproved,
+    description,
+    subcontractorSupplier,
+    dateReceived,
+    respondBefore,
+    responseDate,
+  } = req.body;
+  
   try {
     const submittal = await Submittal.findOne({ where: { id } });
     
     submittal.submittalNumber = submittalNumber
+    submittal.numberReccomended = numberReccomended
+    submittal.specificationSection = specificationSection
+    submittal.ahjRequired = ahjRequired
+    submittal.ahjApproved = ahjApproved
     submittal.description = description
+    submittal.subcontractorSupplier = subcontractorSupplier
+    submittal.dateReceived = dateReceived
+    submittal.respondBefore = respondBefore
+    submittal.responseDate = responseDate
 
     await submittal.save()
 

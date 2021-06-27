@@ -6,8 +6,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 export default function SubmittalCreateUpdateDialog(props) {
+  const classes = useStyles();
   const [formValues, setFormValues] = useState(
     props.values
       ? props.values
@@ -85,28 +101,92 @@ export default function SubmittalCreateUpdateDialog(props) {
             <Grid item xs={3}>
               <TextField
                 autoFocus
-                variant="filled"
+                variant="outlined"
                 margin="normal"
-                id="submittalNumber"
                 name="submittalNumber"
                 label="Submittal No."
                 type="number"
                 fullWidth
                 onChange={handleInputChange}
                 defaultValue = {props?.values?.submittalNumber ?? ""}
-                />
+              />
             </Grid>
             <Grid item xs={9}>
               <TextField
-                variant="filled"
+                variant="outlined"
                 margin="normal"
-                id="description"
                 name="description"
                 label="Description"
                 fullWidth
                 onChange={handleInputChange}
                 defaultValue = {props?.values?.description ?? ""}
               />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                name="numberReccomended"
+                label="Number Reccomended"
+                type="number"
+                fullWidth
+                onChange={handleInputChange}
+                defaultValue = {props?.values?.numberReccomended ?? ""}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                name="specificationSection"
+                label="Specification Section"
+                type="number"
+                fullWidth
+                onChange={handleInputChange}
+                defaultValue = {props?.values?.specificationSection ?? ""}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl
+                variant="outlined"
+                className={classes.formControl}
+                fullWidth
+                margin="normal"
+              >
+                <InputLabel id="ahjRequiredLabel">
+                  AHJ Required
+                </InputLabel>
+                <Select
+                  name="ahjRequired"
+                  labelId="ahjRequiredLabel"
+                  onChange={handleInputChange}
+                  defaultValue = {props?.values?.ahjRequired ?? ""}
+                >
+                  <MenuItem value={true}>Yes</MenuItem>
+                  <MenuItem value={false}>No</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl
+                variant="outlined"
+                className={classes.formControl}
+                fullWidth
+                margin="normal"
+              >
+                <InputLabel id="ahjApprovedLabel">
+                  AHJ Approved
+                </InputLabel>
+                <Select
+                  name="ahjApproved"
+                  labelId="ahjApprovedLabel"
+                  onChange={handleInputChange}
+                  defaultValue = {props?.values?.ahjApproved ?? ""}
+                >
+                  <MenuItem value={true}>Yes</MenuItem>
+                  <MenuItem value={false}>No</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
         </DialogContent>

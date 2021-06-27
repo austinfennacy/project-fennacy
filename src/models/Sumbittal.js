@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         deletedAt: undefined 
       }
     }
+
+    getSubmittalAcceptable() {
+      // base on whether or not the submittal has NET, NETw/MN then yes,
+      // if AR, Rejected then no
+      return false;
+    }
   };
   Submittal.init({
     id: {
@@ -31,6 +37,18 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'submittal number is required' },
       },
     },
+    numberReccomended: {
+      type: DataTypes.INTEGER,
+    },
+    specificationSection: {
+      type: DataTypes.INTEGER,
+    },
+    ahjRequired: {
+      type: DataTypes.BOOLEAN,
+    },
+    ahjApproved: {
+      type: DataTypes.BOOLEAN,
+    },
     description: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -39,6 +57,21 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'description is required' },
       },
     },
+    subcontractorSupplier: {
+      type: DataTypes.STRING,
+    },
+    dateReceived: {
+      type: DataTypes.DATEONLY,
+    },
+    respondBefore: {
+      type: DataTypes.DATEONLY,
+    },
+    responseDate: {
+      type: DataTypes.DATEONLY,
+    },
+    // status: {
+    //   //some kind of enum, not sure
+    // },
   }, {
     sequelize,
     modelName: 'Submittal',

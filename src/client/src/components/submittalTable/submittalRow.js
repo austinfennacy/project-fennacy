@@ -47,10 +47,41 @@ export default function SubmittalRow(props) {
         {props.submittal.submittalNumber}
       </TableCell>
       <TableCell>
+        {props.submittal.numberReccomended}
+      </TableCell>
+      <TableCell>
+        {props.submittal.specificationSection}
+      </TableCell>
+      <TableCell>
+        {props.submittal.getSubmittalAcceptable ? "Yes" : "No"}
+      </TableCell>
+      <TableCell>
+        {props.submittal.ahjRequired ? "Yes" : "No"}
+      </TableCell>
+      <TableCell>
+        {props.submittal.ahjApproved ? "Yes" : "No"}
+      </TableCell>
+      <TableCell>
         {props.submittal.description}
       </TableCell>
       <TableCell>
-      <Button
+        {props.submittal.subcontractorSupplier}
+      </TableCell>
+      <TableCell>
+        {props.submittal.dateReceived}
+      </TableCell>
+      <TableCell>
+        {props.submittal.respondBefore}
+      </TableCell>
+      <TableCell>
+        {props.submittal.responseDate}
+      </TableCell>
+      <TableCell>
+        todo status
+      </TableCell>
+
+      <TableCell>
+        <Button
           variant="outlined"
           color="primary"
           onClick={handleOpenUpdate}
@@ -64,7 +95,15 @@ export default function SubmittalRow(props) {
           values={{
             id: props.submittal.id,
             submittalNumber: props.submittal.submittalNumber,
+            numberReccomended: props.submittal.numberReccomended,
+            specificationSection: props.submittal.specificationSection,
+            ahjRequired: props.submittal.ahjRequired,
+            ahjApproved: props.submittal.ahjApproved,
             description: props.submittal.description,
+            subcontractorSupplier: props.submittal.subcontractorSupplier,
+            dateReceived: props.submittal.dateReceived,
+            respondBefore: props.submittal.respondBefore,
+            responseDate: props.submittal.responseDate,
           }}/>
         <Button
           variant="outlined"
