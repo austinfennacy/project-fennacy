@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 
 export default function SubmittalRow(props) {
@@ -53,7 +54,7 @@ export default function SubmittalRow(props) {
           variant="outlined"
           color="primary"
           onClick={handleOpenUpdate}
-          startIcon={<DeleteIcon />}>
+          startIcon={<EditIcon />}>
           Update
         </Button>
         <SubmittalCreateUpdateDialog 
