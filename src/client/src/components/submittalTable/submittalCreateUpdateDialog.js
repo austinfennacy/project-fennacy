@@ -51,6 +51,26 @@ export default function SubmittalCreateUpdateDialog(props) {
       dateReceived: date,
     })
   };
+  const [respondBefore, setRespondBefore] = React.useState(props?.values?.respondBefore
+    ? new Date(props.values.respondBefore)
+    : null);
+  const handleRespondBeforeChange = (date) => {
+    setRespondBefore(date);
+    setFormValues({
+      ...formValues,
+      respondBefore: date,
+    })
+  };
+  const [responseDate, setResponseDate] = React.useState(props?.values?.responseDate
+    ? new Date(props.values.responseDate)
+    : null);
+  const handleResponseDateChange = (date) => {
+    setResponseDate(date);
+    setFormValues({
+      ...formValues,
+      responseDate: date,
+    })
+  };
 
   const handleCreate = (event) => {
     event.preventDefault();
@@ -206,6 +226,17 @@ export default function SubmittalCreateUpdateDialog(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={3}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  name="subcontractorSupplier"
+                  label="Subcontractor Supplier"
+                  fullWidth
+                  onChange={handleInputChange}
+                  defaultValue = {props?.values?.subcontractorSupplier ?? ""}
+                />
+              </Grid>
+              <Grid item xs={3}>
                 <KeyboardDatePicker
                   disableToolbar
                   variant="outlined"
@@ -213,13 +244,44 @@ export default function SubmittalCreateUpdateDialog(props) {
                   margin="normal"
                   name="dateReceived"
                   label="Date Received"
-                  onChange={handleInputChange}
                   fullWidth
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
                   }}
                   value={dateReceived}
                   onChange={handleDateReceivedChange}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="outlined"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  name="respondBefore"
+                  label="Respond Before"
+                  fullWidth
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                  value={respondBefore}
+                  onChange={handleRespondBeforeChange}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="outlined"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  name="responseDate"
+                  label="Response Date"
+                  fullWidth
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                  value={responseDate}
+                  onChange={handleResponseDateChange}
                 />
               </Grid>
             </Grid>
