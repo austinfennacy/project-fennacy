@@ -53,7 +53,7 @@ export default function SubmittalRow(props) {
         {props.submittal.specificationSection}
       </TableCell>
       <TableCell>
-        {props.submittal.getSubmittalAcceptable ? "Yes" : "No"}
+        {/* {props.submittal.getSubmittalAcceptable ? "Yes" : "No"} */}
       </TableCell>
       <TableCell>
         {props.submittal.ahjRequired ? "Yes" : "No"}
@@ -77,7 +77,7 @@ export default function SubmittalRow(props) {
         {props.submittal.responseDate}
       </TableCell>
       <TableCell>
-        todo status
+        {/* todo status */}
       </TableCell>
 
       <TableCell>
