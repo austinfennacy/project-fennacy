@@ -37,7 +37,7 @@ export default function SubmittalCreateUpdateDialog(props) {
       })
       .catch(error => console.log(error));
 
-    props.setOpen(false);
+    props.handleClose();
   };
 
   const handleUpdate = (event) => {
@@ -56,8 +56,8 @@ export default function SubmittalCreateUpdateDialog(props) {
         props.fetchSubmittals();
       })
       .catch(error => console.log(error));
-
-    props.setOpen(false);
+    
+    props.handleClose();
   };
 
   const dialogTitleText = props.values

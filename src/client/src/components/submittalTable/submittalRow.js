@@ -58,7 +58,6 @@ export default function SubmittalRow(props) {
         </Button>
         <SubmittalCreateUpdateDialog 
           isDialogOpen={openUpdate}
-          setOpen={handleOpenUpdate}
           handleClose={handleCloseUpdate}
           fetchSubmittals={props.refreshSubmittals}
           values={{

@@ -42,7 +42,6 @@ export default function SubmittalTable() {
         </Button>
         <SubmittalCreateUpdateDialog 
           isDialogOpen={open}
-          setOpen={setOpen}
           handleClose={handleClose}
           fetchSubmittals={fetchSubmittals}/>
       </div>
