@@ -11,6 +11,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SubmittalCreateUpdateDialog(props) {
   const classes = useStyles();
+
   const [formValues, setFormValues] = useState(
     props.values
       ? props.values
@@ -34,6 +40,16 @@ export default function SubmittalCreateUpdateDialog(props) {
       ...formValues,
       [name]: value,
     });
+  };
+  const [dateReceived, setDateReceived] = React.useState(props?.values?.dateReceived
+    ? new Date(props.values.dateReceived)
+    : null);
+  const handleDateReceivedChange = (date) => {
+    setDateReceived(date);
+    setFormValues({
+      ...formValues,
+      dateReceived: date,
+    })
   };
 
   const handleCreate = (event) => {
@@ -97,99 +113,119 @@ export default function SubmittalCreateUpdateDialog(props) {
       <form onSubmit={onSubmitHandler}>
         <DialogTitle id="form-dialog-title">{dialogTitleText}</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2}>
-            <Grid item xs={3}>
-              <TextField
-                autoFocus
-                variant="outlined"
-                margin="normal"
-                name="submittalNumber"
-                label="Submittal No."
-                type="number"
-                fullWidth
-                onChange={handleInputChange}
-                defaultValue = {props?.values?.submittalNumber ?? ""}
-              />
-            </Grid>
-            <Grid item xs={9}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                name="description"
-                label="Description"
-                fullWidth
-                onChange={handleInputChange}
-                defaultValue = {props?.values?.description ?? ""}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                name="numberReccomended"
-                label="Number Reccomended"
-                type="number"
-                fullWidth
-                onChange={handleInputChange}
-                defaultValue = {props?.values?.numberReccomended ?? ""}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                name="specificationSection"
-                label="Specification Section"
-                type="number"
-                fullWidth
-                onChange={handleInputChange}
-                defaultValue = {props?.values?.specificationSection ?? ""}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControl}
-                fullWidth
-                margin="normal"
-              >
-                <InputLabel id="ahjRequiredLabel">
-                  AHJ Required
-                </InputLabel>
-                <Select
-                  name="ahjRequired"
-                  labelId="ahjRequiredLabel"
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Grid container spacing={2}>
+              <Grid item xs={3}>
+                <TextField
+                  autoFocus
+                  variant="outlined"
+                  margin="normal"
+                  name="submittalNumber"
+                  label="Submittal No."
+                  type="number"
+                  fullWidth
                   onChange={handleInputChange}
-                  defaultValue = {props?.values?.ahjRequired ?? ""}
-                >
-                  <MenuItem value={true}>Yes</MenuItem>
-                  <MenuItem value={false}>No</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControl}
-                fullWidth
-                margin="normal"
-              >
-                <InputLabel id="ahjApprovedLabel">
-                  AHJ Approved
-                </InputLabel>
-                <Select
-                  name="ahjApproved"
-                  labelId="ahjApprovedLabel"
+                  defaultValue = {props?.values?.submittalNumber ?? ""}
+                />
+              </Grid>
+              <Grid item xs={9}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  name="description"
+                  label="Description"
+                  fullWidth
                   onChange={handleInputChange}
-                  defaultValue = {props?.values?.ahjApproved ?? ""}
+                  defaultValue = {props?.values?.description ?? ""}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  name="numberReccomended"
+                  label="Number Reccomended"
+                  type="number"
+                  fullWidth
+                  onChange={handleInputChange}
+                  defaultValue = {props?.values?.numberReccomended ?? ""}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  name="specificationSection"
+                  label="Specification Section"
+                  type="number"
+                  fullWidth
+                  onChange={handleInputChange}
+                  defaultValue = {props?.values?.specificationSection ?? ""}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControl}
+                  fullWidth
+                  margin="normal"
                 >
-                  <MenuItem value={true}>Yes</MenuItem>
-                  <MenuItem value={false}>No</MenuItem>
-                </Select>
-              </FormControl>
+                  <InputLabel id="ahjRequiredLabel">
+                    AHJ Required
+                  </InputLabel>
+                  <Select
+                    name="ahjRequired"
+                    labelId="ahjRequiredLabel"
+                    onChange={handleInputChange}
+                    defaultValue = {props?.values?.ahjRequired ?? ""}
+                  >
+                    <MenuItem value={true}>Yes</MenuItem>
+                    <MenuItem value={false}>No</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={3}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControl}
+                  fullWidth
+                  margin="normal"
+                >
+                  <InputLabel id="ahjApprovedLabel">
+                    AHJ Approved
+                  </InputLabel>
+                  <Select
+                    name="ahjApproved"
+                    labelId="ahjApprovedLabel"
+                    onChange={handleInputChange}
+                    defaultValue = {props?.values?.ahjApproved ?? ""}
+                  >
+                    <MenuItem value={true}>Yes</MenuItem>
+                    <MenuItem value={false}>No</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={3}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="outlined"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  name="dateReceived"
+                  label="Date Received"
+                  onChange={handleInputChange}
+                  fullWidth
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                  value={dateReceived}
+                  onChange={handleDateReceivedChange}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          </MuiPickersUtilsProvider>
         </DialogContent>
+        
         <DialogActions>
           <Button onClick={props.handleClose} color="default">
             Cancel
