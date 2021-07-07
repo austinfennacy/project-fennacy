@@ -9,6 +9,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
+import LaunchIcon from '@material-ui/icons/Launch';
+import { Link } from "@reach/router";
 
 export default function SubmittalRow(props) {
   const [openDelete, setOpenDelete] = useState(false);
@@ -81,6 +83,14 @@ export default function SubmittalRow(props) {
       </TableCell>
 
       <TableCell>
+        <Link to={`submittal/${props.submittal.id}`}>
+          <Button
+            variant="outlined"
+            color="primary"
+            startIcon={<LaunchIcon />}>
+            Details
+          </Button>
+        </Link>
         <Button
           variant="outlined"
           color="primary"

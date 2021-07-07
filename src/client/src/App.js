@@ -1,18 +1,21 @@
 import './App.css';
 import SubmittalTable from './components/submittalTable/submittalTable';
+import Submittal from './components/submittal/submittal';
 import Container from '@material-ui/core/Container';
+import { Router } from "@reach/router";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Container maxWidth="xl">
         <h1>
           Project Fennacy
         </h1>
-        <SubmittalTable />
+        <Router>
+          <SubmittalTable path="/" />
+          <Submittal path="submittal/:id" />
+        </Router>
       </Container>
     </div>
   );
 }
-
-export default App;
