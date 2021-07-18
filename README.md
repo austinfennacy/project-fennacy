@@ -8,19 +8,24 @@
 - create .env and populate it
   - note: there are no quotes used surrounding db_myusername and db_mypassword
   - (see npm dotenv for more)
-```
+
+```env
 DB_HOST=localhost
 DB_USER=db_myusername
 DB_PASS=db_mypassword
 ```
+
 - start MySQL server
   - if unsuccessfull, check Windows>Start>Services>MySQL80
 - in terminal at project root, run
-```
+
+```console
 npm run init_db
 ```
-- then run 
-```
+
+- then run
+
+```console
 npm run dev
 ```
 
@@ -29,12 +34,10 @@ npm run dev
 ### frontend must-have
 
 - react (frontend framework)
-  - jsx (html markup inside js, similar to .NET razor functions)
+  - jsx (included w react, html markup inside js)
   - create-react-app (boilerplate / toolchain initializer)
   - react router
-  - Redux (state management)
 - material UI (css library)
-- passport (authentication)
 - axios (HTTP requests client, to access backend API)
 
 ### backend must-have
@@ -42,6 +45,7 @@ npm run dev
 - express (backend API/framework)
 - sequelize (ORM between models/db)
 - MySQL (db)
+- puppeteer (pdf generation)
 
 ### Project Organization?
 
@@ -59,6 +63,7 @@ npm run dev
 
 ### frontend nice-to-have
 
+- passport (authentication)
 - ESlint, AirBnB javascript style (code style enforcement)
   - will this enforce strict mode implicitly?
 - Prettier (code format enforcement)
