@@ -3,12 +3,31 @@ const cors = require('cors');
 const { Sequelize } = require('sequelize');
 const { sequelize, Submittal } = require('./models');
 const config = require('./config/config.js');
+const puppeteer = require('puppeteer');
 
 const app = express();
 app.use(express.json())
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
+
+app.get('/screenshot', async (req, res) => {
+  printPdf(req.query.url).then(pdf => {
+    res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length })
+    res.send(pdf)
+  })
+})
+
+async function printPdf(url) {
+  const browser = await puppeteer.launch({ headless: true })
+  const page = await browser.newPage()
+  await page.goto(url, {waitUntil: 'networkidle0'})
+  
+  const pdf = await page.pdf({ format: 'A4' })
+  await browser.close()
+  
+  return pdf
+}
 
 app.get('/submittals', cors(), async (req, res) => {
   try {
