@@ -11,8 +11,11 @@ app.use(express.json())
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
-app.get('/screenshot', async (req, res) => {
-  printPdf(req.query.url).then(pdf => {
+app.get('/getSubmittalPdf', async (req, res) => {
+  const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
+  
+  const url = `${baseUrl}/submittal/${req.query.id}`
+  printPdf(url).then(pdf => {
     res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length })
     res.send(pdf)
   })
