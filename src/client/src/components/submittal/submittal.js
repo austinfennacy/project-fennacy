@@ -30,9 +30,7 @@ export default function Submittal(props) {
 
   return (
     <div>
-      <h2>submittal id no {submittal.id}</h2>
-      <div>number {submittal.submittalNumber}</div>
-      <div>description {submittal.description}</div>
+      <h2>Submittal #{submittal.submittalNumber} ({submittal.description})</h2>
       <button onClick={saveSubmittalPdf}>Download Submittal PDF</button>
     </div>
   )
