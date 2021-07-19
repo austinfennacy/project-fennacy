@@ -26,7 +26,7 @@ export default function Submittal(props) {
   const [submittal, setSubmittal] = useState([]);
   useEffect(() => fetch(`/submittal/${id}`)
     .then(res => res.json())
-    .then((submittal) => setSubmittal(submittal)), []);
+    .then((submittalJson) => setSubmittal(submittalJson)), [id]);
 
   return (
     <div>

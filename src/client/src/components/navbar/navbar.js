@@ -19,14 +19,7 @@ export default function Navbar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          
           <NavDrawer />
-
-          {/* <IconButton edge="start" 
-            className={classes.menuButton} 
-            color="inherit" aria-label="menu">
-              <MenuIcon />
-          </IconButton> */}
           <Typography variant="h6" color="inherit">
             PROJECT FENNACY
           </Typography>
