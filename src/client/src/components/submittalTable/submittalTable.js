@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import SubmittalRow from './submittalRow';
 import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
+import Container from '@material-ui/core/Container';
 
 export default function SubmittalTable() {
   const [submittals, setSubmittals] = useState([]);
@@ -27,7 +28,7 @@ export default function SubmittalTable() {
   };
 
   return (
-    <div>
+    <Container maxWidth="xl">
       <h3>
         Submittals
       </h3>
@@ -75,6 +76,6 @@ export default function SubmittalTable() {
       </TableContainer>
       <ul>
       </ul>
-    </div>
+    </Container>
   );
 }

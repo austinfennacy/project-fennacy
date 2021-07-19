@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import './submittal.css';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
 
 export default function Submittal(props) {
   const id = props.id
@@ -23,10 +25,10 @@ export default function Submittal(props) {
      })
     .catch(err => console.log(err))
 
-  const [submittal, setSubmittal] = useState([]);
+  const [submittal, setSubmittal] = useState([])
   useEffect(() => fetch(`/submittal/${id}`)
     .then(res => res.json())
-    .then((submittalJson) => setSubmittal(submittalJson)), [id]);
+    .then((submittalJson) => setSubmittal(submittalJson)), [id])
 
   return (
     <div>
