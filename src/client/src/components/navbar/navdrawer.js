@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListIcon from '@material-ui/icons/List';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from '@reach/router'
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -48,7 +49,8 @@ export default function NavDrawer() {
         >
           <List>
             <ListItem button
-              href={'/submittals'}>
+              component={Link}
+              to="/">
               <ListItemIcon>
                 <ListIcon />
               </ListItemIcon>
