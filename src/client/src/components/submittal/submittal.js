@@ -4,6 +4,7 @@ import axios from 'axios'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
+import SubmittalPdf from './submittalPdf';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,14 +13,9 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     height: '100%',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
   },  
   infoBar: {
-      height: '100%',
+    height: '100%',
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
@@ -60,7 +56,7 @@ export default function Submittal(props) {
         <Grid item xs={1}>
         </Grid>
         <Grid item xs={7}>
-          <Paper className={classes.paper}>todofix pdf goes here</Paper>
+          <SubmittalPdf />
         </Grid>
         <Grid item xs={1}>
         </Grid>
