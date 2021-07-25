@@ -9,7 +9,7 @@ export default function App() {
     <div className="App">
       <Navbar />
 
-      <Router> 
+      <Router className="Router"> 
         <SubmittalTable path="/" />
         <Submittal path="submittal/:id" />
       </Router>
