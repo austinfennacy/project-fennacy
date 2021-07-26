@@ -20,6 +20,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }, 
 }))
 
 export default function Submittal(props) {
@@ -56,9 +61,9 @@ export default function Submittal(props) {
         <Grid item xs={1}>
         </Grid>
         <Grid item xs={7}>
-          <SubmittalPdf 
-            id={id}
-            />
+          <Paper className={classes.paper}>
+            <SubmittalPdf id={id} />
+          </Paper>
         </Grid>
         <Grid item xs={1}>
         </Grid>
