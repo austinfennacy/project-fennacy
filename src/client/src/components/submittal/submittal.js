@@ -22,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
   },
   pdfPaper: {
     margin: theme.spacing(2),
-    padding: theme.spacing(2),
-    textAlign: 'center',
     color: theme.palette.text.primary,
   }, 
 }))
