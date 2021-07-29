@@ -1,7 +1,7 @@
+import './submittalPdf.css'
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   pdf: {
@@ -28,9 +28,11 @@ export default function SubmittalPdf(props) {
 
   return (
     <div className={classes.pdf}>
+      
       <h2 className={classes.title} align="center">
         SHOP DRAWING AND SUBMITTAL TRANSMITTAL
       </h2>
+      
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <div className={classes.todofix}>
@@ -41,6 +43,48 @@ export default function SubmittalPdf(props) {
           <div className={classes.todofix} align="right">
             11905
           </div>
+        </Grid>
+      </Grid>
+
+      <hr />
+
+      <Grid container spacing={2}>
+        <Grid item xs={7}>
+          <label>
+            Description:
+          </label>
+          <div>
+            {submittal.description}
+          </div>
+        </Grid>
+        <Grid item xs={5}>
+
+          <Grid container>
+            <Grid item xs={8} align="right">
+              <label>
+                Submittal No.:
+              </label>
+            </Grid>
+            <Grid item xs={4} align="right">
+              <span>
+                {submittal.submittalNumber}
+              </span>
+            </Grid>
+          </Grid>
+
+          <Grid container>
+            <Grid item xs={8} align="right">
+              <label>
+                Spec Section:
+              </label>
+            </Grid>
+            <Grid item xs={4} align="right">
+              <span className={classes.todofix}>
+                0987611
+              </span>
+            </Grid>
+          </Grid>
+
         </Grid>
       </Grid>
 
