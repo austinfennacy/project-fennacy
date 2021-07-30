@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   pdfScreen: {
     fontFamily: "TimesNewRoman",
     padding: "4vw",
-    fontSize: "1.2vw",
+    fontSize: "1.1vw",
   },
   pdfPrint: {
     fontFamily: "TimesNewRoman",
@@ -99,7 +99,97 @@ export default function SubmittalPdf(props) {
 
       <hr />
 
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <label>
+            Architect:
+          </label>
+          <div className={classes.todofix}>
+            Darden Architects
+          </div>
+          <div className={classes.todofix}>
+            6790 N. West Ave
+          </div>
+          <div className={classes.todofix}>
+            Fresno, California 93711
+          </div>
+        </Grid>
+        <Grid item xs={6}>
+          <label>
+            Project:
+          </label>
+          <div className={classes.todofix}>
+            Sanger Educational Complex
+          </div>
+          <div className={classes.todofix}>
+            1850 S Fowler Ave
+          </div>
+          <div className={classes.todofix}>
+            Fresno, CA 93727
+          </div>
+        </Grid>
+      </Grid>
 
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <label>
+            Contractor:
+          </label>
+          <div className={classes.todofix}>
+            Harris Construction Company Inc.
+          </div>
+          <div className={classes.todofix}>
+            5286 E Home Ave
+          </div>
+          <div className={classes.todofix}>
+            Fresno, CA 93727
+          </div>
+        </Grid>
+        <Grid item xs={6}>
+          <label>
+            Supplier:
+          </label>
+          <div className={classes.todofix}>
+            Visalia Ceramic Tile
+          </div>
+          <hr />
+          <label>
+            Substitution:
+          </label>
+          <span className={classes.todofix}>
+            Yes/No (DSA Approval Req'd)
+          </span>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <label>
+            Date Received:
+          </label>
+          <span>
+            {submittal.dateReceived}
+          </span>
+        </Grid>
+        <Grid item xs={4}>
+          <label>
+            No. Received:
+          </label>
+          <span className={classes.todofix}>
+            12
+          </span>
+        </Grid>
+        <Grid item xs={4}>
+          <label>
+            Date Returned:
+          </label>
+          <span>
+            {submittal.responseDate}
+          </span>
+        </Grid>
+      </Grid>
+
+      <hr />
 
       <br />
       <br />
