@@ -2,11 +2,17 @@ import './submittalPdf.css'
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
+import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  pdf: {
+  pdfScreen: {
     fontFamily: "TimesNewRoman",
-    padding: theme.spacing(6)
+    padding: "4vw",
+    fontSize: "1.2vw",
+  },
+  pdfPrint: {
+    fontFamily: "TimesNewRoman",
+    padding: theme.spacing(6),
   },
   todofix: {
     color: "red"
@@ -20,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SubmittalPdf(props) {
   const id = props.id
   const classes = useStyles()
+  const pdfClass = useMediaQuery("screen")
+    ? classes.pdfScreen
+    : classes.pdfPrint
   
   const [submittal, setSubmittal] = useState([])
   useEffect(() => fetch(`/submittal/${id}`)
@@ -27,7 +36,7 @@ export default function SubmittalPdf(props) {
     .then((submittalJson) => setSubmittal(submittalJson)), [id])
 
   return (
-    <div className={classes.pdf}>
+    <div className={pdfClass}>
       
       <h2 className={classes.title} align="center">
         SHOP DRAWING AND SUBMITTAL TRANSMITTAL
