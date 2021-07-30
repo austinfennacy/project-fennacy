@@ -157,7 +157,7 @@ export default function SubmittalPdf(props) {
             Substitution:
           </label>
           <span className={classes.todofix}>
-            Yes/No (DSA Approval Req'd)
+            ☐🗹 (DSA Approval Req'd)
           </span>
         </Grid>
       </Grid>
@@ -171,7 +171,7 @@ export default function SubmittalPdf(props) {
             {submittal.dateReceived}
           </span>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <label>
             No. Received:
           </label>
@@ -179,7 +179,7 @@ export default function SubmittalPdf(props) {
             12
           </span>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <label>
             Date Returned:
           </label>
