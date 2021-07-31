@@ -12,6 +12,8 @@ import SubmittalRow from './submittalRow';
 import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles({
   createSubmittal: {
@@ -22,12 +24,25 @@ const useStyles = makeStyles({
     color: 'white',
     height: 36,
     padding: '0 16px',
-    marginBottom: '16px'
+    margin: '0 0 16px 0'
   },
+  title: {
+    fontSize: "4rem",
+    textTransform: "uppercase",
+    fontWeight: "600",
+    letterSpacing: "2px",
+  },
+  grid: {
+    marginTop: "24px"
+  }
 });
 
 export default function SubmittalTable() {
   const classes = useStyles();
+
+  const theme = {
+    spacing: 8,
+  }
 
   const [submittals, setSubmittals] = useState([]);
   useEffect(() => fetchSubmittals(), []);
@@ -45,23 +60,27 @@ export default function SubmittalTable() {
 
   return (
     <Container maxWidth="xl">
-      <h3>
-        Submittals
-      </h3>
-      <div align="left" >
-        <Button
-          variant="contained"
-          className={classes.createSubmittal}
-          onClick={handleOpen}
-          align="left"
-          startIcon={<AddIcon />}>
-          Create Submittal
-        </Button>
-        <SubmittalCreateUpdateDialog 
-          isDialogOpen={open}
-          handleClose={handleClose}
-          fetchSubmittals={fetchSubmittals}/>
-      </div>
+      <Grid container alignItems="baseline" className={classes.grid}>
+        <Grid item xs={3} align="left">
+          <Button
+            variant="contained"
+            className={classes.createSubmittal}
+            onClick={handleOpen}
+            align="left"
+            startIcon={<AddIcon />}>
+            Create Submittal
+          </Button>
+          <SubmittalCreateUpdateDialog 
+            isDialogOpen={open}
+            handleClose={handleClose}
+            fetchSubmittals={fetchSubmittals}/>
+        </Grid>
+        <Grid item xs={6} align="center">
+          <div className={classes.title}>
+            Submittals
+          </div>
+        </Grid>
+      </Grid>  
       <TableContainer component={Paper} mt={2}>
         <Table size="small" >
           <TableHead>
