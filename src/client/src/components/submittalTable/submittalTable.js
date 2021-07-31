@@ -11,8 +11,24 @@ import AddIcon from '@material-ui/icons/Add';
 import SubmittalRow from './submittalRow';
 import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  createSubmittal: {
+    background: 'linear-gradient(45deg, hsl(200, 100%, 40%) 30%, #21CBF3 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '2px 2px 5px 0px rgba(33, 203, 243, .3)',
+    color: 'white',
+    height: 36,
+    padding: '0 16px',
+    marginBottom: '16px'
+  },
+});
 
 export default function SubmittalTable() {
+  const classes = useStyles();
+
   const [submittals, setSubmittals] = useState([]);
   useEffect(() => fetchSubmittals(), []);
   const fetchSubmittals = () => fetch('/submittals')
@@ -35,7 +51,7 @@ export default function SubmittalTable() {
       <div align="left" >
         <Button
           variant="contained"
-          color="primary"
+          className={classes.createSubmittal}
           onClick={handleOpen}
           align="left"
           startIcon={<AddIcon />}>
