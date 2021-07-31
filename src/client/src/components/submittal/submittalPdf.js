@@ -24,8 +24,11 @@ const useStyles = makeStyles((theme) => ({
   bold: {
     fontWeight: "bold",
   },
-  small: {
+  smallScreen: {
     fontSize: "0.95vw"
+  },
+  smallPrint: {
+    fontSize: "0.8rem",
   },
   underlined: {
     borderBottom: "1px solid black",
@@ -40,6 +43,9 @@ export default function SubmittalPdf(props) {
   const pdfClass = useMediaQuery("screen")
     ? classes.pdfScreen
     : classes.pdfPrint
+  const smallClass = useMediaQuery("screen")
+    ? classes.smallScreen
+    : classes.smallPrint
   
   const [submittal, setSubmittal] = useState([])
   useEffect(() => fetch(`/submittal/${id}`)
@@ -235,7 +241,7 @@ export default function SubmittalPdf(props) {
             </span>
           </div>
         </Grid>
-        <Grid item xs={8} className={classes.small}>
+        <Grid item xs={8} className={smallClass}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <div>
