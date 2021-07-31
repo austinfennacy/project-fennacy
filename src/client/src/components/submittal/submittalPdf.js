@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   small: {
-    fontSize: "0.75rem"
+    fontSize: "0.95vw"
   },
   underlined: {
     borderBottom: "1px solid black",
