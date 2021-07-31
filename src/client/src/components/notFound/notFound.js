@@ -2,15 +2,8 @@ import React from 'react'
 
 export default function SubmittalPdf(props) {
   return (
-    <div>
-      <h2>404 not found</h2>
-      <h2>404 not found</h2>
-      <h2>404 not found</h2>
-      <h2>404 not found</h2>
-      <h2>404 not found</h2>
-      <h2>404 not found</h2>
-      <h2>404 not found</h2>
-      <h2>404 not found</h2>
+    <div align="center">
+      <h2>404 - this is not a valid link :(</h2>
     </div>
   )
 }
