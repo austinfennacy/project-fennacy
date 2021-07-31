@@ -20,6 +20,17 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: "0",
     marginBottom: "0.5rem",
+  },
+  bold: {
+    fontWeight: "bold",
+  },
+  small: {
+    fontSize: "0.75rem"
+  },
+  underlined: {
+    borderBottom: "1px solid black",
+    display: "inline-block",
+    width: "100%",
   }
 }))
 
@@ -191,6 +202,127 @@ export default function SubmittalPdf(props) {
 
       <hr />
 
+      <div style={{ minHeight:'4rem' }}>
+        <label>
+          Contractor Remarks:
+        </label>
+        <div className={classes.todofix}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+        </div>
+      </div>
+
+      <Grid container>
+        <Grid item xs={4}>
+          <div>
+            Other Required Information:
+          </div>
+          <div>
+            <label>
+              Warranty:
+            </label>
+            <span className={classes.todofix}>
+              ☐🗹
+            </span>
+          </div>
+          <div>
+            <label>
+              O and M Manuals:
+            </label>
+            <span className={classes.todofix}>
+              ☐🗹
+            </span>
+          </div>
+        </Grid>
+        <Grid item xs={8} className={classes.small}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <div>
+                <Grid container>
+                  <Grid item xs={7} align="right">
+                    Submittal Task #:
+                  </Grid>
+                  <Grid item xs={1}>
+                  </Grid>
+                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
+                    01244
+                  </Grid>
+                </Grid>
+              </div>
+              <div>
+                <Grid container>
+                  <Grid item xs={7} align="right">
+                    Early Start Date:
+                  </Grid>
+                  <Grid item xs={1}>
+                  </Grid>
+                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
+                    8/25/2021
+                  </Grid>
+                </Grid>
+              </div>
+              <div>
+                <Grid container>
+                  <Grid item xs={7} align="right">
+                    Early Finish Date:
+                  </Grid>
+                  <Grid item xs={1}>
+                  </Grid>
+                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
+                    10/2/2021
+                  </Grid>
+                </Grid>
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <div>
+                <Grid container>
+                  <Grid item xs={7} align="right">
+                    Late Finish Date:
+                  </Grid>
+                  <Grid item xs={1}>
+                  </Grid>
+                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
+                    11/26/2021
+                  </Grid>
+                </Grid>
+              </div>
+              <div>
+                <Grid container>
+                  <Grid item xs={7} align="right">
+                    Scheduled Float Time:
+                  </Grid>
+                  <Grid item xs={1}>
+                  </Grid>
+                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
+                    2 months
+                  </Grid>
+                </Grid>
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <hr />
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />
