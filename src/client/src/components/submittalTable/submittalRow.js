@@ -10,36 +10,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ActionsDropdown from './actionsDropdown';
 
 export default function SubmittalRow(props) {
-  const [openDelete, setOpenDelete] = useState(false);
-  const handleOpenDelete = () => {
-    setOpenDelete(true);
-  };
-  const handleCloseDelete = () => {
-    setOpenDelete(false);
-  };
-  const handleSubmitDelete = () => {
-    fetch(`/submittal/${props.submittal.id}`, {
-      method: 'DELETE'
-    })
-      .then(res => res.json())
-      .then(function (data) {
-        if (data.success) {
-          props.refreshSubmittals();
-        }
-      })
-      .catch(error => console.log(error));
-
-    setOpenDelete(false);
-  };
-
-  const [openUpdate, setOpenUpdate] = useState(false);
-  const handleOpenUpdate = () => {
-    setOpenUpdate(true);
-  };
-  const handleCloseUpdate = () => {
-    setOpenUpdate(false);
-  };
-
   return (
     <TableRow>
       <TableCell align="right">
@@ -81,34 +51,6 @@ export default function SubmittalRow(props) {
 
       <TableCell>
         <ActionsDropdown {...props}/>
-
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={handleOpenDelete}
-          startIcon={<DeleteIcon />}>
-          Delete
-        </Button>
-        <Dialog
-          open={openDelete}
-          onClose={handleCloseDelete}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Are you sure you would like to delete this submittal?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDelete} color="default">
-              Cancel
-            </Button>
-            <Button onClick={handleSubmitDelete} color="secondary" autoFocus>
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
       </TableCell>
     </TableRow>
   );
