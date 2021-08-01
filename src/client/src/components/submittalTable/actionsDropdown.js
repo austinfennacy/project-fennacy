@@ -84,6 +84,7 @@ export default function ActionsDropdown(props) {
 
   const [openDelete, setOpenDelete] = useState(false)
   const handleOpenDelete = () => {
+    handleCloseMenu()
     setOpenDelete(true)
   }
   const handleCloseDelete = () => {
