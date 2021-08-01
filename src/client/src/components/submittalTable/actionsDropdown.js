@@ -5,9 +5,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import LaunchIcon from '@material-ui/icons/Launch';
 import { makeStyles } from '@material-ui/core/styles' 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
@@ -26,6 +26,10 @@ const useStyles = makeStyles(() => ({
   arrowDropDownIcon: {
     marginLeft: "0.2rem",
   },
+  listItemIcon: {
+    minWidth: "0",
+    marginRight: "12px"
+  }
 }))
 
 const StyledMenu = withStyles({
@@ -47,17 +51,6 @@ const StyledMenu = withStyles({
     {...props}
   />
 ));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
 
 export default function CustomizedMenus() {
   const classes = useStyles()
@@ -94,24 +87,24 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
+        <MenuItem>
+          <ListItemIcon className={classes.listItemIcon}>
+            <LaunchIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Sent mail" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
+          <ListItemText primary="View Submittal" />
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon className={classes.listItemIcon}>
+            <EditIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
+          <ListItemText primary="Edit" />
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon className={classes.listItemIcon}>
+            <DeleteIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </StyledMenuItem>
+          <ListItemText primary="Delete" />
+        </MenuItem>
       </StyledMenu>
     </div>
   );

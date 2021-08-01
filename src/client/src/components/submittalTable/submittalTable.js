@@ -13,11 +13,10 @@ import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles({
   createSubmittal: {
-    background: 'linear-gradient(45deg, hsl(200, 100%, 40%) 30%, #21CBF3 90%)',
+    background: 'linear-gradient(45deg, hsl(200, 100%, 40%) 30%, hsl(191, 90%, 54%) 90%)',
     border: 0,
     borderRadius: 3,
     boxShadow: '2px 2px 5px 0px rgba(33, 203, 243, .3)',
