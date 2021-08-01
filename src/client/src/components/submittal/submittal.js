@@ -5,6 +5,8 @@ import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import SubmittalPdf from './submittalPdf';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +25,17 @@ const useStyles = makeStyles((theme) => ({
   pdfPaper: {
     margin: theme.spacing(2),
     color: theme.palette.text.primary,
-  }, 
+  },
+  downloadSubmittal: {
+    background: 'linear-gradient(45deg, hsl(120, 100%, 30%) 30%, hsl(120, 100%, 40%) 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '2px 2px 5px 0px hsl(120, 30%, 70%)',
+    color: 'white',
+    height: 36,
+    padding: '0 16px',
+    margin: '0 0 16px 0'
+  },
 }))
 
 export default function Submittal(props) {
@@ -71,10 +83,18 @@ export default function Submittal(props) {
             elevation={3}
             variant="outlined"
             square>
-            <h2>Submittal #{submittal.submittalNumber} ({submittal.description})</h2>
-            <div>todo make me full height</div>
+            <h2>Submittal #{submittal.submittalNumber}
             <br />
-            <button onClick={saveSubmittalPdf}>Download Submittal PDF</button>
+            {submittal.description}</h2>
+            <br />
+            <Button
+              variant="contained"
+              className={classes.downloadSubmittal}
+              onClick={saveSubmittalPdf}
+              align="center"
+              startIcon={<GetAppIcon />}>
+              Download Submittal PDF
+            </Button>
           </Paper>
         </Grid>
       </Grid>
