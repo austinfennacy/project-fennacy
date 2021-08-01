@@ -98,17 +98,7 @@ export default function SubmittalRow(props) {
           handleClose={handleCloseUpdate}
           fetchSubmittals={props.refreshSubmittals}
           values={{
-            id: props.submittal.id,
-            submittalNumber: props.submittal.submittalNumber,
-            numberReccomended: props.submittal.numberReccomended,
-            specificationSection: props.submittal.specificationSection,
-            ahjRequired: props.submittal.ahjRequired,
-            ahjApproved: props.submittal.ahjApproved,
-            description: props.submittal.description,
-            subcontractorSupplier: props.submittal.subcontractorSupplier,
-            dateReceived: props.submittal.dateReceived,
-            respondBefore: props.submittal.respondBefore,
-            responseDate: props.submittal.responseDate,
+            ...props.submittal,
           }}/>
         <Button
           variant="outlined"
