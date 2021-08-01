@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     flexGrow: 1,
   },
   appBar: {
-    background: 'linear-gradient(45deg, hsl(4, 100%, 30%) 10%, hsl(18, 100%, 40%) 90%)',
+    background: 'linear-gradient(45deg, hsl(4, 100%, 30%), 70%, hsl(18, 100%, 40%))',
     boxShadow: '0 0px 5px 2px hsl(4, 30%, 70%)',
   },
 });
