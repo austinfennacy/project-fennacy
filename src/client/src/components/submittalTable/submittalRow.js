@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DeleteIcon from '@material-ui/icons/Delete';
 import ActionsDropdown from './actionsDropdown';
 
 export default function SubmittalRow(props) {
