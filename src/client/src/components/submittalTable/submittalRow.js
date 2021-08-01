@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 import LaunchIcon from '@material-ui/icons/Launch';
 import { Link } from "@reach/router";
+import ActionsDropdown from './actionsDropdown';
 
 export default function SubmittalRow(props) {
   const [openDelete, setOpenDelete] = useState(false);
@@ -83,6 +84,12 @@ export default function SubmittalRow(props) {
       </TableCell>
 
       <TableCell>
+        <ActionsDropdown/>
+
+
+
+
+
         <Link to={`submittal/${props.submittal.id}`}>
           <Button
             variant="outlined"
