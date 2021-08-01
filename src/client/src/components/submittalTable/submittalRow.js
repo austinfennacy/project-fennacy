@@ -7,10 +7,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import LaunchIcon from '@material-ui/icons/Launch';
-import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
-import { Link } from "@reach/router";
 import ActionsDropdown from './actionsDropdown';
 
 export default function SubmittalRow(props) {
@@ -86,20 +82,6 @@ export default function SubmittalRow(props) {
       <TableCell>
         <ActionsDropdown {...props}/>
 
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={handleOpenUpdate}
-          startIcon={<EditIcon />}>
-          Update
-        </Button>
-        <SubmittalCreateUpdateDialog 
-          isDialogOpen={openUpdate}
-          handleClose={handleCloseUpdate}
-          fetchSubmittals={props.refreshSubmittals}
-          values={{
-            ...props.submittal,
-          }}/>
         <Button
           variant="outlined"
           color="secondary"

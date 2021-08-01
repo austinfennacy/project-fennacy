@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -11,6 +11,7 @@ import LaunchIcon from '@material-ui/icons/Launch';
 import { makeStyles } from '@material-ui/core/styles' 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Link } from "@reach/router";
+import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 
 const useStyles = makeStyles(() => ({
   button: {
@@ -55,20 +56,28 @@ const StyledMenu = withStyles({
     }}
     {...props}
   />
-));
+))
 
 export default function ActionsDropdown(props) {
   const classes = useStyles()
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleClickMenu = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleCloseMenu = () => {
+    setAnchorEl(null)
+  }
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [openUpdate, setOpenUpdate] = useState(false)
+  const handleOpenUpdate = () => {
+    setOpenUpdate(true)
+    handleCloseMenu()
+  }
+  const handleCloseUpdate = () => {
+    setOpenUpdate(false)
+  }
 
   return (
     <div>
@@ -77,7 +86,7 @@ export default function ActionsDropdown(props) {
         aria-haspopup="true"
         variant="contained"
         color="primary"
-        onClick={handleClick}
+        onClick={handleClickMenu}
         className={classes.button}
       >
         Actions
@@ -90,7 +99,7 @@ export default function ActionsDropdown(props) {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={handleCloseMenu}
       >
         <Link to={`submittal/${props.submittal.id}`} className={classes.link}>
           <MenuItem>
@@ -100,12 +109,21 @@ export default function ActionsDropdown(props) {
             <ListItemText primary="View Submittal" />
           </MenuItem>
         </Link>
-        <MenuItem>
+
+        <MenuItem onClick={handleOpenUpdate}>
           <ListItemIcon className={classes.listItemIcon}>
             <EditIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Edit" />
         </MenuItem>
+        <SubmittalCreateUpdateDialog 
+          isDialogOpen={openUpdate}
+          handleClose={handleCloseUpdate}
+          fetchSubmittals={props.refreshSubmittals}
+          values={{
+            ...props.submittal,
+          }}/>
+
         <MenuItem>
           <ListItemIcon className={classes.listItemIcon}>
             <DeleteIcon fontSize="small" />
@@ -114,5 +132,5 @@ export default function ActionsDropdown(props) {
         </MenuItem>
       </StyledMenu>
     </div>
-  );
+  )
 }
