@@ -84,20 +84,8 @@ export default function SubmittalRow(props) {
       </TableCell>
 
       <TableCell>
-        <ActionsDropdown/>
+        <ActionsDropdown {...props}/>
 
-
-
-
-
-        <Link to={`submittal/${props.submittal.id}`}>
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<LaunchIcon />}>
-            Details
-          </Button>
-        </Link>
         <Button
           variant="outlined"
           color="primary"

@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import LaunchIcon from '@material-ui/icons/Launch';
 import { makeStyles } from '@material-ui/core/styles' 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { Link } from "@reach/router";
 
 const useStyles = makeStyles(() => ({
   button: {
@@ -28,8 +29,12 @@ const useStyles = makeStyles(() => ({
   },
   listItemIcon: {
     minWidth: "0",
-    marginRight: "12px"
-  }
+    marginRight: "12px",
+  },
+  link: {
+    textDecoration: "none",
+    color: "black"
+  },
 }))
 
 const StyledMenu = withStyles({
@@ -52,7 +57,7 @@ const StyledMenu = withStyles({
   />
 ));
 
-export default function CustomizedMenus() {
+export default function ActionsDropdown(props) {
   const classes = useStyles()
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -87,12 +92,14 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>
-          <ListItemIcon className={classes.listItemIcon}>
-            <LaunchIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="View Submittal" />
-        </MenuItem>
+        <Link to={`submittal/${props.submittal.id}`} className={classes.link}>
+          <MenuItem>
+            <ListItemIcon className={classes.listItemIcon}>
+              <LaunchIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="View Submittal" />
+          </MenuItem>
+        </Link>
         <MenuItem>
           <ListItemIcon className={classes.listItemIcon}>
             <EditIcon fontSize="small" />
