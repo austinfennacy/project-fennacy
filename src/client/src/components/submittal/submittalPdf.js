@@ -34,7 +34,19 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid black",
     display: "inline-block",
     width: "100%",
-  }
+  },
+  editableBox: {
+    position: "relative",
+    transformStyle: "preserve-3d",
+    background: "rgba(154, 219, 254, 0.3)",
+    borderColor: "rgba(154, 219, 254, 0.9)",
+    border: "2px solid",
+    padding: "2px",
+    "& *": {
+      position: "relative",
+      transform: "translateZ(-1px)",  
+    },
+  },
 }))
 
 export default function SubmittalPdf(props) {
@@ -52,6 +64,9 @@ export default function SubmittalPdf(props) {
     .then(res => res.json())
     .then((submittalJson) => setSubmittal(submittalJson)), [id])
 
+  const [showEdit, setShowEdit] = useState(props.showEdit)
+  var editableBox = () => showEdit ? classes.editableBox : "";
+
   return (
     <div className={pdfClass}>
       
@@ -59,18 +74,23 @@ export default function SubmittalPdf(props) {
         SHOP DRAWING AND SUBMITTAL TRANSMITTAL
       </h2>
       
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <div className={classes.todofix}>
-            FUSD McLane High School CTE
-          </div>
+      <div className={editableBox()}>
+        {/* <span>
+          EDIT (todo make me same size as sibling, then hide, then on hover show)
+        </span> */}
+        <Grid container spacing={2}>
+          <Grid item xs={6} >
+            <div>
+              {submittal.projectName ? submittal.projectName : "[no project name]" }
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div align="right">
+              {submittal.projectNumber ? submittal.projectName : "[no project number]" }
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <div className={classes.todofix} align="right">
-            11905
-          </div>
-        </Grid>
-      </Grid>
+      </div>
 
       <hr />
 

@@ -73,7 +73,7 @@ export default function Submittal(props) {
         </Grid>
         <Grid item xs={7}>
           <Paper className={classes.pdfPaper} square>
-            <SubmittalPdf id={id} />
+            <SubmittalPdf id={id} showEdit={true} />
           </Paper>
         </Grid>
         <Grid item xs={1}>
