@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import { useMediaQuery } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -50,10 +51,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   hiddenEditText: {
-    background: "rgba(255, 0, 0, 0.3)",
+    background: "rgba(154, 219, 254, 0.3)",
+    color: "white",
     display: "none",
     justifyContent: "center",
     alignContent: "center",
+    cursor: "pointer",
   }
 }))
 
@@ -91,6 +94,9 @@ export default function SubmittalPdf(props) {
       width:${offsetWidth}px;
       position: relative;
       top: ${-1*offsetHeight}px;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02rem;
     `)
     document.getElementById("editBoxWrapper").setAttribute("style",`
       height:${offsetHeight}px;
@@ -128,7 +134,7 @@ export default function SubmittalPdf(props) {
             </Grid>
         </div>
         <div id="hiddenEditText" className={classes.hiddenEditText}>
-          edit
+          EDIT
         </div>
       </div>
 
