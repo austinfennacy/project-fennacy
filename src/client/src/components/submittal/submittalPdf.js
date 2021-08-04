@@ -36,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   editableBox: {
+    display: "inline-block",
+    width: "100%",
     position: "relative",
     transformStyle: "preserve-3d",
     background: "rgba(154, 219, 254, 0.3)",
@@ -47,6 +49,12 @@ const useStyles = makeStyles((theme) => ({
       transform: "translateZ(-1px)",  
     },
   },
+  hiddenEditText: {
+    background: "rgba(255, 0, 0, 0.3)",
+    display: "none",
+    justifyContent: "center",
+    alignContent: "center",
+  }
 }))
 
 export default function SubmittalPdf(props) {
@@ -67,29 +75,53 @@ export default function SubmittalPdf(props) {
   const [showEdit, setShowEdit] = useState(props.showEdit)
   var editableBox = () => showEdit ? classes.editableBox : "";
 
+  useEffect(() => {    
+    let offsetHeight = document.getElementById('editableBox').offsetHeight;
+    let offsetWidth = document.getElementById('editableBox').offsetWidth;
+    document.getElementById("hiddenEditText").setAttribute("style",`
+      height:${offsetHeight}px;
+      width:${offsetWidth}px;
+      position: relative;
+      top: ${-1*offsetHeight}px;
+    `)
+    document.getElementById("editBoxWrapper").setAttribute("style",`
+      height:${offsetHeight}px;
+    `)
+  });
+
+  var showEditText = () => {
+    console.log('onMouseEnter')
+    document.getElementById("hiddenEditText").style.display = "grid"; 
+  };
+  var hideEditText = () => {
+    console.log('onMouseLeave')
+    document.getElementById("hiddenEditText").style.display = "none"; 
+  };
+
   return (
     <div className={pdfClass}>
       
       <h2 className={classes.title} align="center">
         SHOP DRAWING AND SUBMITTAL TRANSMITTAL
       </h2>
-      
-      <div className={editableBox()}>
-        {/* <span>
-          EDIT (todo make me same size as sibling, then hide, then on hover show)
-        </span> */}
-        <Grid container spacing={2}>
-          <Grid item xs={6} >
-            <div>
-              {submittal.projectName ? submittal.projectName : "[no project name]" }
-            </div>
-          </Grid>
-          <Grid item xs={6}>
-            <div align="right">
-              {submittal.projectNumber ? submittal.projectName : "[no project number]" }
-            </div>
-          </Grid>
-        </Grid>
+      <div id="editBoxWrapper" onMouseEnter={showEditText} onMouseLeave={hideEditText}>
+        <div id="editableBox" className={editableBox()}>
+            <Grid container spacing={2}>
+              <Grid item xs={6} >
+                <div>
+                  {submittal.projectName ? submittal.projectName : "[no project name]" }
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div align="right">
+                  {submittal.projectNumber ? submittal.projectName : "[no project number]" }
+                </div>
+              </Grid>
+            </Grid>
+        </div>
+        <div id="hiddenEditText" className={classes.hiddenEditText}>
+          edit
+        </div>
       </div>
 
       <hr />
