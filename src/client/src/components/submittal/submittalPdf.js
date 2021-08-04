@@ -72,10 +72,18 @@ export default function SubmittalPdf(props) {
     .then(res => res.json())
     .then((submittalJson) => setSubmittal(submittalJson)), [id])
 
-  const [showEdit, setShowEdit] = useState(props.showEdit)
-  var editableBox = () => showEdit ? classes.editableBox : "";
+  const [showEdit] = useState(props.showEdit)
+  let editableBox = () => showEdit ? classes.editableBox : "";
 
-  useEffect(() => {    
+  useEffect(() => {
+    renderEditBox()
+    window.addEventListener("resize", renderEditBox);
+    return _ => {
+      window.removeEventListener("resize", renderEditBox);
+    }
+  });
+
+  let renderEditBox = () => {
     let offsetHeight = document.getElementById('editableBox').offsetHeight;
     let offsetWidth = document.getElementById('editableBox').offsetWidth;
     document.getElementById("hiddenEditText").setAttribute("style",`
@@ -87,13 +95,13 @@ export default function SubmittalPdf(props) {
     document.getElementById("editBoxWrapper").setAttribute("style",`
       height:${offsetHeight}px;
     `)
-  });
+  }
 
-  var showEditText = () => {
+  let showEditText = () => {
     console.log('onMouseEnter')
     document.getElementById("hiddenEditText").style.display = "grid"; 
   };
-  var hideEditText = () => {
+  let hideEditText = () => {
     console.log('onMouseLeave')
     document.getElementById("hiddenEditText").style.display = "none"; 
   };

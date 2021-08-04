@@ -39,10 +39,6 @@ const useStyles = makeStyles({
 export default function SubmittalTable() {
   const classes = useStyles();
 
-  const theme = {
-    spacing: 8,
-  }
-
   const [submittals, setSubmittals] = useState([]);
   useEffect(() => fetchSubmittals(), []);
   const fetchSubmittals = () => fetch('/submittals')
