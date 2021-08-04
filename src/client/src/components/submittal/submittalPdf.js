@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import { useMediaQuery } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -104,12 +103,10 @@ export default function SubmittalPdf(props) {
   }
 
   let showEditText = () => {
-    console.log('onMouseEnter')
     document.getElementById("hiddenEditText").style.display = "grid"; 
   };
   let hideEditText = () => {
-    console.log('onMouseLeave')
-    document.getElementById("hiddenEditText").style.display = "none"; 
+    document.getElementById("hiddenEditText").style.display = "none";
   };
 
   return (
