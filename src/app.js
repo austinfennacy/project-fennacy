@@ -1,15 +1,15 @@
-const express = require('express');
-const cors = require('cors');
-const { Sequelize } = require('sequelize');
-const { sequelize, Submittal } = require('./models');
-const config = require('./config/config.js');
-const puppeteer = require('puppeteer');
+const express = require('express')
+const cors = require('cors')
+const { Sequelize } = require('sequelize')
+const { sequelize, Submittal, Address } = require('./models')
+const config = require('./config/config.js')
+const puppeteer = require('puppeteer')
 
-const app = express();
+const app = express()
 app.use(express.json())
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
+const PORT = process.env.PORT || 5000
+app.listen(PORT, console.log(`Server started on port ${PORT}`))
 
 app.get('/getSubmittalPdf', async (req, res) => {
   const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
@@ -34,7 +34,7 @@ async function printPdf(url) {
 
 app.get('/submittals', cors(), async (req, res) => {
   try {
-    const submittals = await Submittal.findAll();
+    const submittals = await Submittal.findAll()
     
     return res.json(submittals)
   } catch (err) {
@@ -55,7 +55,7 @@ app.post('/submittal', async (req, res) => {
     dateReceived,
     respondBefore,
     responseDate,
-  } = req.body;
+  } = req.body
 
   try {
     const submittal = await Submittal.create({ 
@@ -79,11 +79,13 @@ app.post('/submittal', async (req, res) => {
 })
 
 app.get('/submittal/:id', async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
   
   try {
-    const submittal = await Submittal.findOne({ where: { id } });
-    
+    const submittal = await Submittal.findOne({ where: { id } })
+
+    submittal.dataValues.architectAddress = await submittal.getArchitectAddress()
+
     return res.json(submittal)
   } catch (err) {
     console.log(err)
@@ -92,7 +94,7 @@ app.get('/submittal/:id', async (req, res) => {
 })
 
 app.put('/submittal/:id', async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
   const { 
     submittalNumber,
     numberRecommended,
@@ -104,10 +106,10 @@ app.put('/submittal/:id', async (req, res) => {
     dateReceived,
     respondBefore,
     responseDate,
-  } = req.body;
+  } = req.body
   
   try {
-    const submittal = await Submittal.findOne({ where: { id } });
+    const submittal = await Submittal.findOne({ where: { id } })
     
     submittal.submittalNumber = submittalNumber
     submittal.numberRecommended = numberRecommended
@@ -130,16 +132,16 @@ app.put('/submittal/:id', async (req, res) => {
 })
 
 app.delete('/submittal/:id', async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
 
   try {
     const numAddectedRows = await Submittal.destroy({
       where: {
         id: id,
       }
-    });
+    })
     
-    const recordDeletedSuccessfully = numAddectedRows == 1;
+    const recordDeletedSuccessfully = numAddectedRows == 1
 
     return res.json({ success: recordDeletedSuccessfully })
   } catch (err) {
@@ -149,14 +151,14 @@ app.delete('/submittal/:id', async (req, res) => {
 })
 
 app.put('/submittal/updateProject/:id', async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
   const { 
     projectNumber,
     projectName,
-  } = req.body;
+  } = req.body
 
   try {
-    const submittal = await Submittal.findOne({ where: { id } });
+    const submittal = await Submittal.findOne({ where: { id } })
     
     submittal.projectNumber = projectNumber
     submittal.projectName = projectName
@@ -171,13 +173,13 @@ app.put('/submittal/updateProject/:id', async (req, res) => {
 })
 
 app.put('/submittal/updateDescription/:id', async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
   const { 
     description,
-  } = req.body;
+  } = req.body
 
   try {
-    const submittal = await Submittal.findOne({ where: { id } });
+    const submittal = await Submittal.findOne({ where: { id } })
     
     submittal.description = description
 
@@ -191,14 +193,14 @@ app.put('/submittal/updateDescription/:id', async (req, res) => {
 })
 
 app.put('/submittal/updateSubSpec/:id', async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
   const { 
     submittalNumber,
     specificationNumber,
-  } = req.body;
+  } = req.body
 
   try {
-    const submittal = await Submittal.findOne({ where: { id } });
+    const submittal = await Submittal.findOne({ where: { id } })
     
     submittal.submittalNumber = submittalNumber
     submittal.specificationNumber = specificationNumber
@@ -212,10 +214,37 @@ app.put('/submittal/updateSubSpec/:id', async (req, res) => {
   }
 })
 
+app.post('/submittal/createAddress/:submittalId', async (req, res) => {
+  const submittalId = req.params.submittalId
+  const { 
+    addressNameLine,
+    addressLine1,
+    addressLine2,
+    city,
+    zip,
+  } = req.body
+
+  try {
+    const address = await Address.create({ 
+      addressNameLine,
+      addressLine1,
+      addressLine2,
+      city,
+      zip,
+      architectAddressId: submittalId,
+    })
+
+    return res.json(address)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 const db = new Sequelize(config.development.database, config.development.username, config.development.password, {
   host: config.development.host,
     dialect: 'mysql'
-  });
+  })
 
 // comment out this block to prevent updates to the database schema
 async function main() {

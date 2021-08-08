@@ -7,6 +7,7 @@ import EditableBox from './edit/editableBox'
 import ProjectDialog from './edit/projectDialog'
 import DescriptionDialog from './edit/descriptionDialog'
 import SubSpecDialog from './edit/subSpecDialog'
+import AddressDialog from './edit/addressDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -54,7 +55,7 @@ export default function SubmittalPdf(props) {
     ? classes.smallScreen
     : classes.smallPrint
   
-  const [submittal, setSubmittal] = useState([])
+  const [submittal, setSubmittal] = useState({})
   useEffect(() => fetchSubmittal(), [id])
   const fetchSubmittal = () => fetch(`/submittal/${id}`)
     .then(res => res.json())
@@ -71,6 +72,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateSubSpecDialog, setOpenUpdateSubSpecDialog] = useState(false)
   const handleOpenUpdateSubSpecDialog = () => { setOpenUpdateSubSpecDialog(true) }
   const handleCloseUpdateSubSpecDialog = () => { setOpenUpdateSubSpecDialog(false) }
+
+  const [openUpdateArchitectAddressDialog, setOpenUpdateArchitectAddressDialog] = useState(false)
+  const handleOpenUpdateArchitectAddressDialog = () => { setOpenUpdateArchitectAddressDialog(true) }
+  const handleCloseUpdateArchitectAddressDialog = () => { setOpenUpdateArchitectAddressDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -161,15 +166,35 @@ export default function SubmittalPdf(props) {
           <label>
             Architect:
           </label>
-          <div className={classes.todofix}>
-            Darden Architects
-          </div>
-          <div className={classes.todofix}>
-            6790 N. West Ave
-          </div>
-          <div className={classes.todofix}>
-            Fresno, California 93711
-          </div>
+          <EditableBox  
+              openDialog={handleOpenUpdateArchitectAddressDialog}
+              showEdit={props.showEdit}>
+            <div>
+              {submittal?.architectAddress?.addressName
+                ? submittal.architectAddress.addressName
+                : '[missing address title]'}
+            </div>
+            <div>
+              {submittal?.architectAddress?.addressLine1
+                ? submittal.architectAddress.addressLine1
+                : '[missing address street]'}
+            </div>
+            <div>
+              {(submittal?.architectAddress?.city && submittal?.architectAddress?.state)
+                ? `${submittal.architectAddress.city}, ${submittal.architectAddress.state}`
+                : '[missing data]'}
+              {submittal?.architectAddress?.zip
+                ? ` ${submittal.architectAddress.zip}`
+                : ''}
+            </div>
+          </EditableBox>
+          {/* <AddressDialog
+            addressType="architectAddress"
+            isDialogOpen={openUpdateArchitectAddressDialog}
+            handleClose={handleCloseUpdateArchitectAddressDialog}
+            fetchSubmittals={fetchSubmittal}
+            values={{ ...submittal }} /> */}
+          
         </Grid>
         <Grid item xs={6}>
           <label>

@@ -1,11 +1,12 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Submittal extends Model {
     static associate(models) {
-      // define association here
+      Submittal.hasOne(models.Address, { as: 'architectAddress' });
+      Submittal.hasOne(models.Address, { as: 'contractorAddress' });
+      Submittal.hasOne(models.Address, { as: 'projectAddress' });
     }
 
     toJSON() {

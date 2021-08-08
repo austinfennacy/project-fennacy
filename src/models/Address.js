@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
     },
+    addressNameLine: {
+      type: DataTypes.STRING,
+    },
     addressLine1: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -32,28 +35,16 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     addressLine2: {
-      allowNull: true,
       type: DataTypes.STRING,
     },
     city: {
-      allowNull: true,
       type: DataTypes.STRING,
     },
     state: {
-      allowNull: true,
       type: DataTypes.STRING,
     },
     zip: {
-      allowNull: true,
       type: DataTypes.INTEGER,
-    },
-    isMailing: {
-      allowNull: true,
-      type: DataTypes.BOOLEAN,
-    },
-    isBilling: {
-      allowNull: true,
-      type: DataTypes.BOOLEAN,
     },
   }, {
     sequelize,
