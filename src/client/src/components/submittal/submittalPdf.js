@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import { useMediaQuery } from '@material-ui/core';
 import ProjectDialog from './edit/projectDialog';
+import EditableBox from './edit/editableBox';
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -36,28 +37,6 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
     width: "100%",
   },
-  editableBox: {
-    display: "inline-block",
-    width: "100%",
-    position: "relative",
-    transformStyle: "preserve-3d",
-    background: "rgba(154, 219, 254, 0.3)",
-    borderColor: "rgba(154, 219, 254, 0.9)",
-    border: "2px solid",
-    padding: "2px",
-    "& *": {
-      position: "relative",
-      transform: "translateZ(-1px)",  
-    },
-  },
-  hiddenEditText: {
-    background: "rgba(154, 219, 254, 0.3)",
-    color: "white",
-    display: "none",
-    justifyContent: "center",
-    alignContent: "center",
-    cursor: "pointer",
-  }
 }))
 
 export default function SubmittalPdf(props) {
@@ -76,41 +55,6 @@ export default function SubmittalPdf(props) {
     .then(res => res.json())
     .then((submittalJson) => setSubmittal(submittalJson));
 
-  const [showEdit] = useState(props.showEdit)
-  let editableBox = () => showEdit ? classes.editableBox : "";
-
-  useEffect(() => {
-    renderEditBox()
-    window.addEventListener("resize", renderEditBox);
-    return _ => {
-      window.removeEventListener("resize", renderEditBox);
-    }
-  });
-
-  let renderEditBox = () => {
-    let offsetHeight = document.getElementById('editableBox').offsetHeight;
-    let offsetWidth = document.getElementById('editableBox').offsetWidth;
-    document.getElementById("hiddenEditText").setAttribute("style",`
-      height:${offsetHeight}px;
-      width:${offsetWidth}px;
-      position: relative;
-      top: ${-1*offsetHeight}px;
-      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.02rem;
-    `)
-    document.getElementById("editBoxWrapper").setAttribute("style",`
-      height:${offsetHeight}px;
-    `)
-  }
-
-  let showEditText = () => {
-    document.getElementById("hiddenEditText").style.display = "grid"; 
-  };
-  let hideEditText = () => {
-    document.getElementById("hiddenEditText").style.display = "none";
-  };
-
   const [openUpdateProjectDialog, setOpenUpdateProjectDialog] = useState(false);
   const handleOpenUpdateProjectDialog = () => {
     setOpenUpdateProjectDialog(true);
@@ -125,30 +69,28 @@ export default function SubmittalPdf(props) {
       <h2 className={classes.title} align="center">
         SHOP DRAWING AND SUBMITTAL TRANSMITTAL
       </h2>
-      <div id="editBoxWrapper" onMouseEnter={showEditText} onMouseLeave={hideEditText}>
-        <div id="editableBox" className={editableBox()}>
-            <Grid container spacing={2}>
-              <Grid item xs={6} >
-                <div>
-                  {submittal.projectName ? submittal.projectName : "[no project name]" }
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div align="right">
-                  {submittal.projectNumber ? submittal.projectNumber : "[no project number]" }
-                </div>
-              </Grid>
-            </Grid>
-        </div>
-        <div id="hiddenEditText" className={classes.hiddenEditText} onClick={handleOpenUpdateProjectDialog}>
-          EDIT
-        </div>
-      </div>
+
+      <EditableBox  
+        openDialog={handleOpenUpdateProjectDialog}
+        showEdit={props.showEdit}>
+        <Grid container spacing={2}>
+          <Grid item xs={6} >
+            <div>
+              {submittal.projectName ? submittal.projectName : "[no project name]" }
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <div align="right">
+              {submittal.projectNumber ? submittal.projectNumber : "[no project number]" }
+            </div>
+          </Grid>
+        </Grid>
+      </EditableBox>
       <ProjectDialog
         isDialogOpen={openUpdateProjectDialog}
         handleClose={handleCloseUpdateProjectDialog}
         fetchSubmittals={fetchSubmittal}
-        values={{ ...submittal }}/>
+        values={{ ...submittal }} />
 
       <hr />
 
