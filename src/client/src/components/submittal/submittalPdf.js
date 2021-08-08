@@ -170,8 +170,8 @@ export default function SubmittalPdf(props) {
               openDialog={handleOpenUpdateArchitectAddressDialog}
               showEdit={props.showEdit}>
             <div>
-              {submittal?.architectAddress?.addressName
-                ? submittal.architectAddress.addressName
+              {submittal?.architectAddress?.addressNameLine
+                ? submittal.architectAddress.addressNameLine
                 : '[missing address title]'}
             </div>
             <div>
@@ -188,12 +188,12 @@ export default function SubmittalPdf(props) {
                 : ''}
             </div>
           </EditableBox>
-          {/* <AddressDialog
+          <AddressDialog
             addressType="architectAddress"
             isDialogOpen={openUpdateArchitectAddressDialog}
             handleClose={handleCloseUpdateArchitectAddressDialog}
             fetchSubmittals={fetchSubmittal}
-            values={{ ...submittal }} /> */}
+            values={{ ...submittal.architectAddress }} />
           
         </Grid>
         <Grid item xs={6}>

@@ -214,25 +214,29 @@ app.put('/submittal/updateSubSpec/:id', async (req, res) => {
   }
 })
 
-app.post('/submittal/createAddress/:submittalId', async (req, res) => {
+app.put('/submittal/updateAddress/:submittalId', async (req, res) => {
   const submittalId = req.params.submittalId
   const { 
     addressNameLine,
     addressLine1,
-    addressLine2,
     city,
+    state,
     zip,
   } = req.body
 
   try {
-    const address = await Address.create({ 
-      addressNameLine,
-      addressLine1,
-      addressLine2,
-      city,
-      zip,
-      architectAddressId: submittalId,
+    const [address, created] = await Address.findOrCreate({ 
+      where: { architectAddressId: submittalId },
     })
+
+    address.addressNameLine = addressNameLine
+    address.addressLine1 = addressLine1
+    address.city = city
+    address.state = state
+    address.zip = zip
+    address.architectAddressId = submittalId
+
+    address.save()
 
     return res.json(address)
   } catch (err) {
