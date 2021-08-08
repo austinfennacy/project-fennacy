@@ -1,10 +1,11 @@
 import './submittalPdf.css'
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid';
-import { useMediaQuery } from '@material-ui/core';
-import ProjectDialog from './edit/projectDialog';
-import EditableBox from './edit/editableBox';
+import Grid from '@material-ui/core/Grid'
+import { useMediaQuery } from '@material-ui/core'
+import EditableBox from './edit/editableBox'
+import ProjectDialog from './edit/projectDialog'
+import DescriptionDialog from './edit/descriptionDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -53,15 +54,15 @@ export default function SubmittalPdf(props) {
   useEffect(() => fetchSubmittal(), [id])
   const fetchSubmittal = () => fetch(`/submittal/${id}`)
     .then(res => res.json())
-    .then((submittalJson) => setSubmittal(submittalJson));
+    .then((submittalJson) => setSubmittal(submittalJson))
 
-  const [openUpdateProjectDialog, setOpenUpdateProjectDialog] = useState(false);
-  const handleOpenUpdateProjectDialog = () => {
-    setOpenUpdateProjectDialog(true);
-  };
-  const handleCloseUpdateProjectDialog = () => {
-    setOpenUpdateProjectDialog(false);
-  };
+  const [openUpdateProjectDialog, setOpenUpdateProjectDialog] = useState(false)
+  const handleOpenUpdateProjectDialog = () => { setOpenUpdateProjectDialog(true) }
+  const handleCloseUpdateProjectDialog = () => { setOpenUpdateProjectDialog(false) }
+
+  const [openUpdateDescriptionDialog, setOpenUpdateDescriptionDialog] = useState(false)
+  const handleOpenUpdateDescriptionDialog = () => { setOpenUpdateDescriptionDialog(true) }
+  const handleCloseUpdateDescriptionDialog = () => { setOpenUpdateDescriptionDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -95,16 +96,25 @@ export default function SubmittalPdf(props) {
       <hr />
 
       <Grid container spacing={2}>
-        <Grid item xs={7}>
-          <label>
-            Description:
-          </label>
-          <div>
-            {submittal.description}
-          </div>
-        </Grid>
-        <Grid item xs={5}>
+          <Grid item xs={7}>
+            <label>
+              Description:
+            </label>
+            <EditableBox  
+              openDialog={handleOpenUpdateDescriptionDialog}
+              showEdit={props.showEdit}>
+              <div>
+                {submittal.description}
+              </div>
+            </EditableBox>
+          </Grid>
+        <DescriptionDialog
+          isDialogOpen={openUpdateDescriptionDialog}
+          handleClose={handleCloseUpdateDescriptionDialog}
+          fetchSubmittals={fetchSubmittal}
+          values={{ ...submittal }} />
 
+        <Grid item xs={5}>
           <Grid container>
             <Grid item xs={8} align="right">
               <label>

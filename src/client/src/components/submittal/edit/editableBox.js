@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { v4 as uuidv4 } from 'uuid'
 
 const useStyles = makeStyles(() => ({
   editableBox: {
@@ -29,14 +30,19 @@ const useStyles = makeStyles(() => ({
 export default function EditableBox(props) {
   const classes = useStyles()
 
+  // use UUID to create unique IDs for targeting when multiple EditableBox on 1 page
+  const hiddenEditTextId = `hiddenEditText-${uuidv4()}`
+  const editBoxWrapperId = `editBoxWrapper-${uuidv4()}`
+  const editableBoxId = `editableBox-${uuidv4()}`
+
   const [showEdit] = useState(props.showEdit)
   let editableBox = () => showEdit ? classes.editableBox : ""
 
   let showEditText = () => {
-    document.getElementById("hiddenEditText").style.display = "grid" 
+    document.getElementById(hiddenEditTextId).style.display = "grid" 
   }
   let hideEditText = () => {
-    document.getElementById("hiddenEditText").style.display = "none"
+    document.getElementById(hiddenEditTextId).style.display = "none"
   }
 
   useEffect(() => {
@@ -48,9 +54,9 @@ export default function EditableBox(props) {
   });
 
   let renderEditBox = () => {
-    let offsetHeight = document.getElementById('editableBox').offsetHeight;
-    let offsetWidth = document.getElementById('editableBox').offsetWidth;
-    document.getElementById("hiddenEditText").setAttribute("style",`
+    let offsetHeight = document.getElementById(editableBoxId).offsetHeight;
+    let offsetWidth = document.getElementById(editableBoxId).offsetWidth;
+    document.getElementById(hiddenEditTextId).setAttribute("style",`
       height:${offsetHeight}px;
       width:${offsetWidth}px;
       position: relative;
@@ -59,17 +65,17 @@ export default function EditableBox(props) {
       font-weight: 700;
       letter-spacing: 0.02rem;
     `)
-    document.getElementById("editBoxWrapper").setAttribute("style",`
+    document.getElementById(editBoxWrapperId).setAttribute("style",`
       height:${offsetHeight}px;
     `)
   }
 
   return (
-    <div id="editBoxWrapper" onMouseEnter={showEditText} onMouseLeave={hideEditText}>
-      <div id="editableBox" className={editableBox()}>
+    <div id={editBoxWrapperId} onMouseEnter={showEditText} onMouseLeave={hideEditText}>
+      <div id={editableBoxId} className={editableBox()}>
         {props.children}
       </div>
-      <div id="hiddenEditText" className={classes.hiddenEditText} onClick={props.openDialog}>
+      <div id={hiddenEditTextId} className={classes.hiddenEditText} onClick={props.openDialog}>
         EDIT
       </div>
     </div>
