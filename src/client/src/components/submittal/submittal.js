@@ -1,4 +1,3 @@
-import './submittal.css'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Paper from '@material-ui/core/Paper'
