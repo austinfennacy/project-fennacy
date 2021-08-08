@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 export default function SubSpecDialog(props) {
   const [formValues, setFormValues] = useState(props.values);
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    value = value == '' ? null : value
     setFormValues({
       ...formValues,
       [name]: value,
@@ -72,7 +73,7 @@ export default function SubSpecDialog(props) {
             defaultValue = {props.values.specificationNumber}
           />
         </DialogContent>
-        
+
         <DialogActions>
           <Button onClick={props.handleClose} color="default">
             Cancel
