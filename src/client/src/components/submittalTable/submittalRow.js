@@ -10,7 +10,7 @@ export default function SubmittalRow(props) {
         {props.submittal.submittalNumber}
       </TableCell>
       <TableCell>
-        {props.submittal.numberReccomended}
+        {props.submittal.numberRecommended}
       </TableCell>
       <TableCell>
         {props.submittal.specificationSection}

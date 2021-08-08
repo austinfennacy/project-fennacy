@@ -46,7 +46,7 @@ app.get('/submittals', cors(), async (req, res) => {
 app.post('/submittal', async (req, res) => {
   const { 
     submittalNumber,
-    numberReccomended,
+    numberRecommended,
     specificationSection,
     ahjRequired,
     ahjApproved,
@@ -60,7 +60,7 @@ app.post('/submittal', async (req, res) => {
   try {
     const submittal = await Submittal.create({ 
       submittalNumber,
-      numberReccomended,
+      numberRecommended,
       specificationSection,
       ahjRequired,
       ahjApproved,
@@ -95,7 +95,7 @@ app.put('/submittal/:id', async (req, res) => {
   const id = req.params.id;
   const { 
     submittalNumber,
-    numberReccomended,
+    numberRecommended,
     specificationSection,
     ahjRequired,
     ahjApproved,
@@ -110,7 +110,7 @@ app.put('/submittal/:id', async (req, res) => {
     const submittal = await Submittal.findOne({ where: { id } });
     
     submittal.submittalNumber = submittalNumber
-    submittal.numberReccomended = numberReccomended
+    submittal.numberRecommended = numberRecommended
     submittal.specificationSection = specificationSection
     submittal.ahjRequired = ahjRequired
     submittal.ahjApproved = ahjApproved

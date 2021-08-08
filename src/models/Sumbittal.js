@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     specificationNumber: {
       type: DataTypes.INTEGER,
     },
-    numberReccomended: {
+    numberRecommended: {
       type: DataTypes.INTEGER,
     },
     specificationSection: {

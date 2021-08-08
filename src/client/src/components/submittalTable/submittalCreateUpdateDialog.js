@@ -163,12 +163,12 @@ export default function SubmittalCreateUpdateDialog(props) {
                 <TextField
                   variant="outlined"
                   margin="normal"
-                  name="numberReccomended"
+                  name="numberRecommended"
                   label="Number Reccomended"
                   type="number"
                   fullWidth
                   onChange={handleInputChange}
-                  defaultValue = {props?.values?.numberReccomended ?? ""}
+                  defaultValue = {props?.values?.numberRecommended ?? ""}
                 />
               </Grid>
               <Grid item xs={3}>
