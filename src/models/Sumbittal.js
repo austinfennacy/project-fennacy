@@ -72,6 +72,12 @@ module.exports = (sequelize, DataTypes) => {
     // status: {
     //   //some kind of enum, not sure
     // },
+    projectNumber: {
+      type: DataTypes.INTEGER,
+    },
+    projectName: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'Submittal',

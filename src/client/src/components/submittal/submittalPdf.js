@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import { useMediaQuery } from '@material-ui/core';
+import ProjectDialog from './edit/projectDialog';
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -70,9 +71,10 @@ export default function SubmittalPdf(props) {
     : classes.smallPrint
   
   const [submittal, setSubmittal] = useState([])
-  useEffect(() => fetch(`/submittal/${id}`)
+  useEffect(() => fetchSubmittal(), [id])
+  const fetchSubmittal = () => fetch(`/submittal/${id}`)
     .then(res => res.json())
-    .then((submittalJson) => setSubmittal(submittalJson)), [id])
+    .then((submittalJson) => setSubmittal(submittalJson));
 
   const [showEdit] = useState(props.showEdit)
   let editableBox = () => showEdit ? classes.editableBox : "";
@@ -109,6 +111,14 @@ export default function SubmittalPdf(props) {
     document.getElementById("hiddenEditText").style.display = "none";
   };
 
+  const [openUpdateProjectDialog, setOpenUpdateProjectDialog] = useState(false);
+  const handleOpenUpdateProjectDialog = () => {
+    setOpenUpdateProjectDialog(true);
+  };
+  const handleCloseUpdateProjectDialog = () => {
+    setOpenUpdateProjectDialog(false);
+  };
+
   return (
     <div className={pdfClass}>
       
@@ -125,15 +135,20 @@ export default function SubmittalPdf(props) {
               </Grid>
               <Grid item xs={6}>
                 <div align="right">
-                  {submittal.projectNumber ? submittal.projectName : "[no project number]" }
+                  {submittal.projectNumber ? submittal.projectNumber : "[no project number]" }
                 </div>
               </Grid>
             </Grid>
         </div>
-        <div id="hiddenEditText" className={classes.hiddenEditText}>
+        <div id="hiddenEditText" className={classes.hiddenEditText} onClick={handleOpenUpdateProjectDialog}>
           EDIT
         </div>
       </div>
+      <ProjectDialog
+        isDialogOpen={openUpdateProjectDialog}
+        handleClose={handleCloseUpdateProjectDialog}
+        fetchSubmittals={fetchSubmittal}
+        values={{ ...submittal }}/>
 
       <hr />
 
