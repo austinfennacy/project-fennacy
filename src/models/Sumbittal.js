@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'submittal number is required' },
       },
     },
+    specificationNumber: {
+      type: DataTypes.INTEGER,
+    },
     numberReccomended: {
       type: DataTypes.INTEGER,
     },

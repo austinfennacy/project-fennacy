@@ -6,6 +6,7 @@ import { useMediaQuery } from '@material-ui/core'
 import EditableBox from './edit/editableBox'
 import ProjectDialog from './edit/projectDialog'
 import DescriptionDialog from './edit/descriptionDialog'
+import SubSpecDialog from './edit/subSpecDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -38,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
     width: "100%",
   },
+  displayBlock: {
+    display: "block",
+  }
 }))
 
 export default function SubmittalPdf(props) {
@@ -63,6 +67,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateDescriptionDialog, setOpenUpdateDescriptionDialog] = useState(false)
   const handleOpenUpdateDescriptionDialog = () => { setOpenUpdateDescriptionDialog(true) }
   const handleCloseUpdateDescriptionDialog = () => { setOpenUpdateDescriptionDialog(false) }
+
+  const [openUpdateSubSpecDialog, setOpenUpdateSubSpecDialog] = useState(false)
+  const handleOpenUpdateSubSpecDialog = () => { setOpenUpdateSubSpecDialog(true) }
+  const handleCloseUpdateSubSpecDialog = () => { setOpenUpdateSubSpecDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -117,30 +125,32 @@ export default function SubmittalPdf(props) {
         <Grid item xs={5}>
           <Grid container>
             <Grid item xs={8} align="right">
-              <label>
+              <label className={classes.displayBlock}>
                 Submittal No.:
               </label>
-            </Grid>
-            <Grid item xs={4} align="right">
-              <span>
-                {submittal.submittalNumber}
-              </span>
-            </Grid>
-          </Grid>
-
-          <Grid container>
-            <Grid item xs={8} align="right">
-              <label>
+              <label className={classes.displayBlock}>
                 Spec Section:
               </label>
             </Grid>
             <Grid item xs={4} align="right">
-              <span className={classes.todofix}>
-                0987611
-              </span>
+            <EditableBox  
+              openDialog={handleOpenUpdateSubSpecDialog}
+              showEdit={props.showEdit}>
+                <div>
+                  {submittal.submittalNumber}
+                </div>
+                <div>
+                  {submittal.specificationNumber}
+                </div>
+              </EditableBox>
+              <SubSpecDialog
+                isDialogOpen={openUpdateSubSpecDialog}
+                handleClose={handleCloseUpdateSubSpecDialog}
+                fetchSubmittals={fetchSubmittal}
+                values={{ ...submittal }} />
+
             </Grid>
           </Grid>
-
         </Grid>
       </Grid>
 
