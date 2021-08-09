@@ -77,6 +77,10 @@ export default function SubmittalPdf(props) {
   const handleOpenUpdateArchitectAddressDialog = () => { setOpenUpdateArchitectAddressDialog(true) }
   const handleCloseUpdateArchitectAddressDialog = () => { setOpenUpdateArchitectAddressDialog(false) }
 
+  const [openUpdateProjectAddressDialog, setOpenUpdateProjectAddressDialog] = useState(false)
+  const handleOpenUpdateProjectAddressDialog = () => { setOpenUpdateProjectAddressDialog(true) }
+  const handleCloseUpdateProjectAddressDialog = () => { setOpenUpdateProjectAddressDialog(false) }
+
   return (
     <div className={pdfClass}>
       
@@ -197,21 +201,42 @@ export default function SubmittalPdf(props) {
               ...submittal.architectAddress,
               submittalId: submittal.id, 
             }} />
-          
         </Grid>
         <Grid item xs={6}>
           <label>
             Project:
           </label>
-          <div className={classes.todofix}>
-            Sanger Educational Complex
-          </div>
-          <div className={classes.todofix}>
-            1850 S Fowler Ave
-          </div>
-          <div className={classes.todofix}>
-            Fresno, CA 93727
-          </div>
+          <EditableBox  
+              openDialog={handleOpenUpdateProjectAddressDialog}
+              showEdit={props.showEdit}>
+            <div>
+              {submittal?.projectAddress?.addressNameLine
+                ? submittal.projectAddress.addressNameLine
+                : '[missing address title]'}
+            </div>
+            <div>
+              {submittal?.projectAddress?.addressLine1
+                ? submittal.projectAddress.addressLine1
+                : '[missing address street]'}
+            </div>
+            <div>
+              {(submittal?.projectAddress?.city && submittal?.projectAddress?.state)
+                ? `${submittal.projectAddress.city}, ${submittal.projectAddress.state}`
+                : '[missing data]'}
+              {submittal?.projectAddress?.zip
+                ? ` ${submittal.projectAddress.zip}`
+                : ''}
+            </div>
+          </EditableBox>
+          <AddressDialog
+            addressType="projectAddress"
+            isDialogOpen={openUpdateProjectAddressDialog}
+            handleClose={handleCloseUpdateProjectAddressDialog}
+            fetchSubmittals={fetchSubmittal}
+            values={{ 
+              ...submittal.projectAddress,
+              submittalId: submittal.id, 
+            }} />
         </Grid>
       </Grid>
 

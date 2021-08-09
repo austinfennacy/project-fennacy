@@ -85,6 +85,8 @@ app.get('/submittal/:id', async (req, res) => {
     const submittal = await Submittal.findOne({ where: { id } })
 
     submittal.dataValues.architectAddress = await submittal.getArchitectAddress()
+    submittal.dataValues.projectAddress = await submittal.getProjectAddress()
+    submittal.dataValues.contractorAddress = await submittal.getContractorAddress()
 
     return res.json(submittal)
   } catch (err) {
