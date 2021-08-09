@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid'
 export default function AddressDialog(props) {
   const [formValues, setFormValues] = useState({
     ...props.values,
-    // addressType: props.addressType,
+    addressType: props.addressType,
   });
 
 
@@ -26,7 +26,7 @@ export default function AddressDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateAddress/${props.values.architectAddressId}`, {
+    fetch(`/submittal/updateAddress/${props.values.submittalId}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

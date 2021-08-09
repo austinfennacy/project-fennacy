@@ -193,7 +193,10 @@ export default function SubmittalPdf(props) {
             isDialogOpen={openUpdateArchitectAddressDialog}
             handleClose={handleCloseUpdateArchitectAddressDialog}
             fetchSubmittals={fetchSubmittal}
-            values={{ ...submittal.architectAddress }} />
+            values={{ 
+              ...submittal.architectAddress,
+              submittalId: submittal.id, 
+            }} />
           
         </Grid>
         <Grid item xs={6}>

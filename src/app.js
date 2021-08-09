@@ -216,17 +216,28 @@ app.put('/submittal/updateSubSpec/:id', async (req, res) => {
 
 app.put('/submittal/updateAddress/:submittalId', async (req, res) => {
   const submittalId = req.params.submittalId
+
   const { 
     addressNameLine,
     addressLine1,
     city,
     state,
     zip,
+    addressType,
   } = req.body
 
+  
+  architectAddressId = addressType == "architectAddress" ? submittalId : null
+  contractorAddressId = addressType == "contractorAddress" ? submittalId : null
+  projectAddressId = addressType == "projectAddress" ? submittalId : null
+  
   try {
     const [address, created] = await Address.findOrCreate({ 
-      where: { architectAddressId: submittalId },
+      where: {
+        architectAddressId: architectAddressId,
+        contractorAddressId: contractorAddressId,
+        projectAddressId: projectAddressId,
+      },
     })
 
     address.addressNameLine = addressNameLine
@@ -234,7 +245,9 @@ app.put('/submittal/updateAddress/:submittalId', async (req, res) => {
     address.city = city
     address.state = state
     address.zip = zip
-    address.architectAddressId = submittalId
+    address.architectAddressId = architectAddressId
+    address.contractorAddressId = contractorAddressId
+    address.projectAddressId = projectAddressId
 
     address.save()
 
