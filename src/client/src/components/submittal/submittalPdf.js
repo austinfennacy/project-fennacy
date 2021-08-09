@@ -81,6 +81,10 @@ export default function SubmittalPdf(props) {
   const handleOpenUpdateProjectAddressDialog = () => { setOpenUpdateProjectAddressDialog(true) }
   const handleCloseUpdateProjectAddressDialog = () => { setOpenUpdateProjectAddressDialog(false) }
 
+  const [openUpdateContractorAddressDialog, setOpenUpdateContractorAddressDialog] = useState(false)
+  const handleOpenUpdateContractorAddressDialog = () => { setOpenUpdateContractorAddressDialog(true) }
+  const handleCloseUpdateContractorAddressDialog = () => { setOpenUpdateContractorAddressDialog(false) }
+
   return (
     <div className={pdfClass}>
       
@@ -213,15 +217,21 @@ export default function SubmittalPdf(props) {
           <label>
             Contractor:
           </label>
-          <div className={classes.todofix}>
-            Harris Construction Company Inc.
-          </div>
-          <div className={classes.todofix}>
-            5286 E Home Ave
-          </div>
-          <div className={classes.todofix}>
-            Fresno, CA 93727
-          </div>
+          <EditableBox  
+              openDialog={handleOpenUpdateContractorAddressDialog}
+              showEdit={props.showEdit}>
+            <FormattedAddress
+              {...submittal?.contractorAddress} />
+          </EditableBox>
+          <AddressDialog
+            addressType="contractorAddress"
+            isDialogOpen={openUpdateContractorAddressDialog}
+            handleClose={handleCloseUpdateContractorAddressDialog}
+            fetchSubmittals={fetchSubmittal}
+            values={{ 
+              ...submittal.contractorAddress,
+              submittalId: submittal.id, 
+            }} />
         </Grid>
         <Grid item xs={6}>
           <label>
