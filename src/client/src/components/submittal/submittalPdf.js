@@ -8,6 +8,7 @@ import ProjectDialog from './edit/projectDialog'
 import DescriptionDialog from './edit/descriptionDialog'
 import SubSpecDialog from './edit/subSpecDialog'
 import AddressDialog from './edit/addressDialog'
+import SupplierDialog from './edit/supplierDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -84,6 +85,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateContractorAddressDialog, setOpenUpdateContractorAddressDialog] = useState(false)
   const handleOpenUpdateContractorAddressDialog = () => { setOpenUpdateContractorAddressDialog(true) }
   const handleCloseUpdateContractorAddressDialog = () => { setOpenUpdateContractorAddressDialog(false) }
+
+  const [openUpdateSupplierDialog, setOpenUpdateSupplierDialog] = useState(false)
+  const handleOpenUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(true) }
+  const handleCloseUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -237,9 +242,18 @@ export default function SubmittalPdf(props) {
           <label>
             Supplier:
           </label>
-          <div className={classes.todofix}>
-            Visalia Ceramic Tile
-          </div>
+          <EditableBox  
+              openDialog={handleOpenUpdateSupplierDialog}
+              showEdit={props.showEdit}>
+            <div>
+              {submittal.supplierName ? submittal.supplierName : "[no supplier data]"}
+            </div>
+          </EditableBox>
+          <SupplierDialog
+            isDialogOpen={openUpdateSupplierDialog}
+            handleClose={handleCloseUpdateSupplierDialog}
+            fetchSubmittals={fetchSubmittal}
+            values={{ ...submittal }} />
           <hr />
           <label>
             Substitution:

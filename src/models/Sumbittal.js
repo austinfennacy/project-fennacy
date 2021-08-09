@@ -82,6 +82,9 @@ module.exports = (sequelize, DataTypes) => {
     projectName: {
       type: DataTypes.STRING,
     },
+    supplierName: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'Submittal',
