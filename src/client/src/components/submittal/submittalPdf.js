@@ -173,24 +173,8 @@ export default function SubmittalPdf(props) {
           <EditableBox  
               openDialog={handleOpenUpdateArchitectAddressDialog}
               showEdit={props.showEdit}>
-            <div>
-              {submittal?.architectAddress?.addressNameLine
-                ? submittal.architectAddress.addressNameLine
-                : '[missing address title]'}
-            </div>
-            <div>
-              {submittal?.architectAddress?.addressLine1
-                ? submittal.architectAddress.addressLine1
-                : '[missing address street]'}
-            </div>
-            <div>
-              {(submittal?.architectAddress?.city && submittal?.architectAddress?.state)
-                ? `${submittal.architectAddress.city}, ${submittal.architectAddress.state}`
-                : '[missing data]'}
-              {submittal?.architectAddress?.zip
-                ? ` ${submittal.architectAddress.zip}`
-                : ''}
-            </div>
+            <FormattedAddress
+              {...submittal?.architectAddress} />
           </EditableBox>
           <AddressDialog
             addressType="architectAddress"
@@ -209,24 +193,8 @@ export default function SubmittalPdf(props) {
           <EditableBox  
               openDialog={handleOpenUpdateProjectAddressDialog}
               showEdit={props.showEdit}>
-            <div>
-              {submittal?.projectAddress?.addressNameLine
-                ? submittal.projectAddress.addressNameLine
-                : '[missing address title]'}
-            </div>
-            <div>
-              {submittal?.projectAddress?.addressLine1
-                ? submittal.projectAddress.addressLine1
-                : '[missing address street]'}
-            </div>
-            <div>
-              {(submittal?.projectAddress?.city && submittal?.projectAddress?.state)
-                ? `${submittal.projectAddress.city}, ${submittal.projectAddress.state}`
-                : '[missing data]'}
-              {submittal?.projectAddress?.zip
-                ? ` ${submittal.projectAddress.zip}`
-                : ''}
-            </div>
+            <FormattedAddress
+              {...submittal?.projectAddress} />
           </EditableBox>
           <AddressDialog
             addressType="projectAddress"
@@ -429,5 +397,30 @@ export default function SubmittalPdf(props) {
       <br />
       <br />
     </div>
+  )
+}
+
+function FormattedAddress(props) {
+  return (
+  <div>
+    <div>
+      {props?.addressNameLine
+        ? props.addressNameLine
+        : '[missing address title]'}
+    </div>
+    <div>
+      {props?.addressLine1
+        ? props.addressLine1
+        : '[missing address street]'}
+    </div>
+    <div>
+      {(props?.city && props?.state)
+        ? `${props.city}, ${props.state}`
+        : '[missing data]'}
+      {props?.zip
+        ? ` ${props.zip}`
+        : ''}
+    </div>
+  </div>
   )
 }
