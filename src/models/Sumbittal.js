@@ -85,6 +85,9 @@ module.exports = (sequelize, DataTypes) => {
     supplierName: {
       type: DataTypes.STRING,
     },
+    isSubstitutionUsed: {
+      type: DataTypes.BOOLEAN,
+    },
   }, {
     sequelize,
     modelName: 'Submittal',

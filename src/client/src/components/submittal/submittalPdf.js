@@ -9,6 +9,7 @@ import DescriptionDialog from './edit/descriptionDialog'
 import SubSpecDialog from './edit/subSpecDialog'
 import AddressDialog from './edit/addressDialog'
 import SupplierDialog from './edit/supplierDialog'
+import SubstitutionDialog from './edit/substitutionDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -89,6 +90,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateSupplierDialog, setOpenUpdateSupplierDialog] = useState(false)
   const handleOpenUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(true) }
   const handleCloseUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(false) }
+
+  const [openUpdateSubstitutionDialog, setOpenUpdateSubstitutionDialog] = useState(false)
+  const handleOpenUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(true) }
+  const handleCloseUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -255,12 +260,27 @@ export default function SubmittalPdf(props) {
             fetchSubmittals={fetchSubmittal}
             values={{ ...submittal }} />
           <hr />
-          <label>
-            Substitution:
-          </label>
-          <span className={classes.todofix}>
-            ☐🗹 (DSA Approval Req'd)
-          </span>
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <label>
+                Substitution:
+              </label>
+            </Grid>
+            <Grid item xs={7}>
+              <EditableBox  
+                openDialog={handleOpenUpdateSubstitutionDialog}
+                showEdit={props.showEdit}>
+                <span>
+                  {submittal.isSubstitutionUsed ? "🗹 Yes" : "☐ Yes"}
+                </span>
+              </EditableBox>
+              <SubstitutionDialog
+                isDialogOpen={openUpdateSubstitutionDialog}
+                handleClose={handleCloseUpdateSubstitutionDialog}
+                fetchSubmittals={fetchSubmittal}
+                values={{ ...submittal }} />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
 
