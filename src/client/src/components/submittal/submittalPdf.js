@@ -11,6 +11,7 @@ import AddressDialog from './edit/addressDialog'
 import SupplierDialog from './edit/supplierDialog'
 import SubstitutionDialog from './edit/substitutionDialog'
 import ReceivedInfoDialog from './edit/receivedInfoDialog'
+import ContractorRemarksDialog from './edit/contractorRemarksDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -45,7 +46,14 @@ const useStyles = makeStyles((theme) => ({
   },
   displayBlock: {
     display: "block",
-  }
+  },
+  contractorRemarks: {
+    display: "-webkit-box",
+    WebkitLineClamp: "3",
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
 }))
 
 export default function SubmittalPdf(props) {
@@ -99,6 +107,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateReceivedInfoDialog, setOpenUpdateReceivedInfoDialog] = useState(false)
   const handleOpenUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(true) }
   const handleCloseUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(false) }
+
+  const [openUpdateContractorRemarksDialog, setOpenUpdateContractorRemarksDialog] = useState(false)
+  const handleOpenUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(true) }
+  const handleCloseUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -327,15 +339,22 @@ export default function SubmittalPdf(props) {
 
       <hr />
 
-      <div style={{ minHeight:'4rem' }}>
+      <div>
         <label>
           Contractor Remarks:
         </label>
-        <div className={classes.todofix}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        </div>
+        <EditableBox  
+        openDialog={handleOpenUpdateContractorRemarksDialog}
+        showEdit={props.showEdit}>
+          <div className={classes.contractorRemarks}>
+            {submittal?.contractorRemarks ?? '[no data]'}
+          </div>
+        </EditableBox>
+        <ContractorRemarksDialog
+          isDialogOpen={openUpdateContractorRemarksDialog}
+          handleClose={handleCloseUpdateContractorRemarksDialog}
+          fetchSubmittals={fetchSubmittal}
+          values={{ ...submittal }} />
       </div>
 
       <Grid container>

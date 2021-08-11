@@ -88,6 +88,9 @@ module.exports = (sequelize, DataTypes) => {
     isSubstitutionUsed: {
       type: DataTypes.BOOLEAN,
     },
+    contractorRemarks: {
+      type: DataTypes.TEXT,
+    },
   }, {
     sequelize,
     modelName: 'Submittal',
