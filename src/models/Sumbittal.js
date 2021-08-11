@@ -41,9 +41,6 @@ module.exports = (sequelize, DataTypes) => {
     specificationNumber: {
       type: DataTypes.INTEGER,
     },
-    numberRecommended: {
-      type: DataTypes.INTEGER,
-    },
     specificationSection: {
       type: DataTypes.INTEGER,
     },
@@ -66,6 +63,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     dateReceived: {
       type: DataTypes.DATEONLY,
+    },
+    numberReceived: {
+      type: DataTypes.STRING,
     },
     respondBefore: {
       type: DataTypes.DATEONLY,

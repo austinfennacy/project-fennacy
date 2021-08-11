@@ -10,6 +10,7 @@ import SubSpecDialog from './edit/subSpecDialog'
 import AddressDialog from './edit/addressDialog'
 import SupplierDialog from './edit/supplierDialog'
 import SubstitutionDialog from './edit/substitutionDialog'
+import ReceivedInfoDialog from './edit/receivedInfoDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -94,6 +95,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateSubstitutionDialog, setOpenUpdateSubstitutionDialog] = useState(false)
   const handleOpenUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(true) }
   const handleCloseUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(false) }
+
+  const [openUpdateReceivedInfoDialog, setOpenUpdateReceivedInfoDialog] = useState(false)
+  const handleOpenUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(true) }
+  const handleCloseUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -284,32 +289,41 @@ export default function SubmittalPdf(props) {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <label>
-            Date Received:
-          </label>
-          <span>
-            {submittal.dateReceived}
-          </span>
+      <EditableBox  
+        openDialog={handleOpenUpdateReceivedInfoDialog}
+        showEdit={props.showEdit}>
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <label>
+              Date Received:
+            </label>
+            <span>
+              {submittal.dateReceived}
+            </span>
+          </Grid>
+          <Grid item xs={3}>
+            <label>
+              No. Received:
+            </label>
+            <span>
+              {submittal.numberReceived}
+            </span>
+          </Grid>
+          <Grid item xs={5}>
+            <label>
+              Date Returned:
+            </label>
+            <span>
+              {submittal.responseDate}
+            </span>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <label>
-            No. Received:
-          </label>
-          <span className={classes.todofix}>
-            12
-          </span>
-        </Grid>
-        <Grid item xs={5}>
-          <label>
-            Date Returned:
-          </label>
-          <span>
-            {submittal.responseDate}
-          </span>
-        </Grid>
-      </Grid>
+      </EditableBox>
+      <ReceivedInfoDialog
+        isDialogOpen={openUpdateReceivedInfoDialog}
+        handleClose={handleCloseUpdateReceivedInfoDialog}
+        fetchSubmittals={fetchSubmittal}
+        values={{ ...submittal }} />
 
       <hr />
 

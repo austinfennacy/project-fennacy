@@ -46,7 +46,7 @@ app.get('/submittals', cors(), async (req, res) => {
 app.post('/submittal', async (req, res) => {
   const { 
     submittalNumber,
-    numberRecommended,
+    numberReceived,
     specificationSection,
     ahjRequired,
     ahjApproved,
@@ -60,7 +60,7 @@ app.post('/submittal', async (req, res) => {
   try {
     const submittal = await Submittal.create({ 
       submittalNumber,
-      numberRecommended,
+      numberReceived,
       specificationSection,
       ahjRequired,
       ahjApproved,
@@ -99,7 +99,7 @@ app.put('/submittal/:id', async (req, res) => {
   const id = req.params.id
   const { 
     submittalNumber,
-    numberRecommended,
+    numberReceived,
     specificationSection,
     ahjRequired,
     ahjApproved,
@@ -114,7 +114,7 @@ app.put('/submittal/:id', async (req, res) => {
     const submittal = await Submittal.findOne({ where: { id } })
     
     submittal.submittalNumber = submittalNumber
-    submittal.numberRecommended = numberRecommended
+    submittal.numberReceived = numberReceived
     submittal.specificationSection = specificationSection
     submittal.ahjRequired = ahjRequired
     submittal.ahjApproved = ahjApproved
@@ -290,6 +290,30 @@ app.put('/submittal/updateSubstitution/:id', async (req, res) => {
     const submittal = await Submittal.findOne({ where: { id } })
     
     submittal.isSubstitutionUsed = isSubstitutionUsed
+
+    await submittal.save()
+
+    return res.json(submittal)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
+app.put('/submittal/updateReceivedInfo/:id', async (req, res) => {
+  const id = req.params.id
+  const { 
+    dateReceived,
+    numberReceived,
+    responseDate,
+  } = req.body
+
+  try {
+    const submittal = await Submittal.findOne({ where: { id } })
+    
+    submittal.dateReceived = dateReceived
+    submittal.numberReceived = numberReceived
+    submittal.responseDate = responseDate
 
     await submittal.save()
 
