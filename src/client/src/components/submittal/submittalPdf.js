@@ -371,7 +371,7 @@ export default function SubmittalPdf(props) {
             openDialog={handleOpenUpdateWarrantyDialog}
             showEdit={props.showEdit}>
             <Grid container spacing={2}>
-              <Grid item xs={8}>
+              <Grid item xs={8} align="right">
                 <div>
                   <label>
                     Warranty:
