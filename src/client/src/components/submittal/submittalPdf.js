@@ -2,7 +2,7 @@ import './submittalPdf.css'
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import { useMediaQuery } from '@material-ui/core'
+import { Box, useMediaQuery } from '@material-ui/core'
 import EditableBox from './edit/editableBox'
 import ProjectDialog from './edit/projectDialog'
 import DescriptionDialog from './edit/descriptionDialog'
@@ -15,6 +15,7 @@ import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
 import FloatDialog from './edit/floatDialog'
+import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -354,7 +355,7 @@ export default function SubmittalPdf(props) {
 
       <hr />
 
-      <div>
+      <Box mb={1}>
         <label>
           Contractor Remarks:
         </label>
@@ -370,7 +371,7 @@ export default function SubmittalPdf(props) {
           handleClose={handleCloseUpdateContractorRemarksDialog}
           fetchSubmittals={fetchSubmittal}
           values={{ ...submittal }} />
-      </div>
+      </Box>
 
       <Grid container>
         <Grid item xs={4}>
