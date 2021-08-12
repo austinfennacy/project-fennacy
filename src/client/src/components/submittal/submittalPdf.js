@@ -405,36 +405,28 @@ export default function SubmittalPdf(props) {
               <div>
                 <Grid container>
                   <Grid item xs={7} align="right">
-                    Submittal Task #:
+                    <div>
+                      Early Start Date:
+                    </div>
+                    <div>
+                      Early Finish Date:
+                    </div>
+                    <div>
+                      Late Finish Date:
+                    </div>
                   </Grid>
                   <Grid item xs={1}>
                   </Grid>
-                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
-                    01244
-                  </Grid>
-                </Grid>
-              </div>
-              <div>
-                <Grid container>
-                  <Grid item xs={7} align="right">
-                    Early Start Date:
-                  </Grid>
-                  <Grid item xs={1}>
-                  </Grid>
-                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
-                    8/25/2021
-                  </Grid>
-                </Grid>
-              </div>
-              <div>
-                <Grid container>
-                  <Grid item xs={7} align="right">
-                    Early Finish Date:
-                  </Grid>
-                  <Grid item xs={1}>
-                  </Grid>
-                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
-                    10/2/2021
+                  <Grid item xs={4}>
+                    <div className={classes.underlined}>
+                      {submittal.earlyStartDate ? submittal.earlyStartDate : "[no data]"}
+                    </div>
+                    <div className={classes.underlined}>
+                      {submittal.earlyFinishDate ? submittal.earlyFinishDate : "[no data]"}
+                    </div>
+                    <div className={classes.underlined}>
+                      {submittal.lateFinishDate ? submittal.lateFinishDate : "[no data]"}
+                    </div>
                   </Grid>
                 </Grid>
               </div>
@@ -443,24 +435,22 @@ export default function SubmittalPdf(props) {
               <div>
                 <Grid container>
                   <Grid item xs={7} align="right">
-                    Late Finish Date:
+                    <div>
+                      Scheduled Float Time:
+                    </div>
+                    <div>
+                      Submittal Task No:
+                    </div>
                   </Grid>
                   <Grid item xs={1}>
                   </Grid>
-                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
-                    11/26/2021
-                  </Grid>
-                </Grid>
-              </div>
-              <div>
-                <Grid container>
-                  <Grid item xs={7} align="right">
-                    Scheduled Float Time:
-                  </Grid>
-                  <Grid item xs={1}>
-                  </Grid>
-                  <Grid item xs={4} className={`${classes.todofix} ${classes.underlined}`}>
-                    2 months
+                  <Grid item xs={4}>
+                    <div className={classes.underlined}>
+                      {submittal.floatTime ? submittal.floatTime : "[no data]"}
+                    </div>
+                    <div className={classes.underlined}>
+                      {submittal.submittalTaskNumber ? submittal.submittalTaskNumber : "[no data]"}
+                    </div>
                   </Grid>
                 </Grid>
               </div>

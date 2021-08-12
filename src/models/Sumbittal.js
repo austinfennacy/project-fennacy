@@ -97,6 +97,21 @@ module.exports = (sequelize, DataTypes) => {
     contractorRemarks: {
       type: DataTypes.TEXT,
     },
+    earlyStartDate: {
+      type: DataTypes.DATEONLY,
+    },
+    earlyFinishDate: {
+      type: DataTypes.DATEONLY,
+    },
+    lateFinishDate: {
+      type: DataTypes.DATEONLY,
+    },
+    floatTime: {
+      type: DataTypes.STRING,
+    },
+    submittalTaskNumber: {
+      type: DataTypes.INTEGER,
+    },
   }, {
     sequelize,
     modelName: 'Submittal',
