@@ -88,6 +88,12 @@ module.exports = (sequelize, DataTypes) => {
     isSubstitutionUsed: {
       type: DataTypes.BOOLEAN,
     },
+    hasWarranty: {
+      type: DataTypes.BOOLEAN,
+    },
+    hasManuals: {
+      type: DataTypes.BOOLEAN,
+    },
     contractorRemarks: {
       type: DataTypes.TEXT,
     },

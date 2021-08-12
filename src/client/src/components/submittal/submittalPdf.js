@@ -10,6 +10,7 @@ import SubSpecDialog from './edit/subSpecDialog'
 import AddressDialog from './edit/addressDialog'
 import SupplierDialog from './edit/supplierDialog'
 import SubstitutionDialog from './edit/substitutionDialog'
+import WarrantyDialog from './edit/warrantyDialog'
 import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
 
@@ -103,6 +104,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateSubstitutionDialog, setOpenUpdateSubstitutionDialog] = useState(false)
   const handleOpenUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(true) }
   const handleCloseUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(false) }
+
+  const [openUpdateWarrantyDialog, setOpenUpdateWarrantyDialog] = useState(false)
+  const handleOpenUpdateWarrantyDialog = () => { setOpenUpdateWarrantyDialog(true) }
+  const handleCloseUpdateWarrantyDialog = () => { setOpenUpdateWarrantyDialog(false) }
 
   const [openUpdateReceivedInfoDialog, setOpenUpdateReceivedInfoDialog] = useState(false)
   const handleOpenUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(true) }
@@ -362,22 +367,37 @@ export default function SubmittalPdf(props) {
           <div>
             Other Required Information:
           </div>
-          <div>
-            <label>
-              Warranty:
-            </label>
-            <span className={classes.todofix}>
-              ☐🗹
-            </span>
-          </div>
-          <div>
-            <label>
-              O and M Manuals:
-            </label>
-            <span className={classes.todofix}>
-              ☐🗹
-            </span>
-          </div>
+          <EditableBox  
+            openDialog={handleOpenUpdateWarrantyDialog}
+            showEdit={props.showEdit}>
+            <Grid container spacing={2}>
+              <Grid item xs={8}>
+                <div>
+                  <label>
+                    Warranty:
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    O&M Manuals:
+                  </label>
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                  <div>
+                    {submittal.hasWarranty ? "🗹 Yes" : "☐ Yes"}
+                  </div>
+                  <div>
+                    {submittal.hasManuals ? "🗹 Yes" : "☐ Yes"}
+                  </div>
+              </Grid>
+            </Grid>
+          </EditableBox>
+          <WarrantyDialog
+            isDialogOpen={openUpdateWarrantyDialog}
+            handleClose={handleCloseUpdateWarrantyDialog}
+            fetchSubmittals={fetchSubmittal}
+            values={{ ...submittal }} />
         </Grid>
         <Grid item xs={8} className={smallClass}>
           <Grid container spacing={2}>

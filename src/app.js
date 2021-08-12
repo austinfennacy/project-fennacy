@@ -300,6 +300,28 @@ app.put('/submittal/updateSubstitution/:id', async (req, res) => {
   }
 })
 
+app.put('/submittal/updateWarranty/:id', async (req, res) => {
+  const id = req.params.id
+  const { 
+    hasWarranty,
+    hasManuals,
+  } = req.body
+
+  try {
+    const submittal = await Submittal.findOne({ where: { id } })
+    
+    submittal.hasWarranty = hasWarranty
+    submittal.hasManuals = hasManuals
+
+    await submittal.save()
+
+    return res.json(submittal)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 app.put('/submittal/updateReceivedInfo/:id', async (req, res) => {
   const id = req.params.id
   const { 
