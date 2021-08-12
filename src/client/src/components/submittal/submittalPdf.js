@@ -13,6 +13,7 @@ import SubstitutionDialog from './edit/substitutionDialog'
 import WarrantyDialog from './edit/warrantyDialog'
 import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
+import TimelineDialog from './edit/timelineDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -116,6 +117,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateContractorRemarksDialog, setOpenUpdateContractorRemarksDialog] = useState(false)
   const handleOpenUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(true) }
   const handleCloseUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(false) }
+
+  const [openUpdateTimelineDialog, setOpenUpdateTimelineDialog] = useState(false)
+  const handleOpenUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(true) }
+  const handleCloseUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -418,15 +423,24 @@ export default function SubmittalPdf(props) {
                   <Grid item xs={1}>
                   </Grid>
                   <Grid item xs={4}>
-                    <div className={classes.underlined}>
-                      {submittal.earlyStartDate ? submittal.earlyStartDate : "[no data]"}
-                    </div>
-                    <div className={classes.underlined}>
-                      {submittal.earlyFinishDate ? submittal.earlyFinishDate : "[no data]"}
-                    </div>
-                    <div className={classes.underlined}>
-                      {submittal.lateFinishDate ? submittal.lateFinishDate : "[no data]"}
-                    </div>
+                    <EditableBox  
+                      openDialog={handleOpenUpdateTimelineDialog}
+                      showEdit={props.showEdit}>
+                      <div className={classes.underlined}>
+                        {submittal.earlyStartDate ? submittal.earlyStartDate : "[no data]"}
+                      </div>
+                      <div className={classes.underlined}>
+                        {submittal.earlyFinishDate ? submittal.earlyFinishDate : "[no data]"}
+                      </div>
+                      <div className={classes.underlined}>
+                        {submittal.lateFinishDate ? submittal.lateFinishDate : "[no data]"}
+                      </div>
+                    </EditableBox>
+                    <TimelineDialog
+                      isDialogOpen={openUpdateTimelineDialog}
+                      handleClose={handleCloseUpdateTimelineDialog}
+                      fetchSubmittals={fetchSubmittal}
+                      values={{ ...submittal }} />
                   </Grid>
                 </Grid>
               </div>
