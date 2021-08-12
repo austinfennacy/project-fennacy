@@ -1,30 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 
-export default function WarrantyDialog(props) {
-  const [formValues, setFormValues] = useState({...props.values})
-  useEffect(() => {
-    setFormValues(props.values);
-  }, [props.values])
-
+export default function SubSpecDialog(props) {
+  const [formValues, setFormValues] = useState(props.values);
   const handleInputChange = (e) => {
-    let { name, checked } = e.target;
+    let { name, value } = e.target;
+    value = value == '' ? null : value
     setFormValues({
       ...formValues,
-      [name]: checked,
+      [name]: value,
     });
   };
 
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateWarranty/${props.values.id}`, {
+    fetch(`/submittal/updateFloat/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -51,38 +47,30 @@ export default function WarrantyDialog(props) {
     >
       <form onSubmit={handleUpdate}>
         <DialogTitle id="form-dialog-title">
-          Update Warranty and Manual Info
+          Update Info
         </DialogTitle>
         <DialogContent>
-          <div>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  autoFocus
-                  checked={formValues.hasWarranty}
-                  onChange={handleInputChange}
-                  name="hasWarranty"
-                  color="primary"
-                />
-              }
-              label="Has Warranty"
-            />
-          </div>
-          <div>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formValues.hasManuals}
-                  onChange={handleInputChange}
-                  name="hasManuals"
-                  color="primary"
-                />
-              }
-              label="Has Manuals"
-            />
-          </div>
+          <TextField
+            autoFocus
+            variant="outlined"
+            margin="normal"
+            name="floatTime"
+            label="Scheduled Float Time"
+            fullWidth
+            onChange={handleInputChange}
+            defaultValue = {props.values.floatTime}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            name="submittalTaskNumber"
+            label="Submittal Task Number"
+            type="number"
+            fullWidth
+            onChange={handleInputChange}
+            defaultValue = {props.values.submittalTaskNumber}
+          />
         </DialogContent>
-
         <DialogActions>
           <Button onClick={props.handleClose} color="default">
             Cancel

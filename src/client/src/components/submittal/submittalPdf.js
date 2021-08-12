@@ -14,6 +14,7 @@ import WarrantyDialog from './edit/warrantyDialog'
 import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
+import FloatDialog from './edit/floatDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -121,6 +122,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateTimelineDialog, setOpenUpdateTimelineDialog] = useState(false)
   const handleOpenUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(true) }
   const handleCloseUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(false) }
+
+  const [openUpdateFloatDialog, setOpenUpdateFloatDialog] = useState(false)
+  const handleOpenUpdateFloatDialog = () => { setOpenUpdateFloatDialog(true) }
+  const handleCloseUpdateFloatDialog = () => { setOpenUpdateFloatDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -459,12 +464,21 @@ export default function SubmittalPdf(props) {
                   <Grid item xs={1}>
                   </Grid>
                   <Grid item xs={4}>
-                    <div className={classes.underlined}>
-                      {submittal.floatTime ? submittal.floatTime : "[no data]"}
-                    </div>
-                    <div className={classes.underlined}>
-                      {submittal.submittalTaskNumber ? submittal.submittalTaskNumber : "[no data]"}
-                    </div>
+                    <EditableBox  
+                      openDialog={handleOpenUpdateFloatDialog}
+                      showEdit={props.showEdit}>
+                      <div className={classes.underlined}>
+                        {submittal.floatTime ? submittal.floatTime : "[no data]"}
+                      </div>
+                      <div className={classes.underlined}>
+                        {submittal.submittalTaskNumber ? submittal.submittalTaskNumber : "[no data]"}
+                      </div>
+                    </EditableBox>
+                    <FloatDialog
+                      isDialogOpen={openUpdateFloatDialog}
+                      handleClose={handleCloseUpdateFloatDialog}
+                      fetchSubmittals={fetchSubmittal}
+                      values={{ ...submittal }} />
                   </Grid>
                 </Grid>
               </div>

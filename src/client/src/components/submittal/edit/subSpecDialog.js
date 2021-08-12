@@ -62,7 +62,6 @@ export default function SubSpecDialog(props) {
             defaultValue = {props.values.submittalNumber}
           />
           <TextField
-            autoFocus
             variant="outlined"
             margin="normal"
             name="specificationNumber"
