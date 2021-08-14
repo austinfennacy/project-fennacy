@@ -490,14 +490,86 @@ export default function SubmittalPdf(props) {
 
       <hr />
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <label>
+        Design Consultant's Review:
+      </label>
+
+      <Box p={1}>
+        <Grid container>
+          <Grid item xs={3}>
+            TRANSMITTED TO:
+          </Grid>
+          <Grid item xs={4} className={classes.underlined}>
+            {submittal.transmittedTo ? submittal.transmittedTo : "[no data]"}
+          </Grid>
+          <Grid item xs={3}>
+              DATE RETURNED:
+          </Grid>
+          <Grid item xs={2} className={classes.underlined}>
+            {submittal.responseDate ? submittal.responseDate : "[no data]"}
+          </Grid>
+        </Grid>
+
+        <Grid container>
+          <Grid item xs={6}>
+            <Grid container>
+              <Grid item xs={4}>
+                <div>
+                  DATE SENT:
+                </div>
+                <div>
+                  NO. SENT:
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div className={classes.underlined}>
+                  {submittal.responseDate ? submittal.responseDate : "[no data]"}
+                </div>
+                <div className={classes.underlined}>
+                  {submittal.numberSent ? submittal.numberSent : "[no data]"}
+                </div>
+              </Grid>
+            </Grid>
+            
+            <Box mt={1}>
+              <label>
+                ACTION:
+              </label>
+
+              <div className={smallClass}>
+                <div>
+                  {submittal.isDcNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
+                </div>
+                <div>
+                  {submittal.isDcNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
+                </div>
+                <div>
+                  {submittal.isDcAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
+                </div>
+                <div>
+                  {submittal.isDcRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
+                </div>
+                <div>
+                  {submittal.isDcSeeAttachedLetter ? "🗹" : "☐"} SEE ATTACHED LETTER
+                </div>
+              </div>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box mt={2}>
+              <label>
+                Consultant's Remarks:
+              </label>
+              <div>
+                {submittal.dcRemarks ? submittal.dcRemarks : "[no data]"}
+              </div>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <hr />
+
       <br />
       <br />
       <br />
