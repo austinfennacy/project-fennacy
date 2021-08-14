@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
+  noWrap: {
+    whiteSpace: "nowrap",
+  },
 }))
 
 export default function SubmittalPdf(props) {
@@ -298,20 +301,18 @@ export default function SubmittalPdf(props) {
                 Substitution:
               </label>
             </Grid>
-            <Grid item xs={7}>
-              <EditableBox  
-                openDialog={handleOpenUpdateSubstitutionDialog}
-                showEdit={props.showEdit}>
-                <span>
-                  {submittal.isSubstitutionUsed ? "🗹 Yes" : "☐ Yes"}
-                </span>
-              </EditableBox>
-              <SubstitutionDialog
-                isDialogOpen={openUpdateSubstitutionDialog}
-                handleClose={handleCloseUpdateSubstitutionDialog}
-                fetchSubmittals={fetchSubmittal}
-                values={{ ...submittal }} />
-            </Grid>
+            <EditableBox  
+              openDialog={handleOpenUpdateSubstitutionDialog}
+              showEdit={props.showEdit}>
+              <Grid item xs={7} className={classes.noWrap}>
+                {submittal.isSubstitutionUsed ? "🗹 Yes" : "☐ Yes"}
+              </Grid>
+            </EditableBox>
+            <SubstitutionDialog
+              isDialogOpen={openUpdateSubstitutionDialog}
+              handleClose={handleCloseUpdateSubstitutionDialog}
+              fetchSubmittals={fetchSubmittal}
+              values={{ ...submittal }} />
           </Grid>
         </Grid>
       </Grid>
