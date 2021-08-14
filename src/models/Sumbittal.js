@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
     },
     numberReceived: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     respondBefore: {
       type: DataTypes.DATEONLY,
@@ -107,6 +107,63 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     submittalTaskNumber: {
+      type: DataTypes.INTEGER,
+    },
+    transmittedTo: { 
+      type: DataTypes.STRING,
+    },
+    numberSent: {
+      type: DataTypes.INTEGER,
+    },
+    isDcNoExceptionTaken: {
+      type: DataTypes.BOOLEAN,
+    },
+    isDcNoExceptionTakenWithModificationNoted: {
+      type: DataTypes.BOOLEAN,
+    },
+    isDcAmmendAsNotedAndResubmit: {
+      type: DataTypes.BOOLEAN,
+    },
+    isDcRejectedAndResubmit: {
+      type: DataTypes.BOOLEAN,
+    },
+    isDcSeeAttachedLetter: {
+      type: DataTypes.BOOLEAN,
+    },
+    dcRemarks: {
+      type: DataTypes.TEXT,
+    },
+    isArchitectNoExceptionTaken: {
+      type: DataTypes.BOOLEAN,
+    },
+    isArchitectNoExceptionTakenWithModificationNoted: {
+      type: DataTypes.BOOLEAN,
+    },
+    isArchitectAmmendAsNotedAndResubmit: {
+      type: DataTypes.BOOLEAN,
+    },
+    isArchitectRejectedAndResubmit: {
+      type: DataTypes.BOOLEAN,
+    },
+    architectRemarks: {
+      type: DataTypes.TEXT,
+    },
+    isArchitectApprovedSubmission: {
+      type: DataTypes.BOOLEAN,
+    },
+    copiesForContractor: {
+      type: DataTypes.INTEGER,
+    },
+    copiesForOwner: {
+      type: DataTypes.INTEGER,
+    },
+    copiesForInspector: {
+      type: DataTypes.INTEGER,
+    },
+    copiesForFile: {
+      type: DataTypes.INTEGER,
+    },
+    copiesForOther: {
       type: DataTypes.INTEGER,
     },
   }, {
