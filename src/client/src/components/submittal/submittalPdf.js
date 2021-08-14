@@ -612,24 +612,56 @@ export default function SubmittalPdf(props) {
 
       <hr />
 
-      <label>
-        Copies To:
-      </label>
+      <Grid container>
+        <Grid item xs={6}>
+          <label>
+            Copies To:
+          </label>
+        </Grid>
+        <Grid item xs={3} align="right">
+          <label>
+            Date Returned:
+          </label>
+        </Grid>
+        <Grid item xs={2} className={classes.underlined}>
+          {submittal.responseDate ? submittal.responseDate : "[no data]"}
+        </Grid>
+      </Grid>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <Grid container>
+        <Grid item xs={1}>
+        </Grid>
+        <Grid item xs={1} align="right">
+          Contractor:
+        </Grid>
+        <Grid item xs={1}>
+          {submittal.copiesForContractor}
+        </Grid>
+        <Grid item xs={1} align="right">
+          Owner:
+        </Grid>
+        <Grid item xs={1}>
+          {submittal.copiesForOwner}
+        </Grid>
+        <Grid item xs={1} align="right">
+          Inspector:
+        </Grid>
+        <Grid item xs={1}>
+          {submittal.copiesForInspector}
+        </Grid>
+        <Grid item xs={1} align="right">
+          File:
+        </Grid>
+        <Grid item xs={1}>
+          {submittal.copiesForFile}
+        </Grid>
+        <Grid item xs={1} align="right">
+          Other:
+        </Grid>
+        <Grid item xs={1}>
+          {submittal.copiesForOther}
+        </Grid>
+      </Grid>
     </div>
   )
 }
