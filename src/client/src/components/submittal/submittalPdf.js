@@ -15,7 +15,6 @@ import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
 import FloatDialog from './edit/floatDialog'
-import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -569,6 +568,53 @@ export default function SubmittalPdf(props) {
       </Box>
 
       <hr />
+
+      <label>
+        Architect's Review:
+      </label>
+
+      <Box p={1}>
+        <Grid container>
+          <Grid item xs={6}>
+            <label>
+              ACTION:
+            </label>
+
+            <div className={smallClass}>
+              <div>
+                {submittal.isArchitectNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
+              </div>
+              <div>
+                {submittal.isArchitectNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
+              </div>
+              <div>
+                {submittal.isArchitectAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
+              </div>
+              <div>
+                {submittal.isArchitectRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
+              </div>
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <label>
+              Architect's Remarks:
+            </label>
+            <div>
+              {submittal.architectRemarks ? submittal.architectRemarks : "[no data]"}
+            </div>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <div className={classes.bold}>
+        Approved Substitution: {submittal.isArchitectApprovedSubmission ? "🗹" : "☐"}
+      </div>
+
+      <hr />
+
+      <label>
+        Copies To:
+      </label>
 
       <br />
       <br />
