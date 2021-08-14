@@ -73,9 +73,6 @@ module.exports = (sequelize, DataTypes) => {
     responseDate: {
       type: DataTypes.DATEONLY,
     },
-    // status: {
-    //   //some kind of enum, not sure
-    // },
     projectNumber: {
       type: DataTypes.INTEGER,
     },
