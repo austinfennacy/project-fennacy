@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   hiddenEditText: {
     background: "rgba(154, 219, 254, 0.3)",
     color: "white",
-    fontSize: "1rem",
+    fontSize: "1.3vw",
     display: "none",
     justifyContent: "center",
     alignContent: "center",
