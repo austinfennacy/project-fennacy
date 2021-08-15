@@ -13,6 +13,7 @@ import SubstitutionDialog from './edit/substitutionDialog'
 import WarrantyDialog from './edit/warrantyDialog'
 import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
+import ArchitectRemarksDialog from './edit/architectRemarksDialog'
 import DcRemarksDialog from './edit/dcRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
 import FloatDialog from './edit/floatDialog'
@@ -62,6 +63,13 @@ const useStyles = makeStyles((theme) => ({
   dcRemarks: {
     display: "-webkit-box",
     WebkitLineClamp: "6",
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  architectRemarks: {
+    display: "-webkit-box",
+    WebkitLineClamp: "5",
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -134,6 +142,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateDcRemarksDialog, setOpenUpdateDcRemarksDialog] = useState(false)
   const handleOpenUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(true) }
   const handleCloseUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(false) }
+
+  const [openUpdateArchitectRemarksDialog, setOpenUpdateArchitectRemarksDialog] = useState(false)
+  const handleOpenUpdateArchitectRemarksDialog = () => { setOpenUpdateArchitectRemarksDialog(true) }
+  const handleCloseUpdateArchitectRemarksDialog = () => { setOpenUpdateArchitectRemarksDialog(false) }
 
   const [openUpdateTimelineDialog, setOpenUpdateTimelineDialog] = useState(false)
   const handleOpenUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(true) }
@@ -630,21 +642,30 @@ export default function SubmittalPdf(props) {
                 {submittal.isArchitectRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
               </div>
             </div>
+
+            <Box mt={1} className={classes.bold}>
+              Approved Substitution: {submittal.isArchitectApprovedSubmission ? "🗹" : "☐"}
+            </Box>
           </Grid>
           <Grid item xs={6}>
             <label>
               Architect's Remarks:
             </label>
-            <div>
-              {submittal.architectRemarks ? submittal.architectRemarks : "[no data]"}
-            </div>
+            <EditableBox  
+              openDialog={handleOpenUpdateArchitectRemarksDialog}
+              showEdit={props.showEdit}>
+              <div className={classes.architectRemarks}>
+                {submittal?.architectRemarks ?? '[no data]'}
+              </div>
+            </EditableBox>
+            <ArchitectRemarksDialog
+              isDialogOpen={openUpdateArchitectRemarksDialog}
+              handleClose={handleCloseUpdateArchitectRemarksDialog}
+              fetchSubmittals={fetchSubmittal}
+              values={{ ...submittal }} />
           </Grid>
         </Grid>
       </Box>
-
-      <div className={classes.bold}>
-        Approved Substitution: {submittal.isArchitectApprovedSubmission ? "🗹" : "☐"}
-      </div>
 
       <hr />
 
