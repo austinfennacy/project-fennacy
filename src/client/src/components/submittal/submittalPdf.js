@@ -113,6 +113,13 @@ export default function SubmittalPdf(props) {
     isArchitectActionsOpen: false,
     isReceivedInfoOpen: false,
     isContractorRemarksOpen: false,
+    isDcRemarksOpen: false,
+    isArchitectRemarksOpen: false,
+    isTimelineOpen: false,
+    isFloatOpen: false,
+    isTransmittedOpen: false,
+    isCopiesOpen: false,
+    isSentOpen: false,
   })
 
   const handleDialogState = {
@@ -142,35 +149,21 @@ export default function SubmittalPdf(props) {
     closeReceivedInfo: () => setDialogState({ ...dialogState, isReceivedInfoOpen: false}),
     openContractorRemarks: () => setDialogState({ ...dialogState, isContractorRemarksOpen: true}),
     closeContractorRemarks: () => setDialogState({ ...dialogState, isContractorRemarksOpen: false}),
+    openDcRemarks: () => setDialogState({ ...dialogState, isDcRemarksOpen: true}),
+    closeDcRemarks: () => setDialogState({ ...dialogState, isDcRemarksOpen: false}),
+    openArchitectRemarks: () => setDialogState({ ...dialogState, isArchitectRemarksOpen: true}),
+    closeArchitectRemarks: () => setDialogState({ ...dialogState, isArchitectRemarksOpen: false}),
+    openTimeline: () => setDialogState({ ...dialogState, isTimelineOpen: true}),
+    closeTimeline: () => setDialogState({ ...dialogState, isTimelineOpen: false}),
+    openFloat: () => setDialogState({ ...dialogState, isFloatOpen: true}),
+    closeFloat: () => setDialogState({ ...dialogState, isFloatOpen: false}),
+    openTransmitted: () => setDialogState({ ...dialogState, isTransmittedOpen: true}),
+    closeTransmitted: () => setDialogState({ ...dialogState, isTransmittedOpen: false}),
+    openCopies: () => setDialogState({ ...dialogState, isCopiesOpen: true}),
+    closeCopies: () => setDialogState({ ...dialogState, isCopiesOpen: false}),
+    openSent: () => setDialogState({ ...dialogState, isSentOpen: true}),
+    closeSent: () => setDialogState({ ...dialogState, isSentOpen: false}),
   }
-  
-  const [openUpdateDcRemarksDialog, setOpenUpdateDcRemarksDialog] = useState(false)
-  const handleOpenUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(true) }
-  const handleCloseUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(false) }
-
-  const [openUpdateArchitectRemarksDialog, setOpenUpdateArchitectRemarksDialog] = useState(false)
-  const handleOpenUpdateArchitectRemarksDialog = () => { setOpenUpdateArchitectRemarksDialog(true) }
-  const handleCloseUpdateArchitectRemarksDialog = () => { setOpenUpdateArchitectRemarksDialog(false) }
-
-  const [openUpdateTimelineDialog, setOpenUpdateTimelineDialog] = useState(false)
-  const handleOpenUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(true) }
-  const handleCloseUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(false) }
-
-  const [openUpdateFloatDialog, setOpenUpdateFloatDialog] = useState(false)
-  const handleOpenUpdateFloatDialog = () => { setOpenUpdateFloatDialog(true) }
-  const handleCloseUpdateFloatDialog = () => { setOpenUpdateFloatDialog(false) }
-
-  const [openUpdateTransmittedDialog, setOpenUpdateTransmittedDialog] = useState(false)
-  const handleOpenUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(true) }
-  const handleCloseUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(false) }
-
-  const [openUpdateCopiesDialog, setOpenUpdateCopiesDialog] = useState(false)
-  const handleOpenUpdateCopiesDialog = () => { setOpenUpdateCopiesDialog(true) }
-  const handleCloseUpdateCopiesDialog = () => { setOpenUpdateCopiesDialog(false) }
-
-  const [openUpdateSentDialog, setOpenUpdateSentDialog] = useState(false)
-  const handleOpenUpdateSentDialog = () => { setOpenUpdateSentDialog(true) }
-  const handleCloseUpdateSentDialog = () => { setOpenUpdateSentDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -472,7 +465,7 @@ export default function SubmittalPdf(props) {
                   </Grid>
                   <Grid item xs={4}>
                     <EditableBox  
-                      openDialog={handleOpenUpdateTimelineDialog}
+                      openDialog={handleDialogState.openTimeline}
                       showEdit={props.showEdit}>
                       <div className={classes.underlined}>
                         {submittal.earlyStartDate ? submittal.earlyStartDate : "[no data]"}
@@ -485,8 +478,8 @@ export default function SubmittalPdf(props) {
                       </div>
                     </EditableBox>
                     <TimelineDialog
-                      isDialogOpen={openUpdateTimelineDialog}
-                      handleClose={handleCloseUpdateTimelineDialog}
+                      isDialogOpen={dialogState.isTimelineOpen}
+                      handleClose={handleDialogState.closeTimeline}
                       fetchSubmittals={fetchSubmittal}
                       values={{ ...submittal }} />
                   </Grid>
@@ -508,7 +501,7 @@ export default function SubmittalPdf(props) {
                   </Grid>
                   <Grid item xs={4}>
                     <EditableBox  
-                      openDialog={handleOpenUpdateFloatDialog}
+                      openDialog={handleDialogState.openFloat}
                       showEdit={props.showEdit}>
                       <div className={classes.underlined}>
                         {submittal.floatTime ? submittal.floatTime : "[no data]"}
@@ -518,8 +511,8 @@ export default function SubmittalPdf(props) {
                       </div>
                     </EditableBox>
                     <FloatDialog
-                      isDialogOpen={openUpdateFloatDialog}
-                      handleClose={handleCloseUpdateFloatDialog}
+                      isDialogOpen={dialogState.isFloatOpen}
+                      handleClose={handleDialogState.closeFloat}
                       fetchSubmittals={fetchSubmittal}
                       values={{ ...submittal }} />
                   </Grid>
@@ -538,7 +531,7 @@ export default function SubmittalPdf(props) {
 
       <Box p={1}>
         <EditableBox
-          openDialog={handleOpenUpdateTransmittedDialog}
+          openDialog={handleDialogState.openTransmitted}
           showEdit={props.showEdit}>
           <Grid container>
             <Grid item xs={3}>
@@ -556,8 +549,8 @@ export default function SubmittalPdf(props) {
           </Grid>
         </EditableBox>
         <TransmittedDialog
-          isDialogOpen={openUpdateTransmittedDialog}
-          handleClose={handleCloseUpdateTransmittedDialog}
+          isDialogOpen={dialogState.isTransmittedOpen}
+          handleClose={handleDialogState.closeTransmitted}
           fetchSubmittals={fetchSubmittal}
           values={{ ...submittal }} />
 
@@ -574,7 +567,7 @@ export default function SubmittalPdf(props) {
               </Grid>
               <Grid item xs={4}>
               <EditableBox
-                openDialog={handleOpenUpdateSentDialog}
+                openDialog={handleDialogState.openSent}
                 showEdit={props.showEdit}>
                   <div className={classes.underlined}>
                     {submittal.responseDate ? submittal.responseDate : "[no data]"}
@@ -584,8 +577,8 @@ export default function SubmittalPdf(props) {
                   </div>
                 </EditableBox>
                 <SentDialog
-                  isDialogOpen={openUpdateSentDialog}
-                  handleClose={handleCloseUpdateSentDialog}
+                  isDialogOpen={dialogState.isSentOpen}
+                  handleClose={handleDialogState.closeSent}
                   fetchSubmittals={fetchSubmittal}
                   values={{ ...submittal }} />
               </Grid>
@@ -628,15 +621,15 @@ export default function SubmittalPdf(props) {
                 Consultant's Remarks:
               </label>
               <EditableBox  
-                openDialog={handleOpenUpdateDcRemarksDialog}
+                openDialog={handleDialogState.openDcRemarks}
                 showEdit={props.showEdit}>
                 <div className={classes.dcRemarks}>
                   {submittal?.dcRemarks ?? '[no data]'}
                 </div>
               </EditableBox>
               <DcRemarksDialog
-                isDialogOpen={openUpdateDcRemarksDialog}
-                handleClose={handleCloseUpdateDcRemarksDialog}
+                isDialogOpen={dialogState.isDcRemarksOpen}
+                handleClose={handleDialogState.closeDcRemarks}
                 fetchSubmittals={fetchSubmittal}
                 values={{ ...submittal }} />
             </Box>
@@ -690,15 +683,15 @@ export default function SubmittalPdf(props) {
               Architect's Remarks:
             </label>
             <EditableBox  
-              openDialog={handleOpenUpdateArchitectRemarksDialog}
+              openDialog={handleDialogState.openArchitectRemarks}
               showEdit={props.showEdit}>
               <div className={classes.architectRemarks}>
                 {submittal?.architectRemarks ?? '[no data]'}
               </div>
             </EditableBox>
             <ArchitectRemarksDialog
-              isDialogOpen={openUpdateArchitectRemarksDialog}
-              handleClose={handleCloseUpdateArchitectRemarksDialog}
+              isDialogOpen={dialogState.isArchitectRemarksOpen}
+              handleClose={handleDialogState.closeArchitectRemarks}
               fetchSubmittals={fetchSubmittal}
               values={{ ...submittal }} />
           </Grid>
@@ -708,7 +701,7 @@ export default function SubmittalPdf(props) {
       <hr />
 
       <EditableBox
-        openDialog={handleOpenUpdateCopiesDialog}
+        openDialog={handleDialogState.openCopies}
         showEdit={props.showEdit}>
         <Grid container>
           <Grid item xs={6}>
@@ -760,8 +753,8 @@ export default function SubmittalPdf(props) {
         </Grid>
       </EditableBox>
       <CopiesDialog
-          isDialogOpen={openUpdateCopiesDialog}
-          handleClose={handleCloseUpdateCopiesDialog}
+          isDialogOpen={dialogState.isCopiesOpen}
+          handleClose={handleDialogState.closeCopies}
           fetchSubmittals={fetchSubmittal}
           values={{ ...submittal }} />
     </div>
