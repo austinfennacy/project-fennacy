@@ -55,7 +55,7 @@ export default function Submittal(props) {
         const blob = new Blob([response.data], {type: 'application/pdf'})
         const link = document.createElement('a')
         link.href = window.URL.createObjectURL(blob)
-        link.download = `submittal-test.pdf`
+        link.download = `Submittal ${submittal.submittalNumber} - ${submittal.description}.pdf`
         link.click()
      })
     .catch(err => console.log(err))
