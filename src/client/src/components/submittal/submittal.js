@@ -68,16 +68,16 @@ export default function Submittal(props) {
   return (
     <div className={classes.root}>
       <Grid container className={classes.container}>
-        <Grid item xs={1}>
+        <Grid item sm={0} md={1}>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item sm={8} md={7} xl={8}>
           <Paper className={classes.pdfPaper} square>
             <SubmittalPdf id={id} showEdit={true} />
           </Paper>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item sm={0} md={1}>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item sm={4} md={3} xl={2}>
           <Paper className={classes.infoBar}
             elevation={3}
             variant="outlined"
