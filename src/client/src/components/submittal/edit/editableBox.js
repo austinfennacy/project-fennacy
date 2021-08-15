@@ -9,8 +9,7 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     transformStyle: "preserve-3d",
     background: "rgba(154, 219, 254, 0.3)",
-    borderColor: "rgba(154, 219, 254, 0.9)",
-    border: "2px solid",
+    boxShadow: "0 0 0 2px rgba(154, 219, 254, 1) inset",
     padding: "2px",
     "& *": {
       position: "relative",
@@ -41,7 +40,7 @@ export default function EditableBox(props) {
     () => setShowEdit(props.showEdit),
     [props.showEdit],
   );
-  
+
   let editableBox = () => showEdit ? classes.editableBox : ""
 
   let showEditText = () => {
