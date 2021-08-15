@@ -118,22 +118,26 @@ export default function Submittal(props) {
             <br />
             {submittal.description}</h2>
             <br />
-            <Button
-              variant="contained"
-              className={classes.showEdit}
-              onClick={toggleShowEdit}
-              align="center"
-              startIcon={showEdit.editButtonIcon}>
-              {showEdit.editButtonText}
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.downloadSubmittal}
-              onClick={saveSubmittalPdf}
-              align="center"
-              startIcon={<GetAppIcon />}>
-              Download Submittal PDF
-            </Button>
+            <div>
+              <Button
+                variant="contained"
+                className={classes.showEdit}
+                onClick={toggleShowEdit}
+                align="center"
+                startIcon={showEdit.editButtonIcon}>
+                {showEdit.editButtonText}
+              </Button>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                className={classes.downloadSubmittal}
+                onClick={saveSubmittalPdf}
+                align="center"
+                startIcon={<GetAppIcon />}>
+                Download Submittal PDF
+              </Button>
+            </div>
           </Paper>
         </Grid>
       </Grid>

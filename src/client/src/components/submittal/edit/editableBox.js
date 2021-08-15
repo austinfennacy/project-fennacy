@@ -44,7 +44,9 @@ export default function EditableBox(props) {
   let editableBox = () => showEdit ? classes.editableBox : ""
 
   let showEditText = () => {
-    document.getElementById(hiddenEditTextId).style.display = "grid" 
+    if (showEdit) {
+      document.getElementById(hiddenEditTextId).style.display = "grid" 
+    }
   }
   let hideEditText = () => {
     document.getElementById(hiddenEditTextId).style.display = "none"
