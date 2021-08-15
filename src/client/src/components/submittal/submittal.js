@@ -9,15 +9,17 @@ import Button from '@material-ui/core/Button'
 import Hidden from '@material-ui/core/Hidden'
 
 const useStyles = makeStyles((theme) => ({
-  pdfBackground: {
-    backgroundColor: 'hsl(0, 0%, 16%)',
-    height: '100%',
-  },
-  container: {
+  fullHeight: {
     height: '100%',
   },  
+  pdfBackground: {
+    backgroundColor: 'hsl(0, 0%, 16%)',
+    minHeight: '100%',
+    height: 'auto',
+  },
   infoBar: {
-    height: 'calc(100% - 34px)',
+    minHeight: 'calc(100% - 34px)',
+    height: 'auto',
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
@@ -67,8 +69,8 @@ export default function Submittal(props) {
     .then((submittalJson) => setSubmittal(submittalJson)), [id])
 
   return (
-    <div className={classes.pdfBackground}>
-      <Grid container className={classes.container}>
+    <div className={classes.fullHeight}>
+      <Grid container className={classes.pdfBackground}>
         <Hidden smDown>
           <Grid item sm={1}>
           </Grid>
