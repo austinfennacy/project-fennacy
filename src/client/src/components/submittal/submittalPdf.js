@@ -13,6 +13,7 @@ import SubstitutionDialog from './edit/substitutionDialog'
 import WarrantyDialog from './edit/warrantyDialog'
 import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
+import DcRemarksDialog from './edit/dcRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
 import FloatDialog from './edit/floatDialog'
 import TransmittedDialog from './edit/transmittedDialog'
@@ -54,6 +55,13 @@ const useStyles = makeStyles((theme) => ({
   contractorRemarks: {
     display: "-webkit-box",
     WebkitLineClamp: "3",
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  dcRemarks: {
+    display: "-webkit-box",
+    WebkitLineClamp: "6",
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -122,6 +130,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateContractorRemarksDialog, setOpenUpdateContractorRemarksDialog] = useState(false)
   const handleOpenUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(true) }
   const handleCloseUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(false) }
+
+  const [openUpdateDcRemarksDialog, setOpenUpdateDcRemarksDialog] = useState(false)
+  const handleOpenUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(true) }
+  const handleCloseUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(false) }
 
   const [openUpdateTimelineDialog, setOpenUpdateTimelineDialog] = useState(false)
   const handleOpenUpdateTimelineDialog = () => { setOpenUpdateTimelineDialog(true) }
@@ -365,8 +377,8 @@ export default function SubmittalPdf(props) {
           Contractor Remarks:
         </label>
         <EditableBox  
-        openDialog={handleOpenUpdateContractorRemarksDialog}
-        showEdit={props.showEdit}>
+          openDialog={handleOpenUpdateContractorRemarksDialog}
+          showEdit={props.showEdit}>
           <div className={classes.contractorRemarks}>
             {submittal?.contractorRemarks ?? '[no data]'}
           </div>
@@ -574,9 +586,18 @@ export default function SubmittalPdf(props) {
               <label>
                 Consultant's Remarks:
               </label>
-              <div>
-                {submittal.dcRemarks ? submittal.dcRemarks : "[no data]"}
-              </div>
+              <EditableBox  
+                openDialog={handleOpenUpdateDcRemarksDialog}
+                showEdit={props.showEdit}>
+                <div className={classes.dcRemarks}>
+                  {submittal?.dcRemarks ?? '[no data]'}
+                </div>
+              </EditableBox>
+              <DcRemarksDialog
+                isDialogOpen={openUpdateDcRemarksDialog}
+                handleClose={handleCloseUpdateDcRemarksDialog}
+                fetchSubmittals={fetchSubmittal}
+                values={{ ...submittal }} />
             </Box>
           </Grid>
         </Grid>
