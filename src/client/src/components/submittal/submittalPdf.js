@@ -106,6 +106,9 @@ export default function SubmittalPdf(props) {
     isArchitectAddressOpen: false,
     isProjectAddressOpen: false,
     isContractorAddressOpen: false,
+    isSupplierOpen: false,
+    isSubstitutionOpen: false,
+    isWarrantyOpen: false,
   })
 
   const handleDialogState = {
@@ -121,20 +124,14 @@ export default function SubmittalPdf(props) {
     closeProjectAddress: () => setDialogState({ ...dialogState, isProjectAddressOpen: false}),
     openContractorAddress: () => setDialogState({ ...dialogState, isContractorAddressOpen: true}),
     closeContractorAddress: () => setDialogState({ ...dialogState, isContractorAddressOpen: false}),
+    openSupplier: () => setDialogState({ ...dialogState, isSupplierOpen: true}),
+    closeSupplier: () => setDialogState({ ...dialogState, isSupplierOpen: false}),
+    openSubstitution: () => setDialogState({ ...dialogState, isSubstitutionOpen: true}),
+    closeSubstitution: () => setDialogState({ ...dialogState, isSubstitutionOpen: false}),
+    openWarranty: () => setDialogState({ ...dialogState, isWarrantyOpen: true}),
+    closeWarranty: () => setDialogState({ ...dialogState, isWarrantyOpen: false}),
   }
   
-  const [openUpdateSupplierDialog, setOpenUpdateSupplierDialog] = useState(false)
-  const handleOpenUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(true) }
-  const handleCloseUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(false) }
-
-  const [openUpdateSubstitutionDialog, setOpenUpdateSubstitutionDialog] = useState(false)
-  const handleOpenUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(true) }
-  const handleCloseUpdateSubstitutionDialog = () => { setOpenUpdateSubstitutionDialog(false) }
-
-  const [openUpdateWarrantyDialog, setOpenUpdateWarrantyDialog] = useState(false)
-  const handleOpenUpdateWarrantyDialog = () => { setOpenUpdateWarrantyDialog(true) }
-  const handleCloseUpdateWarrantyDialog = () => { setOpenUpdateWarrantyDialog(false) }
-
   const [openUpdateDcActionsDialog, setOpenUpdateDcActionsDialog] = useState(false)
   const handleOpenUpdateDcActionsDialog = () => { setOpenUpdateDcActionsDialog(true) }
   const handleCloseUpdateDcActionsDialog = () => { setOpenUpdateDcActionsDialog(false) }
@@ -332,15 +329,15 @@ export default function SubmittalPdf(props) {
             Supplier:
           </label>
           <EditableBox  
-              openDialog={handleOpenUpdateSupplierDialog}
+              openDialog={handleDialogState.openSupplier}
               showEdit={props.showEdit}>
             <div>
               {submittal.supplierName ? submittal.supplierName : "[no supplier data]"}
             </div>
           </EditableBox>
           <SupplierDialog
-            isDialogOpen={openUpdateSupplierDialog}
-            handleClose={handleCloseUpdateSupplierDialog}
+            isDialogOpen={dialogState.isSupplierOpen}
+            handleClose={handleDialogState.closeSupplier}
             fetchSubmittals={fetchSubmittal}
             values={{ ...submittal }} />
           <hr />
@@ -351,15 +348,15 @@ export default function SubmittalPdf(props) {
               </label>
             </Grid>
             <EditableBox  
-              openDialog={handleOpenUpdateSubstitutionDialog}
+              openDialog={handleDialogState.openSubstitution}
               showEdit={props.showEdit}>
               <Grid item xs={7} className={classes.noWrap}>
                 {submittal.isSubstitutionUsed ? "🗹 Yes" : "☐ Yes"}
               </Grid>
             </EditableBox>
             <SubstitutionDialog
-              isDialogOpen={openUpdateSubstitutionDialog}
-              handleClose={handleCloseUpdateSubstitutionDialog}
+              isDialogOpen={dialogState.isSubstitutionOpen}
+              handleClose={handleDialogState.closeSubstitution}
               fetchSubmittals={fetchSubmittal}
               values={{ ...submittal }} />
           </Grid>
@@ -428,7 +425,7 @@ export default function SubmittalPdf(props) {
             Other Required Information:
           </div>
           <EditableBox  
-            openDialog={handleOpenUpdateWarrantyDialog}
+            openDialog={handleDialogState.openWarranty}
             showEdit={props.showEdit}>
             <Grid container spacing={2}>
               <Grid item xs={8} align="right">
@@ -454,8 +451,8 @@ export default function SubmittalPdf(props) {
             </Grid>
           </EditableBox>
           <WarrantyDialog
-            isDialogOpen={openUpdateWarrantyDialog}
-            handleClose={handleCloseUpdateWarrantyDialog}
+            isDialogOpen={dialogState.isWarrantyOpen}
+            handleClose={handleDialogState.closeWarranty}
             fetchSubmittals={fetchSubmittal}
             values={{ ...submittal }} />
         </Grid>
