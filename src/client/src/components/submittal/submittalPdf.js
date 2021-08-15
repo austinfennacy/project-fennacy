@@ -358,41 +358,43 @@ export default function SubmittalPdf(props) {
         </Grid>
       </Grid>
 
-      <EditableBox  
-        openDialog={handleDialogState.openReceivedInfo}
-        showEdit={showEdit}>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <label>
-              Date Received:
-            </label>
-            <span>
-              {submittal.dateReceived}
-            </span>
+      <Box mt={1}>
+        <EditableBox  
+          openDialog={handleDialogState.openReceivedInfo}
+          showEdit={showEdit}>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <label>
+                Date Received:
+              </label>
+              <span>
+                {submittal.dateReceived}
+              </span>
+            </Grid>
+            <Grid item xs={3}>
+              <label>
+                No. Received:
+              </label>
+              <span>
+                {submittal.numberReceived}
+              </span>
+            </Grid>
+            <Grid item xs={5}>
+              <label>
+                Date Returned:
+              </label>
+              <span>
+                {submittal.responseDate}
+              </span>
+            </Grid>
           </Grid>
-          <Grid item xs={3}>
-            <label>
-              No. Received:
-            </label>
-            <span>
-              {submittal.numberReceived}
-            </span>
-          </Grid>
-          <Grid item xs={5}>
-            <label>
-              Date Returned:
-            </label>
-            <span>
-              {submittal.responseDate}
-            </span>
-          </Grid>
-        </Grid>
-      </EditableBox>
-      <ReceivedInfoDialog
-        isDialogOpen={dialogState.isReceivedInfoOpen}
-        handleClose={handleDialogState.closeReceivedInfo}
-        fetchSubmittals={fetchSubmittal}
-        values={{ ...submittal }} />
+        </EditableBox>
+        <ReceivedInfoDialog
+          isDialogOpen={dialogState.isReceivedInfoOpen}
+          handleClose={handleDialogState.closeReceivedInfo}
+          fetchSubmittals={fetchSubmittal}
+          values={{ ...submittal }} />
+      </Box>
 
       <hr />
 
