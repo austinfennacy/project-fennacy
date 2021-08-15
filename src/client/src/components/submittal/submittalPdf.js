@@ -109,6 +109,10 @@ export default function SubmittalPdf(props) {
     isSupplierOpen: false,
     isSubstitutionOpen: false,
     isWarrantyOpen: false,
+    isDcActionsOpen: false,
+    isArchitectActionsOpen: false,
+    isReceivedInfoOpen: false,
+    isContractorRemarksOpen: false,
   })
 
   const handleDialogState = {
@@ -130,24 +134,16 @@ export default function SubmittalPdf(props) {
     closeSubstitution: () => setDialogState({ ...dialogState, isSubstitutionOpen: false}),
     openWarranty: () => setDialogState({ ...dialogState, isWarrantyOpen: true}),
     closeWarranty: () => setDialogState({ ...dialogState, isWarrantyOpen: false}),
+    openDcActions: () => setDialogState({ ...dialogState, isDcActionsOpen: true}),
+    closeDcActions: () => setDialogState({ ...dialogState, isDcActionsOpen: false}),
+    openArchitectActions: () => setDialogState({ ...dialogState, isArchitectActionsOpen: true}),
+    closeArchitectActions: () => setDialogState({ ...dialogState, isArchitectActionsOpen: false}),
+    openReceivedInfo: () => setDialogState({ ...dialogState, isReceivedInfoOpen: true}),
+    closeReceivedInfo: () => setDialogState({ ...dialogState, isReceivedInfoOpen: false}),
+    openContractorRemarks: () => setDialogState({ ...dialogState, isContractorRemarksOpen: true}),
+    closeContractorRemarks: () => setDialogState({ ...dialogState, isContractorRemarksOpen: false}),
   }
   
-  const [openUpdateDcActionsDialog, setOpenUpdateDcActionsDialog] = useState(false)
-  const handleOpenUpdateDcActionsDialog = () => { setOpenUpdateDcActionsDialog(true) }
-  const handleCloseUpdateDcActionsDialog = () => { setOpenUpdateDcActionsDialog(false) }
-
-  const [openUpdateArchitectActionsDialog, setOpenUpdateArchitectActionsDialog] = useState(false)
-  const handleOpenUpdateArchitectActionsDialog = () => { setOpenUpdateArchitectActionsDialog(true) }
-  const handleCloseUpdateArchitectActionsDialog = () => { setOpenUpdateArchitectActionsDialog(false) }
-
-  const [openUpdateReceivedInfoDialog, setOpenUpdateReceivedInfoDialog] = useState(false)
-  const handleOpenUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(true) }
-  const handleCloseUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(false) }
-
-  const [openUpdateContractorRemarksDialog, setOpenUpdateContractorRemarksDialog] = useState(false)
-  const handleOpenUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(true) }
-  const handleCloseUpdateContractorRemarksDialog = () => { setOpenUpdateContractorRemarksDialog(false) }
-
   const [openUpdateDcRemarksDialog, setOpenUpdateDcRemarksDialog] = useState(false)
   const handleOpenUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(true) }
   const handleCloseUpdateDcRemarksDialog = () => { setOpenUpdateDcRemarksDialog(false) }
@@ -364,7 +360,7 @@ export default function SubmittalPdf(props) {
       </Grid>
 
       <EditableBox  
-        openDialog={handleOpenUpdateReceivedInfoDialog}
+        openDialog={handleDialogState.openReceivedInfo}
         showEdit={props.showEdit}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
@@ -394,8 +390,8 @@ export default function SubmittalPdf(props) {
         </Grid>
       </EditableBox>
       <ReceivedInfoDialog
-        isDialogOpen={openUpdateReceivedInfoDialog}
-        handleClose={handleCloseUpdateReceivedInfoDialog}
+        isDialogOpen={dialogState.isReceivedInfoOpen}
+        handleClose={handleDialogState.closeReceivedInfo}
         fetchSubmittals={fetchSubmittal}
         values={{ ...submittal }} />
 
@@ -406,15 +402,15 @@ export default function SubmittalPdf(props) {
           Contractor Remarks:
         </label>
         <EditableBox  
-          openDialog={handleOpenUpdateContractorRemarksDialog}
+          openDialog={handleDialogState.openContractorRemarks}
           showEdit={props.showEdit}>
           <div className={classes.contractorRemarks}>
             {submittal?.contractorRemarks ?? '[no data]'}
           </div>
         </EditableBox>
         <ContractorRemarksDialog
-          isDialogOpen={openUpdateContractorRemarksDialog}
-          handleClose={handleCloseUpdateContractorRemarksDialog}
+          isDialogOpen={dialogState.isContractorRemarksOpen}
+          handleClose={handleDialogState.closeContractorRemarks}
           fetchSubmittals={fetchSubmittal}
           values={{ ...submittal }} />
       </Box>
@@ -600,7 +596,7 @@ export default function SubmittalPdf(props) {
             </label>
 
             <EditableBox  
-              openDialog={handleOpenUpdateDcActionsDialog}
+              openDialog={handleDialogState.openDcActions}
               showEdit={props.showEdit}>
               <div className={smallClass}>
                 <div>
@@ -621,8 +617,8 @@ export default function SubmittalPdf(props) {
               </div>
             </EditableBox>
             <DcActionsDialog
-              isDialogOpen={openUpdateDcActionsDialog}
-              handleClose={handleCloseUpdateDcActionsDialog}
+              isDialogOpen={dialogState.isDcActionsOpen}
+              handleClose={handleDialogState.closeDcActions}
               fetchSubmittals={fetchSubmittal}
               values={{ ...submittal }} />
           </Grid>
@@ -662,7 +658,7 @@ export default function SubmittalPdf(props) {
             </label>
 
             <EditableBox  
-              openDialog={handleOpenUpdateArchitectActionsDialog}
+              openDialog={handleDialogState.openArchitectActions}
               showEdit={props.showEdit}>
               <div className={smallClass}>
                 <div>
@@ -684,8 +680,8 @@ export default function SubmittalPdf(props) {
               </Box>
             </EditableBox>
             <ArchitectActionsDialog
-              isDialogOpen={openUpdateArchitectActionsDialog}
-              handleClose={handleCloseUpdateArchitectActionsDialog}
+              isDialogOpen={dialogState.isArchitectActionsOpen}
+              handleClose={handleDialogState.closeArchitectActions}
               fetchSubmittals={fetchSubmittal}
               values={{ ...submittal }} />
           </Grid>
