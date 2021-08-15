@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import SubmittalPdf from './submittalPdf'
 import GetAppIcon from '@material-ui/icons/GetApp'
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
+import VisibilityIcon from '@material-ui/icons/Visibility'
 import Button from '@material-ui/core/Button'
 import Hidden from '@material-ui/core/Hidden'
 
@@ -38,11 +40,34 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 16px',
     margin: '0 0 16px 0'
   },
+  showEdit: {
+    background: 'linear-gradient(45deg, hsl(200, 100%, 40%) 30%, hsl(191, 90%, 54%) 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '2px 2px 5px 0px rgba(33, 203, 243, .3)',
+    color: 'white',
+    height: 36,
+    padding: '0 16px',
+    margin: '0 0 16px 0'
+  },
 }))
 
 export default function Submittal(props) {
   const id = props.id
   const classes = useStyles()
+
+  const [showEdit, setShowEdit] = useState({
+    isVisible: true,
+    editButtonText: "Hide Edit Boxes",
+    editButtonIcon: <VisibilityOffIcon />,
+  });
+  const toggleShowEdit = () => {
+      setShowEdit({
+      isVisible: !showEdit.isVisible,
+      editButtonText: showEdit.isVisible ? "Show Edit Boxes" : "Hide Edit Boxes",
+      editButtonIcon: showEdit.isVisible ? <VisibilityIcon /> : <VisibilityOffIcon />,
+    })
+  }
 
   let getSubmittalPdf = () =>
     axios.get(`/getSubmittalPdf?id=${id}`, {
@@ -77,7 +102,7 @@ export default function Submittal(props) {
         </Hidden>
         <Grid item sm={8} md={7} xl={8}>
           <Paper className={classes.pdfPaper} square>
-            <SubmittalPdf id={id} showEdit={true} />
+            <SubmittalPdf id={id} showEdit={showEdit.isVisible} />
           </Paper>
         </Grid>
         <Hidden smDown>
@@ -93,6 +118,14 @@ export default function Submittal(props) {
             <br />
             {submittal.description}</h2>
             <br />
+            <Button
+              variant="contained"
+              className={classes.showEdit}
+              onClick={toggleShowEdit}
+              align="center"
+              startIcon={showEdit.editButtonIcon}>
+              {showEdit.editButtonText}
+            </Button>
             <Button
               variant="contained"
               className={classes.downloadSubmittal}

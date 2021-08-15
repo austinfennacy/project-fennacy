@@ -85,6 +85,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SubmittalPdf(props) {
   const id = props.id
+  const [showEdit, setShowEdit] = useState(props.showEdit)
+  useEffect(
+    () => setShowEdit(props.showEdit),
+    [props.showEdit],
+  );
+
   const classes = useStyles()
   const pdfClass = useMediaQuery("screen")
     ? classes.pdfScreen
@@ -174,7 +180,7 @@ export default function SubmittalPdf(props) {
 
       <EditableBox  
         openDialog={handleDialogState.openProject}
-        showEdit={props.showEdit}>
+        showEdit={showEdit}>
         <Grid container spacing={2}>
           <Grid item xs={6} >
             <div>
@@ -203,7 +209,7 @@ export default function SubmittalPdf(props) {
             </label>
             <EditableBox  
               openDialog={handleDialogState.openDescription}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
               <div>
                 {submittal.description}
               </div>
@@ -228,7 +234,7 @@ export default function SubmittalPdf(props) {
             <Grid item xs={4} align="right">
             <EditableBox  
               openDialog={handleDialogState.openSubSpec}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
                 <div>
                   {submittal.submittalNumber}
                 </div>
@@ -256,7 +262,7 @@ export default function SubmittalPdf(props) {
           </label>
           <EditableBox  
               openDialog={handleDialogState.openArchitectAddress}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
             <FormattedAddress
               {...submittal?.architectAddress} />
           </EditableBox>
@@ -276,7 +282,7 @@ export default function SubmittalPdf(props) {
           </label>
           <EditableBox  
               openDialog={handleDialogState.openProjectAddress}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
             <FormattedAddress
               {...submittal?.projectAddress} />
           </EditableBox>
@@ -299,7 +305,7 @@ export default function SubmittalPdf(props) {
           </label>
           <EditableBox  
               openDialog={handleDialogState.openContractorAddress}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
             <FormattedAddress
               {...submittal?.contractorAddress} />
           </EditableBox>
@@ -319,7 +325,7 @@ export default function SubmittalPdf(props) {
           </label>
           <EditableBox  
               openDialog={handleDialogState.openSupplier}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
             <div>
               {submittal.supplierName ? submittal.supplierName : "[no supplier data]"}
             </div>
@@ -338,7 +344,7 @@ export default function SubmittalPdf(props) {
             </Grid>
             <EditableBox  
               openDialog={handleDialogState.openSubstitution}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
               <Grid item xs={7} className={classes.noWrap}>
                 {submittal.isSubstitutionUsed ? "🗹 Yes" : "☐ Yes"}
               </Grid>
@@ -354,7 +360,7 @@ export default function SubmittalPdf(props) {
 
       <EditableBox  
         openDialog={handleDialogState.openReceivedInfo}
-        showEdit={props.showEdit}>
+        showEdit={showEdit}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <label>
@@ -396,7 +402,7 @@ export default function SubmittalPdf(props) {
         </label>
         <EditableBox  
           openDialog={handleDialogState.openContractorRemarks}
-          showEdit={props.showEdit}>
+          showEdit={showEdit}>
           <div className={classes.contractorRemarks}>
             {submittal?.contractorRemarks ?? '[no data]'}
           </div>
@@ -415,7 +421,7 @@ export default function SubmittalPdf(props) {
           </div>
           <EditableBox  
             openDialog={handleDialogState.openWarranty}
-            showEdit={props.showEdit}>
+            showEdit={showEdit}>
             <Grid container spacing={2}>
               <Grid item xs={8} align="right">
                 <div>
@@ -466,7 +472,7 @@ export default function SubmittalPdf(props) {
                   <Grid item xs={4}>
                     <EditableBox  
                       openDialog={handleDialogState.openTimeline}
-                      showEdit={props.showEdit}>
+                      showEdit={showEdit}>
                       <div className={classes.underlined}>
                         {submittal.earlyStartDate ? submittal.earlyStartDate : "[no data]"}
                       </div>
@@ -502,7 +508,7 @@ export default function SubmittalPdf(props) {
                   <Grid item xs={4}>
                     <EditableBox  
                       openDialog={handleDialogState.openFloat}
-                      showEdit={props.showEdit}>
+                      showEdit={showEdit}>
                       <div className={classes.underlined}>
                         {submittal.floatTime ? submittal.floatTime : "[no data]"}
                       </div>
@@ -532,7 +538,7 @@ export default function SubmittalPdf(props) {
       <Box p={1}>
         <EditableBox
           openDialog={handleDialogState.openTransmitted}
-          showEdit={props.showEdit}>
+          showEdit={showEdit}>
           <Grid container>
             <Grid item xs={3}>
               TRANSMITTED TO:
@@ -568,7 +574,7 @@ export default function SubmittalPdf(props) {
               <Grid item xs={4}>
               <EditableBox
                 openDialog={handleDialogState.openSent}
-                showEdit={props.showEdit}>
+                showEdit={showEdit}>
                   <div className={classes.underlined}>
                     {submittal.responseDate ? submittal.responseDate : "[no data]"}
                   </div>
@@ -590,7 +596,7 @@ export default function SubmittalPdf(props) {
 
             <EditableBox  
               openDialog={handleDialogState.openDcActions}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
               <div className={smallClass}>
                 <div>
                   {submittal.isDcNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
@@ -622,7 +628,7 @@ export default function SubmittalPdf(props) {
               </label>
               <EditableBox  
                 openDialog={handleDialogState.openDcRemarks}
-                showEdit={props.showEdit}>
+                showEdit={showEdit}>
                 <div className={classes.dcRemarks}>
                   {submittal?.dcRemarks ?? '[no data]'}
                 </div>
@@ -652,7 +658,7 @@ export default function SubmittalPdf(props) {
 
             <EditableBox  
               openDialog={handleDialogState.openArchitectActions}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
               <div className={smallClass}>
                 <div>
                   {submittal.isArchitectNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
@@ -684,7 +690,7 @@ export default function SubmittalPdf(props) {
             </label>
             <EditableBox  
               openDialog={handleDialogState.openArchitectRemarks}
-              showEdit={props.showEdit}>
+              showEdit={showEdit}>
               <div className={classes.architectRemarks}>
                 {submittal?.architectRemarks ?? '[no data]'}
               </div>
@@ -702,7 +708,7 @@ export default function SubmittalPdf(props) {
 
       <EditableBox
         openDialog={handleDialogState.openCopies}
-        showEdit={props.showEdit}>
+        showEdit={showEdit}>
         <Grid container>
           <Grid item xs={6}>
             <label>

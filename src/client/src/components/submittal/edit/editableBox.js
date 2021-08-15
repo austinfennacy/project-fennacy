@@ -36,7 +36,12 @@ export default function EditableBox(props) {
   const editBoxWrapperId = `editBoxWrapper-${uuidv4()}`
   const editableBoxId = `editableBox-${uuidv4()}`
 
-  const [showEdit] = useState(props.showEdit)
+  const [showEdit, setShowEdit] = useState(props.showEdit)
+  useEffect(
+    () => setShowEdit(props.showEdit),
+    [props.showEdit],
+  );
+  
   let editableBox = () => showEdit ? classes.editableBox : ""
 
   let showEditText = () => {
