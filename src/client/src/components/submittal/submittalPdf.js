@@ -103,6 +103,9 @@ export default function SubmittalPdf(props) {
     isProjectOpen: false,
     isDescriptionOpen: false,
     isSubSpecOpen: false,
+    isArchitectAddressOpen: false,
+    isProjectAddressOpen: false,
+    isContractorAddressOpen: false,
   })
 
   const handleDialogState = {
@@ -112,20 +115,14 @@ export default function SubmittalPdf(props) {
     closeDescription: () => setDialogState({ ...dialogState, isDescriptionOpen: false}),
     openSubSpec: () => setDialogState({ ...dialogState, isSubSpecOpen: true}),
     closeSubSpec: () => setDialogState({ ...dialogState, isSubSpecOpen: false}),
+    openArchitectAddress: () => setDialogState({ ...dialogState, isArchitectAddressOpen: true}),
+    closeArchitectAddress: () => setDialogState({ ...dialogState, isArchitectAddressOpen: false}),
+    openProjectAddress: () => setDialogState({ ...dialogState, isProjectAddressOpen: true}),
+    closeProjectAddress: () => setDialogState({ ...dialogState, isProjectAddressOpen: false}),
+    openContractorAddress: () => setDialogState({ ...dialogState, isContractorAddressOpen: true}),
+    closeContractorAddress: () => setDialogState({ ...dialogState, isContractorAddressOpen: false}),
   }
-
-  const [openUpdateArchitectAddressDialog, setOpenUpdateArchitectAddressDialog] = useState(false)
-  const handleOpenUpdateArchitectAddressDialog = () => { setOpenUpdateArchitectAddressDialog(true) }
-  const handleCloseUpdateArchitectAddressDialog = () => { setOpenUpdateArchitectAddressDialog(false) }
-
-  const [openUpdateProjectAddressDialog, setOpenUpdateProjectAddressDialog] = useState(false)
-  const handleOpenUpdateProjectAddressDialog = () => { setOpenUpdateProjectAddressDialog(true) }
-  const handleCloseUpdateProjectAddressDialog = () => { setOpenUpdateProjectAddressDialog(false) }
-
-  const [openUpdateContractorAddressDialog, setOpenUpdateContractorAddressDialog] = useState(false)
-  const handleOpenUpdateContractorAddressDialog = () => { setOpenUpdateContractorAddressDialog(true) }
-  const handleCloseUpdateContractorAddressDialog = () => { setOpenUpdateContractorAddressDialog(false) }
-
+  
   const [openUpdateSupplierDialog, setOpenUpdateSupplierDialog] = useState(false)
   const handleOpenUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(true) }
   const handleCloseUpdateSupplierDialog = () => { setOpenUpdateSupplierDialog(false) }
@@ -272,15 +269,15 @@ export default function SubmittalPdf(props) {
             Architect:
           </label>
           <EditableBox  
-              openDialog={handleOpenUpdateArchitectAddressDialog}
+              openDialog={handleDialogState.openArchitectAddress}
               showEdit={props.showEdit}>
             <FormattedAddress
               {...submittal?.architectAddress} />
           </EditableBox>
           <AddressDialog
             addressType="architectAddress"
-            isDialogOpen={openUpdateArchitectAddressDialog}
-            handleClose={handleCloseUpdateArchitectAddressDialog}
+            isDialogOpen={dialogState.isArchitectAddressOpen}
+            handleClose={handleDialogState.closeArchitectAddress}
             fetchSubmittals={fetchSubmittal}
             values={{ 
               ...submittal.architectAddress,
@@ -292,15 +289,15 @@ export default function SubmittalPdf(props) {
             Project:
           </label>
           <EditableBox  
-              openDialog={handleOpenUpdateProjectAddressDialog}
+              openDialog={handleDialogState.openProjectAddress}
               showEdit={props.showEdit}>
             <FormattedAddress
               {...submittal?.projectAddress} />
           </EditableBox>
           <AddressDialog
             addressType="projectAddress"
-            isDialogOpen={openUpdateProjectAddressDialog}
-            handleClose={handleCloseUpdateProjectAddressDialog}
+            isDialogOpen={dialogState.isProjectAddressOpen}
+            handleClose={handleDialogState.closeProjectAddress}
             fetchSubmittals={fetchSubmittal}
             values={{ 
               ...submittal.projectAddress,
@@ -315,15 +312,15 @@ export default function SubmittalPdf(props) {
             Contractor:
           </label>
           <EditableBox  
-              openDialog={handleOpenUpdateContractorAddressDialog}
+              openDialog={handleDialogState.openContractorAddress}
               showEdit={props.showEdit}>
             <FormattedAddress
               {...submittal?.contractorAddress} />
           </EditableBox>
           <AddressDialog
             addressType="contractorAddress"
-            isDialogOpen={openUpdateContractorAddressDialog}
-            handleClose={handleCloseUpdateContractorAddressDialog}
+            isDialogOpen={dialogState.isContractorAddressOpen}
+            handleClose={handleDialogState.closeContractorAddress}
             fetchSubmittals={fetchSubmittal}
             values={{ 
               ...submittal.contractorAddress,
