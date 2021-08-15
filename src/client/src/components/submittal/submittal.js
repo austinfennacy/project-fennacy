@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid';
-import SubmittalPdf from './submittalPdf';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid'
+import SubmittalPdf from './submittalPdf'
+import GetAppIcon from '@material-ui/icons/GetApp'
+import Button from '@material-ui/core/Button'
+import Hidden from '@material-ui/core/Hidden'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,15 +69,19 @@ export default function Submittal(props) {
   return (
     <div className={classes.root}>
       <Grid container className={classes.container}>
-        <Grid item sm={0} md={1}>
-        </Grid>
+        <Hidden smDown>
+          <Grid item sm={1}>
+          </Grid>
+        </Hidden>
         <Grid item sm={8} md={7} xl={8}>
           <Paper className={classes.pdfPaper} square>
             <SubmittalPdf id={id} showEdit={true} />
           </Paper>
         </Grid>
-        <Grid item sm={0} md={1}>
-        </Grid>
+        <Hidden smDown>
+          <Grid item sm={1}>
+          </Grid>
+        </Hidden>
         <Grid item sm={4} md={3} xl={2}>
           <Paper className={classes.infoBar}
             elevation={3}
