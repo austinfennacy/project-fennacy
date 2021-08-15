@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     letterSpacing: "2px",
   },
   grid: {
-    marginTop: "24px"
+    paddingTop: "24px"
   }
 });
 

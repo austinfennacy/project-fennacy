@@ -1,5 +1,9 @@
-.App, .Router, .WebClient, #root {
+.App, .WebClient, #root {
   height: 100%;
+}
+
+.Router {
+  height: calc(100% - 24px);
 }
 
 html, body {
