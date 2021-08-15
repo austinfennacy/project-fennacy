@@ -20,6 +20,7 @@ import DcRemarksDialog from './edit/dcRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
 import FloatDialog from './edit/floatDialog'
 import TransmittedDialog from './edit/transmittedDialog'
+import CopiesDialog from './edit/copiesDialog'
 import SentDialog from './edit/sentDialog'
 
 const useStyles = makeStyles((theme) => ({
@@ -169,6 +170,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateTransmittedDialog, setOpenUpdateTransmittedDialog] = useState(false)
   const handleOpenUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(true) }
   const handleCloseUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(false) }
+
+  const [openUpdateCopiesDialog, setOpenUpdateCopiesDialog] = useState(false)
+  const handleOpenUpdateCopiesDialog = () => { setOpenUpdateCopiesDialog(true) }
+  const handleCloseUpdateCopiesDialog = () => { setOpenUpdateCopiesDialog(false) }
 
   const [openUpdateSentDialog, setOpenUpdateSentDialog] = useState(false)
   const handleOpenUpdateSentDialog = () => { setOpenUpdateSentDialog(true) }
@@ -709,56 +714,63 @@ export default function SubmittalPdf(props) {
 
       <hr />
 
-      <Grid container>
-        <Grid item xs={6}>
-          <label>
-            Copies To:
-          </label>
+      <EditableBox
+        openDialog={handleOpenUpdateCopiesDialog}
+        showEdit={props.showEdit}>
+        <Grid container>
+          <Grid item xs={6}>
+            <label>
+              Copies To:
+            </label>
+          </Grid>
+          <Grid item xs={3} align="right">
+            <label>
+              Date Returned:
+            </label>
+          </Grid>
+          <Grid item xs={2} className={classes.underlined}>
+            {submittal.responseDate ? submittal.responseDate : "[no data]"}
+          </Grid>
         </Grid>
-        <Grid item xs={3} align="right">
-          <label>
-            Date Returned:
-          </label>
-        </Grid>
-        <Grid item xs={2} className={classes.underlined}>
-          {submittal.responseDate ? submittal.responseDate : "[no data]"}
-        </Grid>
-      </Grid>
 
-      <Grid container>
-        <Grid item xs={1}>
+        <Grid container>
+          <Grid item xs={2} align="right">
+            Contractor:
+          </Grid>
+          <Grid item xs={1} align="center">
+            {submittal.copiesForContractor}
+          </Grid>
+          <Grid item xs={1} align="right">
+            Owner:
+          </Grid>
+          <Grid item xs={1} align="center">
+            {submittal.copiesForOwner}
+          </Grid>
+          <Grid item xs={2} align="right">
+            Inspector:
+          </Grid>
+          <Grid item xs={1} align="center">
+            {submittal.copiesForInspector}
+          </Grid>
+          <Grid item xs={1} align="right">
+            File:
+          </Grid>
+          <Grid item xs={1} align="center">
+            {submittal.copiesForFile}
+          </Grid>
+          <Grid item xs={1} align="right">
+            Other:
+          </Grid>
+          <Grid item xs={1} align="center">
+            {submittal.copiesForOther}
+          </Grid>
         </Grid>
-        <Grid item xs={1} align="right">
-          Contractor:
-        </Grid>
-        <Grid item xs={1}>
-          {submittal.copiesForContractor}
-        </Grid>
-        <Grid item xs={1} align="right">
-          Owner:
-        </Grid>
-        <Grid item xs={1}>
-          {submittal.copiesForOwner}
-        </Grid>
-        <Grid item xs={1} align="right">
-          Inspector:
-        </Grid>
-        <Grid item xs={1}>
-          {submittal.copiesForInspector}
-        </Grid>
-        <Grid item xs={1} align="right">
-          File:
-        </Grid>
-        <Grid item xs={1}>
-          {submittal.copiesForFile}
-        </Grid>
-        <Grid item xs={1} align="right">
-          Other:
-        </Grid>
-        <Grid item xs={1}>
-          {submittal.copiesForOther}
-        </Grid>
-      </Grid>
+      </EditableBox>
+      <CopiesDialog
+          isDialogOpen={openUpdateCopiesDialog}
+          handleClose={handleCloseUpdateCopiesDialog}
+          fetchSubmittals={fetchSubmittal}
+          values={{ ...submittal }} />
     </div>
   )
 }

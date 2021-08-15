@@ -524,6 +524,36 @@ app.put('/submittal/updateDcActions/:id', async (req, res) => {
   }
 })
 
+app.put('/submittal/updateCopies/:id', async (req, res) => {
+  const id = req.params.id
+  const { 
+    copiesForContractor,
+    copiesForOwner,
+    copiesForInspector,
+    copiesForFile,
+    copiesForOther,
+    responseDate,
+  } = req.body
+
+  try {
+    const submittal = await Submittal.findOne({ where: { id } })
+    
+    submittal.copiesForContractor = copiesForContractor
+    submittal.copiesForOwner = copiesForOwner
+    submittal.copiesForInspector = copiesForInspector
+    submittal.copiesForFile = copiesForFile
+    submittal.copiesForOther = copiesForOther
+    submittal.responseDate = responseDate
+
+    await submittal.save()
+
+    return res.json(submittal)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 app.put('/submittal/updateArchitect/:id', async (req, res) => {
   const id = req.params.id
   const { 
