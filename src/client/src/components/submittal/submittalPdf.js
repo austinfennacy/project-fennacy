@@ -15,6 +15,7 @@ import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
 import FloatDialog from './edit/floatDialog'
+import TransmittedDialog from './edit/transmittedDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -129,6 +130,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateFloatDialog, setOpenUpdateFloatDialog] = useState(false)
   const handleOpenUpdateFloatDialog = () => { setOpenUpdateFloatDialog(true) }
   const handleCloseUpdateFloatDialog = () => { setOpenUpdateFloatDialog(false) }
+
+  const [openUpdateTransmittedDialog, setOpenUpdateTransmittedDialog] = useState(false)
+  const handleOpenUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(true) }
+  const handleCloseUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -495,20 +500,29 @@ export default function SubmittalPdf(props) {
       </label>
 
       <Box p={1}>
-        <Grid container>
-          <Grid item xs={3}>
-            TRANSMITTED TO:
+        <EditableBox
+          openDialog={handleOpenUpdateTransmittedDialog}
+          showEdit={props.showEdit}>
+          <Grid container>
+            <Grid item xs={3}>
+              TRANSMITTED TO:
+            </Grid>
+            <Grid item xs={4} className={classes.underlined}>
+              {submittal.transmittedTo ? submittal.transmittedTo : "[no data]"}
+            </Grid>
+            <Grid item xs={3}>
+                DATE RETURNED:
+            </Grid>
+            <Grid item xs={2} className={classes.underlined}>
+              {submittal.responseDate ? submittal.responseDate : "[no data]"}
+            </Grid>
           </Grid>
-          <Grid item xs={4} className={classes.underlined}>
-            {submittal.transmittedTo ? submittal.transmittedTo : "[no data]"}
-          </Grid>
-          <Grid item xs={3}>
-              DATE RETURNED:
-          </Grid>
-          <Grid item xs={2} className={classes.underlined}>
-            {submittal.responseDate ? submittal.responseDate : "[no data]"}
-          </Grid>
-        </Grid>
+        </EditableBox>
+        <TransmittedDialog
+          isDialogOpen={openUpdateTransmittedDialog}
+          handleClose={handleCloseUpdateTransmittedDialog}
+          fetchSubmittals={fetchSubmittal}
+          values={{ ...submittal }} />
 
         <Grid container>
           <Grid item xs={6}>

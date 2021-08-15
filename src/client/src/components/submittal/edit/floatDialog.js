@@ -6,7 +6,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-export default function SubSpecDialog(props) {
+export default function FloatDialog(props) {
   const [formValues, setFormValues] = useState(props.values);
   const handleInputChange = (e) => {
     let { name, value } = e.target;
