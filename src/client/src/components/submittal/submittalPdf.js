@@ -18,6 +18,7 @@ import DcRemarksDialog from './edit/dcRemarksDialog'
 import TimelineDialog from './edit/timelineDialog'
 import FloatDialog from './edit/floatDialog'
 import TransmittedDialog from './edit/transmittedDialog'
+import SentDialog from './edit/sentDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
@@ -158,6 +159,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateTransmittedDialog, setOpenUpdateTransmittedDialog] = useState(false)
   const handleOpenUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(true) }
   const handleCloseUpdateTransmittedDialog = () => { setOpenUpdateTransmittedDialog(false) }
+
+  const [openUpdateSentDialog, setOpenUpdateSentDialog] = useState(false)
+  const handleOpenUpdateSentDialog = () => { setOpenUpdateSentDialog(true) }
+  const handleCloseUpdateSentDialog = () => { setOpenUpdateSentDialog(false) }
 
   return (
     <div className={pdfClass}>
@@ -560,38 +565,45 @@ export default function SubmittalPdf(props) {
                 </div>
               </Grid>
               <Grid item xs={4}>
-                <div className={classes.underlined}>
-                  {submittal.responseDate ? submittal.responseDate : "[no data]"}
-                </div>
-                <div className={classes.underlined}>
-                  {submittal.numberSent ? submittal.numberSent : "[no data]"}
-                </div>
+              <EditableBox
+                openDialog={handleOpenUpdateSentDialog}
+                showEdit={props.showEdit}>
+                  <div className={classes.underlined}>
+                    {submittal.responseDate ? submittal.responseDate : "[no data]"}
+                  </div>
+                  <div className={classes.underlined}>
+                    {submittal.numberSent ? submittal.numberSent : "[no data]"}
+                  </div>
+                </EditableBox>
+                <SentDialog
+                  isDialogOpen={openUpdateSentDialog}
+                  handleClose={handleCloseUpdateSentDialog}
+                  fetchSubmittals={fetchSubmittal}
+                  values={{ ...submittal }} />
               </Grid>
             </Grid>
             
-            <Box mt={1}>
-              <label>
-                ACTION:
-              </label>
+            <label>
+              ACTION:
+            </label>
 
-              <div className={smallClass}>
-                <div>
-                  {submittal.isDcNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
-                </div>
-                <div>
-                  {submittal.isDcNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
-                </div>
-                <div>
-                  {submittal.isDcAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
-                </div>
-                <div>
-                  {submittal.isDcRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
-                </div>
-                <div>
-                  {submittal.isDcSeeAttachedLetter ? "🗹" : "☐"} SEE ATTACHED LETTER
-                </div>
+            <div className={smallClass}>
+              <div>
+                {submittal.isDcNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
               </div>
-            </Box>
+              <div>
+                {submittal.isDcNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
+              </div>
+              <div>
+                {submittal.isDcAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
+              </div>
+              <div>
+                {submittal.isDcRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
+              </div>
+              <div>
+                {submittal.isDcSeeAttachedLetter ? "🗹" : "☐"} SEE ATTACHED LETTER
+              </div>
+            </div>
           </Grid>
           <Grid item xs={6}>
             <Box mt={2}>

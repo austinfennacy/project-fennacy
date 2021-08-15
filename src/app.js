@@ -474,6 +474,28 @@ app.put('/submittal/updateTransmitted/:id', async (req, res) => {
   }
 })
 
+app.put('/submittal/updateSent/:id', async (req, res) => {
+  const id = req.params.id
+  const { 
+    transmittedTo,
+    numberSent,
+  } = req.body
+
+  try {
+    const submittal = await Submittal.findOne({ where: { id } })
+    
+    submittal.transmittedTo = transmittedTo
+    submittal.numberSent = numberSent
+
+    await submittal.save()
+
+    return res.json(submittal)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 const db = new Sequelize(config.development.database, config.development.username, config.development.password, {
   host: config.development.host,
     dialect: 'mysql'
