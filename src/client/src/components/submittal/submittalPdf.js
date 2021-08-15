@@ -99,9 +99,14 @@ export default function SubmittalPdf(props) {
     .then(res => res.json())
     .then((submittalJson) => setSubmittal(submittalJson))
 
-  const [openUpdateProjectDialog, setOpenUpdateProjectDialog] = useState(false)
-  const handleOpenUpdateProjectDialog = () => { setOpenUpdateProjectDialog(true) }
-  const handleCloseUpdateProjectDialog = () => { setOpenUpdateProjectDialog(false) }
+  const [dialogState, setDialogState] = useState({
+    isProjectOpen: false,
+  })
+
+  const handleDialogState = {
+    openProject: () => setDialogState({ ...dialogState, isProjectOpen: true}),
+    closeProject: () => setDialogState({ ...dialogState, isProjectOpen: false}),
+  }
 
   const [openUpdateDescriptionDialog, setOpenUpdateDescriptionDialog] = useState(false)
   const handleOpenUpdateDescriptionDialog = () => { setOpenUpdateDescriptionDialog(true) }
@@ -187,7 +192,7 @@ export default function SubmittalPdf(props) {
       </h2>
 
       <EditableBox  
-        openDialog={handleOpenUpdateProjectDialog}
+        openDialog={handleDialogState.openProject}
         showEdit={props.showEdit}>
         <Grid container spacing={2}>
           <Grid item xs={6} >
@@ -203,8 +208,8 @@ export default function SubmittalPdf(props) {
         </Grid>
       </EditableBox>
       <ProjectDialog
-        isDialogOpen={openUpdateProjectDialog}
-        handleClose={handleCloseUpdateProjectDialog}
+        isDialogOpen={dialogState.isProjectOpen}
+        handleClose={handleDialogState.closeProject}
         fetchSubmittals={fetchSubmittal}
         values={{ ...submittal }} />
 
