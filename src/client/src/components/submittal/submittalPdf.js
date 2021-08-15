@@ -101,20 +101,18 @@ export default function SubmittalPdf(props) {
 
   const [dialogState, setDialogState] = useState({
     isProjectOpen: false,
+    isDescriptionOpen: false,
+    isSubSpecOpen: false,
   })
 
   const handleDialogState = {
     openProject: () => setDialogState({ ...dialogState, isProjectOpen: true}),
     closeProject: () => setDialogState({ ...dialogState, isProjectOpen: false}),
+    openDescription: () => setDialogState({ ...dialogState, isDescriptionOpen: true}),
+    closeDescription: () => setDialogState({ ...dialogState, isDescriptionOpen: false}),
+    openSubSpec: () => setDialogState({ ...dialogState, isSubSpecOpen: true}),
+    closeSubSpec: () => setDialogState({ ...dialogState, isSubSpecOpen: false}),
   }
-
-  const [openUpdateDescriptionDialog, setOpenUpdateDescriptionDialog] = useState(false)
-  const handleOpenUpdateDescriptionDialog = () => { setOpenUpdateDescriptionDialog(true) }
-  const handleCloseUpdateDescriptionDialog = () => { setOpenUpdateDescriptionDialog(false) }
-
-  const [openUpdateSubSpecDialog, setOpenUpdateSubSpecDialog] = useState(false)
-  const handleOpenUpdateSubSpecDialog = () => { setOpenUpdateSubSpecDialog(true) }
-  const handleCloseUpdateSubSpecDialog = () => { setOpenUpdateSubSpecDialog(false) }
 
   const [openUpdateArchitectAddressDialog, setOpenUpdateArchitectAddressDialog] = useState(false)
   const handleOpenUpdateArchitectAddressDialog = () => { setOpenUpdateArchitectAddressDialog(true) }
@@ -221,7 +219,7 @@ export default function SubmittalPdf(props) {
               Description:
             </label>
             <EditableBox  
-              openDialog={handleOpenUpdateDescriptionDialog}
+              openDialog={handleDialogState.openDescription}
               showEdit={props.showEdit}>
               <div>
                 {submittal.description}
@@ -229,8 +227,8 @@ export default function SubmittalPdf(props) {
             </EditableBox>
           </Grid>
         <DescriptionDialog
-          isDialogOpen={openUpdateDescriptionDialog}
-          handleClose={handleCloseUpdateDescriptionDialog}
+          isDialogOpen={dialogState.isDescriptionOpen}
+          handleClose={handleDialogState.closeDescription}
           fetchSubmittals={fetchSubmittal}
           values={{ ...submittal }} />
 
@@ -246,7 +244,7 @@ export default function SubmittalPdf(props) {
             </Grid>
             <Grid item xs={4} align="right">
             <EditableBox  
-              openDialog={handleOpenUpdateSubSpecDialog}
+              openDialog={handleDialogState.openSubSpec}
               showEdit={props.showEdit}>
                 <div>
                   {submittal.submittalNumber}
@@ -256,8 +254,8 @@ export default function SubmittalPdf(props) {
                 </div>
               </EditableBox>
               <SubSpecDialog
-                isDialogOpen={openUpdateSubSpecDialog}
-                handleClose={handleCloseUpdateSubSpecDialog}
+                isDialogOpen={dialogState.isSubSpecOpen}
+                handleClose={handleDialogState.closeSubSpec}
                 fetchSubmittals={fetchSubmittal}
                 values={{ ...submittal }} />
 
