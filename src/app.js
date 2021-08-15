@@ -366,6 +366,26 @@ app.put('/submittal/updateContractorRemarks/:id', async (req, res) => {
   }
 })
 
+app.put('/submittal/updateDcRemarks/:id', async (req, res) => {
+  const id = req.params.id
+  const { 
+    dcRemarks,
+  } = req.body
+
+  try {
+    const submittal = await Submittal.findOne({ where: { id } })
+    
+    submittal.dcRemarks = dcRemarks
+
+    await submittal.save()
+
+    return res.json(submittal)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
 app.put('/submittal/updateTimeline/:id', async (req, res) => {
   const id = req.params.id
   const { 
