@@ -12,6 +12,7 @@ import SupplierDialog from './edit/supplierDialog'
 import SubstitutionDialog from './edit/substitutionDialog'
 import WarrantyDialog from './edit/warrantyDialog'
 import DcActionsDialog from './edit/dcActionsDialog'
+import ArchitectActionsDialog from './edit/architectActionsDialog'
 import ReceivedInfoDialog from './edit/receivedInfoDialog'
 import ContractorRemarksDialog from './edit/contractorRemarksDialog'
 import ArchitectRemarksDialog from './edit/architectRemarksDialog'
@@ -136,6 +137,10 @@ export default function SubmittalPdf(props) {
   const [openUpdateDcActionsDialog, setOpenUpdateDcActionsDialog] = useState(false)
   const handleOpenUpdateDcActionsDialog = () => { setOpenUpdateDcActionsDialog(true) }
   const handleCloseUpdateDcActionsDialog = () => { setOpenUpdateDcActionsDialog(false) }
+
+  const [openUpdateArchitectActionsDialog, setOpenUpdateArchitectActionsDialog] = useState(false)
+  const handleOpenUpdateArchitectActionsDialog = () => { setOpenUpdateArchitectActionsDialog(true) }
+  const handleCloseUpdateArchitectActionsDialog = () => { setOpenUpdateArchitectActionsDialog(false) }
 
   const [openUpdateReceivedInfoDialog, setOpenUpdateReceivedInfoDialog] = useState(false)
   const handleOpenUpdateReceivedInfoDialog = () => { setOpenUpdateReceivedInfoDialog(true) }
@@ -648,30 +653,39 @@ export default function SubmittalPdf(props) {
       </label>
 
       <Box p={1}>
-        <Grid container>
+        <Grid container spacing={2}>
           <Grid item xs={6}>
             <label>
               ACTION:
             </label>
 
-            <div className={smallClass}>
-              <div>
-                {submittal.isArchitectNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
+            <EditableBox  
+              openDialog={handleOpenUpdateArchitectActionsDialog}
+              showEdit={props.showEdit}>
+              <div className={smallClass}>
+                <div>
+                  {submittal.isArchitectNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
+                </div>
+                <div>
+                  {submittal.isArchitectNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
+                </div>
+                <div>
+                  {submittal.isArchitectAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
+                </div>
+                <div>
+                  {submittal.isArchitectRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
+                </div>
               </div>
-              <div>
-                {submittal.isArchitectNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
-              </div>
-              <div>
-                {submittal.isArchitectAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
-              </div>
-              <div>
-                {submittal.isArchitectRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
-              </div>
-            </div>
 
-            <Box mt={1} className={classes.bold}>
-              Approved Substitution: {submittal.isArchitectApprovedSubmission ? "🗹" : "☐"}
-            </Box>
+              <Box mt={1} className={classes.bold}>
+                Approved Substitution: {submittal.isArchitectApprovedSubmission ? "🗹" : "☐"}
+              </Box>
+            </EditableBox>
+            <ArchitectActionsDialog
+              isDialogOpen={openUpdateArchitectActionsDialog}
+              handleClose={handleCloseUpdateArchitectActionsDialog}
+              fetchSubmittals={fetchSubmittal}
+              values={{ ...submittal }} />
           </Grid>
           <Grid item xs={6}>
             <label>
