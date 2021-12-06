@@ -108,7 +108,7 @@ export default function SubmittalCreateUpdateDialog(props) {
         props.fetchSubmittals();
       })
       .catch(error => console.log(error));
-    
+
     props.handleClose();
   };
 
@@ -287,7 +287,7 @@ export default function SubmittalCreateUpdateDialog(props) {
             </Grid>
           </MuiPickersUtilsProvider>
         </DialogContent>
-        
+
         <DialogActions>
           <Button onClick={props.handleClose} color="default">
             Cancel

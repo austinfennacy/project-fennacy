@@ -13,7 +13,7 @@ import Hidden from '@material-ui/core/Hidden'
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
     height: '100%',
-  },  
+  },
   pdfBackground: {
     backgroundColor: 'hsl(0, 0%, 16%)',
     minHeight: '100%',
@@ -76,7 +76,7 @@ export default function Submittal(props) {
         'Accept': 'application/pdf'
       }
     })
-  
+
   let saveSubmittalPdf = () =>
    getSubmittalPdf()
      .then((response) => {
