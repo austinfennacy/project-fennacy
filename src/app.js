@@ -1,9 +1,10 @@
 const express = require('express')
 const cors = require('cors')
 const { Sequelize } = require('sequelize')
-const { sequelize, Submittal, Address } = require('./models')
+const { sequelize, Submittal, Address, Account } = require('./models')
 const config = require('./config/config.js')
 const puppeteer = require('puppeteer')
+const bcrypt = require('bcrypt')
 
 const app = express()
 app.use(express.json())
@@ -11,9 +12,67 @@ app.use(express.json())
 const PORT = process.env.PORT || 5000
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
 
+app.post('/register', cors(), async (req, res) => {
+  const {
+    name,
+    email,
+    password,
+  } = req.body
+
+  const isEmailValid = validateEmail(email)
+  if (!isEmailValid) {
+    return res.json({ success: false, err: 'That email is not valid.' })
+  }
+
+  const isEmailUnique = await Account.findOne({ where: { email } })
+    .then(account => account === null)
+  if (!isEmailUnique) {
+    return res.json({ success: false, err: 'That email is in use. Try another.' })
+  }
+
+  try {
+    const passwordHash = await bcrypt.hash(password, 8)
+
+    const account = Account.create({
+      name,
+      email,
+      passwordHash,
+      lastLoginAt: new Date(),
+    })
+
+    return res.json(account)
+  } catch (err) {
+    console.error(`could not register account: ${err}`)
+    return res.status(500).json(err)
+  }
+})
+
+function validateEmail(email) {
+  const res = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return res.test(String(email).toLowerCase());
+}
+
+app.post('/login', cors(), async (req, res) => {
+  const {
+    email,
+    password,
+  } = req.body
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 8)
+
+    // todo
+
+    return res.json({ success: true })
+  } catch (err) {
+    console.log('handle fails')
+    return res.status(500).json(err)
+  }
+})
+
 app.get('/getSubmittalPdf', async (req, res) => {
   const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
-  
+
   const url = `${baseUrl}/submittalPdf/${req.query.id}`
   printPdf(url).then(pdf => {
     res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length })
@@ -25,17 +84,17 @@ async function printPdf(url) {
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
   await page.goto(url, {waitUntil: 'networkidle0'})
-  
+
   const pdf = await page.pdf({ format: 'A4' })
   await browser.close()
-  
+
   return pdf
 }
 
 app.get('/submittals', cors(), async (req, res) => {
   try {
     const submittals = await Submittal.findAll()
-    
+
     return res.json(submittals)
   } catch (err) {
     console.log(err)
@@ -44,7 +103,7 @@ app.get('/submittals', cors(), async (req, res) => {
 })
 
 app.post('/submittal', async (req, res) => {
-  const { 
+  const {
     submittalNumber,
     numberReceived,
     specificationSection,
@@ -58,7 +117,7 @@ app.post('/submittal', async (req, res) => {
   } = req.body
 
   try {
-    const submittal = await Submittal.create({ 
+    const submittal = await Submittal.create({
       submittalNumber,
       numberReceived,
       specificationSection,
@@ -80,7 +139,7 @@ app.post('/submittal', async (req, res) => {
 
 app.get('/submittal/:id', async (req, res) => {
   const id = req.params.id
-  
+
   try {
     const submittal = await Submittal.findOne({ where: { id } })
 
@@ -97,7 +156,7 @@ app.get('/submittal/:id', async (req, res) => {
 
 app.put('/submittal/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     submittalNumber,
     numberReceived,
     specificationSection,
@@ -109,10 +168,10 @@ app.put('/submittal/:id', async (req, res) => {
     respondBefore,
     responseDate,
   } = req.body
-  
+
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.submittalNumber = submittalNumber
     submittal.numberReceived = numberReceived
     submittal.specificationSection = specificationSection
@@ -142,7 +201,7 @@ app.delete('/submittal/:id', async (req, res) => {
         id: id,
       }
     })
-    
+
     const recordDeletedSuccessfully = numAddectedRows == 1
 
     return res.json({ success: recordDeletedSuccessfully })
@@ -154,14 +213,14 @@ app.delete('/submittal/:id', async (req, res) => {
 
 app.put('/submittal/updateProject/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     projectNumber,
     projectName,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.projectNumber = projectNumber
     submittal.projectName = projectName
 
@@ -176,13 +235,13 @@ app.put('/submittal/updateProject/:id', async (req, res) => {
 
 app.put('/submittal/updateDescription/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     description,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.description = description
 
     await submittal.save()
@@ -196,14 +255,14 @@ app.put('/submittal/updateDescription/:id', async (req, res) => {
 
 app.put('/submittal/updateSubSpec/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     submittalNumber,
     specificationNumber,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.submittalNumber = submittalNumber
     submittal.specificationNumber = specificationNumber
 
@@ -219,7 +278,7 @@ app.put('/submittal/updateSubSpec/:id', async (req, res) => {
 app.put('/submittal/updateAddress/:submittalId', async (req, res) => {
   const submittalId = req.params.submittalId
 
-  const { 
+  const {
     addressNameLine,
     addressLine1,
     city,
@@ -228,13 +287,12 @@ app.put('/submittal/updateAddress/:submittalId', async (req, res) => {
     addressType,
   } = req.body
 
-  
   architectAddressId = addressType == "architectAddress" ? submittalId : null
   contractorAddressId = addressType == "contractorAddress" ? submittalId : null
   projectAddressId = addressType == "projectAddress" ? submittalId : null
-  
+
   try {
-    const [address, created] = await Address.findOrCreate({ 
+    const [address, created] = await Address.findOrCreate({
       where: {
         architectAddressId: architectAddressId,
         contractorAddressId: contractorAddressId,
@@ -262,13 +320,13 @@ app.put('/submittal/updateAddress/:submittalId', async (req, res) => {
 
 app.put('/submittal/updateSupplier/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     supplierName,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.supplierName = supplierName
 
     await submittal.save()
@@ -282,13 +340,13 @@ app.put('/submittal/updateSupplier/:id', async (req, res) => {
 
 app.put('/submittal/updateSubstitution/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     isSubstitutionUsed,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.isSubstitutionUsed = isSubstitutionUsed
 
     await submittal.save()
@@ -302,14 +360,14 @@ app.put('/submittal/updateSubstitution/:id', async (req, res) => {
 
 app.put('/submittal/updateWarranty/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     hasWarranty,
     hasManuals,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.hasWarranty = hasWarranty
     submittal.hasManuals = hasManuals
 
@@ -324,7 +382,7 @@ app.put('/submittal/updateWarranty/:id', async (req, res) => {
 
 app.put('/submittal/updateReceivedInfo/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     dateReceived,
     numberReceived,
     responseDate,
@@ -332,7 +390,7 @@ app.put('/submittal/updateReceivedInfo/:id', async (req, res) => {
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.dateReceived = dateReceived
     submittal.numberReceived = numberReceived
     submittal.responseDate = responseDate
@@ -348,13 +406,13 @@ app.put('/submittal/updateReceivedInfo/:id', async (req, res) => {
 
 app.put('/submittal/updateContractorRemarks/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     contractorRemarks,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.contractorRemarks = contractorRemarks
 
     await submittal.save()
@@ -368,13 +426,13 @@ app.put('/submittal/updateContractorRemarks/:id', async (req, res) => {
 
 app.put('/submittal/updateDcRemarks/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     dcRemarks,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.dcRemarks = dcRemarks
 
     await submittal.save()
@@ -388,13 +446,13 @@ app.put('/submittal/updateDcRemarks/:id', async (req, res) => {
 
 app.put('/submittal/updateArchitectRemarks/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     architectRemarks,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.architectRemarks = architectRemarks
 
     await submittal.save()
@@ -408,7 +466,7 @@ app.put('/submittal/updateArchitectRemarks/:id', async (req, res) => {
 
 app.put('/submittal/updateTimeline/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     earlyStartDate,
     earlyFinishDate,
     lateFinishDate,
@@ -416,7 +474,7 @@ app.put('/submittal/updateTimeline/:id', async (req, res) => {
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.earlyStartDate = earlyStartDate
     submittal.earlyFinishDate = earlyFinishDate
     submittal.lateFinishDate = lateFinishDate
@@ -432,14 +490,14 @@ app.put('/submittal/updateTimeline/:id', async (req, res) => {
 
 app.put('/submittal/updateFloat/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     floatTime,
     submittalTaskNumber,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.floatTime = floatTime
     submittal.submittalTaskNumber = submittalTaskNumber
 
@@ -454,14 +512,14 @@ app.put('/submittal/updateFloat/:id', async (req, res) => {
 
 app.put('/submittal/updateTransmitted/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     transmittedTo,
     responseDate,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.transmittedTo = transmittedTo
     submittal.responseDate = responseDate
 
@@ -476,14 +534,14 @@ app.put('/submittal/updateTransmitted/:id', async (req, res) => {
 
 app.put('/submittal/updateSent/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     transmittedTo,
     numberSent,
   } = req.body
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.transmittedTo = transmittedTo
     submittal.numberSent = numberSent
 
@@ -498,7 +556,7 @@ app.put('/submittal/updateSent/:id', async (req, res) => {
 
 app.put('/submittal/updateDcActions/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     isDcNoExceptionTaken,
     isDcNoExceptionTakenWithModificationNoted,
     isDcAmmendAsNotedAndResubmit,
@@ -508,7 +566,7 @@ app.put('/submittal/updateDcActions/:id', async (req, res) => {
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.isDcNoExceptionTaken = isDcNoExceptionTaken
     submittal.isDcNoExceptionTakenWithModificationNoted = isDcNoExceptionTakenWithModificationNoted
     submittal.isDcAmmendAsNotedAndResubmit = isDcAmmendAsNotedAndResubmit
@@ -526,7 +584,7 @@ app.put('/submittal/updateDcActions/:id', async (req, res) => {
 
 app.put('/submittal/updateCopies/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     copiesForContractor,
     copiesForOwner,
     copiesForInspector,
@@ -537,7 +595,7 @@ app.put('/submittal/updateCopies/:id', async (req, res) => {
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.copiesForContractor = copiesForContractor
     submittal.copiesForOwner = copiesForOwner
     submittal.copiesForInspector = copiesForInspector
@@ -556,7 +614,7 @@ app.put('/submittal/updateCopies/:id', async (req, res) => {
 
 app.put('/submittal/updateArchitect/:id', async (req, res) => {
   const id = req.params.id
-  const { 
+  const {
     isArchitectNoExceptionTaken,
     isArchitectNoExceptionTakenWithModificationNoted,
     isArchitectAmmendAsNotedAndResubmit,
@@ -566,7 +624,7 @@ app.put('/submittal/updateArchitect/:id', async (req, res) => {
 
   try {
     const submittal = await Submittal.findOne({ where: { id } })
-    
+
     submittal.isArchitectNoExceptionTaken = isArchitectNoExceptionTaken
     submittal.isArchitectNoExceptionTakenWithModificationNoted = isArchitectNoExceptionTakenWithModificationNoted
     submittal.isArchitectAmmendAsNotedAndResubmit = isArchitectAmmendAsNotedAndResubmit
