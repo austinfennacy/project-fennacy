@@ -1,6 +1,8 @@
 import './App.css';
 import SubmittalTable from './components/submittalTable/submittalTable';
 import Submittal from './components/submittal/submittal';
+import Login from './components/login/login';
+import Register from './components/register/register';
 import Navbar from './components/navbar/navbar';
 import { Router } from "@reach/router";
 import SubmittalPdf from './components/submittal/submittalPdf';
@@ -24,6 +26,8 @@ function WebClient() {
 
       <Router className="Router">
         <SubmittalTable path="/" />
+        <Login path="/login" />
+        <Register path="/register" />
         <Submittal path="submittal/:id" />
         <NotFound default />
       </Router>
