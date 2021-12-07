@@ -33,17 +33,17 @@ app.post('/register', cors(), async (req, res) => {
   try {
     const passwordHash = await bcrypt.hash(password, 8)
 
-    const account = Account.create({
+    Account.create({
       name,
       email,
       passwordHash,
       lastLoginAt: new Date(),
     })
 
-    return res.json(account)
+    return res.json({ success: true })
   } catch (err) {
     console.error(`could not register account: ${err}`)
-    return res.status(500).json(err)
+    return res.status(500).json({ success: false, err })
   }
 })
 
@@ -202,7 +202,7 @@ app.delete('/submittal/:id', async (req, res) => {
       }
     })
 
-    const recordDeletedSuccessfully = numAddectedRows == 1
+    const recordDeletedSuccessfully = numAddectedRows === 1
 
     return res.json({ success: recordDeletedSuccessfully })
   } catch (err) {
@@ -287,9 +287,9 @@ app.put('/submittal/updateAddress/:submittalId', async (req, res) => {
     addressType,
   } = req.body
 
-  architectAddressId = addressType == "architectAddress" ? submittalId : null
-  contractorAddressId = addressType == "contractorAddress" ? submittalId : null
-  projectAddressId = addressType == "projectAddress" ? submittalId : null
+  architectAddressId = addressType === "architectAddress" ? submittalId : null
+  contractorAddressId = addressType === "contractorAddress" ? submittalId : null
+  projectAddressId = addressType === "projectAddress" ? submittalId : null
 
   try {
     const [address, created] = await Address.findOrCreate({

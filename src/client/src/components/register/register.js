@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from "@reach/router";
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -29,6 +30,26 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     backgroundColor: 'white',
     boxShadow: '0 0 16px 2px rgb(153, 10, 0, .3)',
+  },
+  successBox: {
+    border: '1px solid hsl(120, 100%, 40%)',
+    backgroundColor: 'hsl(120, 100%, 95%)',
+    width: '100%',
+    padding: '8px 0',
+    margin: '8px 0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  errorBox: {
+    border: '1px solid hsl(0, 100%, 40%)',
+    backgroundColor: 'hsl(0, 100%, 95%)',
+    width: '100%',
+    padding: '8px 0',
+    margin: '8px 0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   registerButton: {
     background: 'linear-gradient(45deg, hsl(120, 100%, 30%) 30%, hsl(120, 100%, 40%) 90%)',
@@ -64,10 +85,15 @@ export default function Register() {
     });
   };
 
-  const handleRegister = (event) => {
-    // event.preventDefault();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [successText, setSuccessText] = useState('Your account was created. Redirecting');
+  const [showError, setShowError] = useState(false);
+  const [errorText, setErrorText] = useState('Error');
 
-    fetch('/register/', {
+  const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
+
+  const handleRegister = (event) => {
+    fetch('/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -76,24 +102,21 @@ export default function Register() {
       body: JSON.stringify(formValues)
     })
     .then(res => res.json())
-    .then(function (data) {
-      console.log(data)
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
+    .then(async function (data) {
+      if (data.success) {
+        setShowError(false)
+        setShowSuccess(true)
+        setSuccessText(`${successText} .`)
+        await sleep(1000)
+        setSuccessText(`${successText} . .`)
+        await sleep(1000)
+        setSuccessText(`${successText} . . .`)
+        await sleep(1000)
+        window.location = '/login'
+      } else {
+        setShowError(true)
+        setErrorText(data.err)
+      }
     })
     .catch(error => console.log(error));
   };
@@ -105,10 +128,22 @@ export default function Register() {
         </Grid>
         <Grid item sm={4} className={classes.center}>
           <Paper className={classes.paper} square>
-            <Grid container direction="column" justifyContent="center" alignItems="center">
+            <Grid container direction="column" alignItems="center">
               <h2>
                 Register a new account
               </h2>
+
+              {showSuccess &&
+                <Box className={classes.successBox}>
+                  {successText}
+                </Box>
+              }
+
+              {showError &&
+                <Box className={classes.errorBox}>
+                  {errorText}
+                </Box>
+              }
 
               <TextField
                 autoFocus
@@ -121,7 +156,6 @@ export default function Register() {
               />
 
               <TextField
-                autoFocus
                 variant="outlined"
                 margin="normal"
                 name="email"
