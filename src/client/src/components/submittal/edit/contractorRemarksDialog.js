@@ -11,10 +11,10 @@ export default function ContractorRemarksDialog(props) {
   useEffect(() => {
     setFormValues(props.values)
   }, [props.values])
-  
+
   const handleInputChange = (e) => {
     let { name, value } = e.target
-    value = value == '' ? null : value
+    value = value === '' ? null : value
     setFormValues({
       ...formValues,
       [name]: value,
@@ -37,7 +37,7 @@ export default function ContractorRemarksDialog(props) {
         props.fetchSubmittals()
       })
       .catch(error => console.log(error))
-    
+
     props.handleClose()
   }
 
