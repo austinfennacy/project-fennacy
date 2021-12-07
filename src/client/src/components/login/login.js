@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from "@reach/router";
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -27,9 +28,28 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
     color: theme.palette.text.primary,
     width: 500,
+    backgroundColor: 'white',
+    boxShadow: '0 0 16px 2px rgb(153, 10, 0, .3)',
+  },
+  successBox: {
+    border: '1px solid hsl(120, 100%, 40%)',
+    backgroundColor: 'hsl(120, 100%, 95%)',
+    width: '100%',
+    padding: '8px 0',
+    margin: '8px 0',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+  },
+  errorBox: {
+    border: '1px solid hsl(0, 100%, 40%)',
+    backgroundColor: 'hsl(0, 100%, 95%)',
+    width: '100%',
+    padding: '8px 0',
+    margin: '8px 0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginButton: {
     background: 'linear-gradient(45deg, hsl(200, 100%, 40%) 30%, hsl(191, 90%, 54%) 90%)',
@@ -39,17 +59,17 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     height: 36,
     padding: '0 16px',
-    margin: '0 0 16px 0'
+    margin: '16px 0'
   },
   registerButton: {
-    background: 'linear-gradient(45deg, hsl(200, 100%, 40%) 30%, hsl(191, 90%, 54%) 90%)',
+    background: 'linear-gradient(45deg, hsl(120, 100%, 30%) 30%, hsl(120, 100%, 40%) 90%)',
     border: 0,
     borderRadius: 3,
     boxShadow: '2px 2px 5px 0px rgba(33, 203, 243, .3)',
     color: 'white',
     height: 36,
     padding: '0 16px',
-    margin: '0 0 16px 0'
+    margin: '4px 0'
   },
 }))
 
@@ -66,9 +86,7 @@ export default function Login() {
   };
 
   const handleLogin = (event) => {
-    // event.preventDefault();
-
-    fetch('/login/', {
+    fetch('/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -106,52 +124,51 @@ export default function Login() {
         </Grid>
         <Grid item sm={4} className={classes.center}>
           <Paper className={classes.paper} square>
+            <Grid container direction="column" alignItems="center">
+              <h2>
+                Login
+              </h2>
 
-            <div>
-              Login
-            </div>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                name="email"
+                label="Email"
+                fullWidth
+                onChange={handleInputChange}
+              />
 
-            Email:
-            <TextField
-              autoFocus
-              variant="outlined"
-              margin="normal"
-              name="email"
-              label="Email"
-              fullWidth
-              onChange={handleInputChange}
-            />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                name="password"
+                label="password"
+                type="password"
+                fullWidth
+                onChange={handleInputChange}
+              />
 
-            Password:
-            <TextField
-              variant="outlined"
-              margin="normal"
-              name="password"
-              label="password"
-              type="password"
-              fullWidth
-              onChange={handleInputChange}
-            />
-
-            <Button
-              variant="contained"
-              className={classes.loginButton}
-              onClick={handleLogin}
-              align="center"
-              startIcon={<VpnKeyIcon />}>
-              Login
-            </Button>
-
-            No account? register:
-            <Link to={`/register`}>
               <Button
                 variant="contained"
-                className={classes.registerButton}
+                className={classes.loginButton}
+                onClick={handleLogin}
                 align="center"
-                startIcon={<AddIcon />}>
-                Register
+                startIcon={<VpnKeyIcon />}
+                >
+                Login
               </Button>
-            </Link>
+
+              <Link to={`/register`}>
+                <Button
+                  variant="contained"
+                  className={classes.registerButton}
+                  align="center"
+                  startIcon={<AddIcon />}
+                  >
+                  Register
+                </Button>
+              </Link>
+            </Grid>
           </Paper>
         </Grid>
         <Grid item sm={4}>

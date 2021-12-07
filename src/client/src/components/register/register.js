@@ -184,7 +184,7 @@ export default function Register() {
                 Register
               </Button>
 
-              <Link to={`/register`}>
+              <Link to={`/login`}>
                 <Button
                   variant="contained"
                   className={classes.loginButton}
