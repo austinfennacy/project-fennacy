@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     padding: theme.spacing(6),
     color: theme.palette.text.primary,
-    width: 500,
+    width: 350,
     backgroundColor: 'white',
     boxShadow: '0 0 16px 2px rgb(153, 10, 0, .3)',
   },
@@ -106,12 +106,13 @@ export default function Register() {
       if (data.success) {
         setShowError(false)
         setShowSuccess(true)
+        await sleep(500)
         setSuccessText(`${successText} .`)
         await sleep(1000)
         setSuccessText(`${successText} . .`)
         await sleep(1000)
         setSuccessText(`${successText} . . .`)
-        await sleep(1000)
+        await sleep(500)
         window.location = '/login'
       } else {
         setShowError(true)
