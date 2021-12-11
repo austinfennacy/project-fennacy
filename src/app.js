@@ -98,12 +98,6 @@ app.post('/login',
     })(req, res)
   })
 
-// app.post('/login', cors(), passport.authenticate('local', {
-//   successRedirect: '/',
-//   failureRedirect: '/login',
-//   failureFlash: true,
-// }))
-
 app.get('/getSubmittalPdf', async (req, res) => {
   const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
 
