@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const { Sequelize } = require('sequelize')
-const { sequelize, Submittal, Address, Account } = require('./models')
+const { sequelize, Submittal, Address, User } = require('./models')
 const config = require('./config/config.js')
 const puppeteer = require('puppeteer')
 const bcrypt = require('bcrypt')
@@ -16,7 +16,7 @@ app.use(express.json())
 const PORT = process.env.PORT || 5000
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
 
-initializePassport(passport, Account, validateEmail)
+initializePassport(passport, User, validateEmail)
 app.use(flash())
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -48,8 +48,8 @@ app.post('/register', async (req, res) => {
     return res.json({ success: false, err: 'Email is not valid' })
   }
 
-  const isEmailUnique = await Account.findOne({ where: { email } })
-    .then(account => account === null)
+  const isEmailUnique = await User.findOne({ where: { email } })
+    .then(user => user === null)
   if (!isEmailUnique) {
     return res.json({ success: false, err: 'That email is in use, try another' })
   }
@@ -57,7 +57,7 @@ app.post('/register', async (req, res) => {
   try {
     const passwordHash = await bcrypt.hash(password, 8)
 
-    Account.create({
+    User.create({
       name,
       email,
       passwordHash,

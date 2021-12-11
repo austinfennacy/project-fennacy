@@ -2,7 +2,7 @@
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-  class Account extends Model {
+  class User extends Model {
     static associate(models) {
       // define association here
     }
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   };
-  Account.init({
+  User.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -36,8 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Account',
+    modelName: 'User',
     paranoid: true,
   });
-  return Account;
+  return User;
 };
