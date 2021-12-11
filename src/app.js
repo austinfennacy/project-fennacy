@@ -5,12 +5,26 @@ const { sequelize, Submittal, Address, Account } = require('./models')
 const config = require('./config/config.js')
 const puppeteer = require('puppeteer')
 const bcrypt = require('bcrypt')
+const passport = require('passport')
+const initializePassport = require('./passport-config')
+const flash = require('express-flash')
+const session = require('express-session')
 
 const app = express()
 app.use(express.json())
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
+
+initializePassport(passport, Account, validateEmail)
+app.use(flash())
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.post('/register', cors(), async (req, res) => {
   const {
@@ -19,15 +33,25 @@ app.post('/register', cors(), async (req, res) => {
     password,
   } = req.body
 
+  if (!name) {
+    return res.json({ success: false, err: 'Name is required' })
+  }
+  if (!email) {
+    return res.json({ success: false, err: 'Email is required' })
+  }
+  if (!password) {
+    return res.json({ success: false, err: 'Password is required' })
+  }
+
   const isEmailValid = validateEmail(email)
   if (!isEmailValid) {
-    return res.json({ success: false, err: 'That email is not valid.' })
+    return res.json({ success: false, err: 'Email is not valid' })
   }
 
   const isEmailUnique = await Account.findOne({ where: { email } })
     .then(account => account === null)
   if (!isEmailUnique) {
-    return res.json({ success: false, err: 'That email is in use. Try another.' })
+    return res.json({ success: false, err: 'That email is in use, try another' })
   }
 
   try {
@@ -47,28 +71,38 @@ app.post('/register', cors(), async (req, res) => {
   }
 })
 
-function validateEmail(email) {
+function validateEmail (email) {
   const res = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return res.test(String(email).toLowerCase());
 }
 
-app.post('/login', cors(), async (req, res) => {
-  const {
-    email,
-    password,
-  } = req.body
+app.post('/login',
+  cors(),
+  async (req, res) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) {
+        return res.json({ success: false, err: err.message })
+      }
 
-  try {
-    const hashedPassword = await bcrypt.hash(password, 8)
+      if (!user) {
+        return res.json({ success: false, err: info.message })
+      }
 
-    // todo
+      req.logIn(user, (err) => {
+        if (err) {
+          return res.json({ success: false, err: err.message })
+        }
 
-    return res.json({ success: true })
-  } catch (err) {
-    console.log('handle fails')
-    return res.status(500).json(err)
-  }
-})
+        return res.json({ success: true })
+      })
+    })(req, res)
+  })
+
+// app.post('/login', cors(), passport.authenticate('local', {
+//   successRedirect: '/',
+//   failureRedirect: '/login',
+//   failureFlash: true,
+// }))
 
 app.get('/getSubmittalPdf', async (req, res) => {
   const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed

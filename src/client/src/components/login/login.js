@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     padding: theme.spacing(6),
     color: theme.palette.text.primary,
-    width: 500,
+    width: 350,
     backgroundColor: 'white',
     boxShadow: '0 0 16px 2px rgb(153, 10, 0, .3)',
   },
@@ -85,6 +85,13 @@ export default function Login() {
     });
   };
 
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [successText, setSuccessText] = useState('Login successful');
+  const [showError, setShowError] = useState(false);
+  const [errorText, setErrorText] = useState('Error');
+
+  const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
+
   const handleLogin = (event) => {
     fetch('/login', {
       method: 'POST',
@@ -95,24 +102,22 @@ export default function Login() {
       body: JSON.stringify(formValues)
     })
     .then(res => res.json())
-    .then(function (data) {
-      console.log(data)
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
-        // TODO DO SOMETHING IF LOGIN SUCCEEDS OR has error
+    .then(async function (data) {
+      if (data.success) {
+        setShowError(false)
+        setShowSuccess(true)
+        await sleep(250)
+        setSuccessText(`${successText} .`)
+        await sleep(500)
+        setSuccessText(`${successText} . .`)
+        await sleep(500)
+        setSuccessText(`${successText} . . .`)
+        await sleep(250)
+        window.location = '/'
+      } else {
+        setShowError(true)
+        setErrorText(data.err)
+      }
     })
     .catch(error => console.log(error));
   };
@@ -129,7 +134,20 @@ export default function Login() {
                 Login
               </h2>
 
+              {showSuccess &&
+                <Box className={classes.successBox}>
+                  {successText}
+                </Box>
+              }
+
+              {showError &&
+                <Box className={classes.errorBox}>
+                  {errorText}
+                </Box>
+              }
+
               <TextField
+                autoFocus
                 variant="outlined"
                 margin="normal"
                 name="email"
