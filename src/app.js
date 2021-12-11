@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.post('/register', cors(), async (req, res) => {
+app.post('/register', async (req, res) => {
   const {
     name,
     email,
@@ -77,7 +77,6 @@ function validateEmail (email) {
 }
 
 app.post('/login',
-  cors(),
   async (req, res) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) {
