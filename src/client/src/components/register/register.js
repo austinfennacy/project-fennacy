@@ -106,13 +106,13 @@ export default function Register() {
       if (data.success) {
         setShowError(false)
         setShowSuccess(true)
-        await sleep(500)
+        await sleep(250)
         setSuccessText(`${successText} .`)
-        await sleep(1000)
-        setSuccessText(`${successText} . .`)
-        await sleep(1000)
-        setSuccessText(`${successText} . . .`)
         await sleep(500)
+        setSuccessText(`${successText} . .`)
+        await sleep(500)
+        setSuccessText(`${successText} . . .`)
+        await sleep(250)
         window.location = '/login'
       } else {
         setShowError(true)
