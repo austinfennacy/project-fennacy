@@ -24,7 +24,7 @@ app.use(session({
   saveUninitialized: false,
 }))
 app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.session()) /////// is this needed? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 app.post('/register', async (req, res) => {
   const {
@@ -92,10 +92,15 @@ app.post('/login',
           return res.json({ success: false, err: err.message })
         }
 
-        return res.json({ success: true })
+        return res.json({ success: true, user })
       })
     })(req, res)
   })
+
+app.delete('/logout', (req, res) => {
+  req.logOut()
+  return res.json({ success: true })
+})
 
 app.get('/getSubmittalPdf', async (req, res) => {
   const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
@@ -118,7 +123,9 @@ async function printPdf(url) {
   return pdf
 }
 
-app.get('/submittals', cors(), async (req, res) => {
+// todo - make sure my server routes are also checking auth? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// todo - make sure my server routes are also checking auth? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+app.get('/submittals', async (req, res) => {
   try {
     const submittals = await Submittal.findAll()
 
