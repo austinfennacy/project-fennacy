@@ -125,7 +125,7 @@ async function printPdf(url) {
 
 // todo - make sure my server routes are also checking auth? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // todo - make sure my server routes are also checking auth? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-app.get('/submittals', async (req, res) => {
+app.get('/submittals', cors(), async (req, res) => {
   try {
     const submittals = await Submittal.findAll()
 
