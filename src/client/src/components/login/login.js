@@ -8,7 +8,6 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from "@reach/router";
 import Box from '@material-ui/core/Box';
-import { useAuth } from '../../contexts/auth/AuthContext'
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -93,27 +92,32 @@ export default function Login() {
 
   const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
 
-  const { login } = useAuth()
   const handleLogin = (event) => {
-    login(formValues)
-      .then(async function (data) {
-        if (data.success) {
-          setShowError(false)
-          setShowSuccess(true)
-
-          await sleep(250)
-          setSuccessText(`${successText} .`)
-          await sleep(500)
-          setSuccessText(`${successText} . .`)
-          await sleep(500)
-          setSuccessText(`${successText} . . .`)
-          await sleep(250)
-
-          window.location = '/'
-        } else {
-          setShowError(true)
-          setErrorText(data.err)
-        }
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formValues)
+    })
+    .then(res => res.json())
+    .then(async function (data) {
+      if (data.success) {
+        setShowError(false)
+        setShowSuccess(true)
+        await sleep(250)
+        setSuccessText(`${successText} .`)
+        await sleep(500)
+        setSuccessText(`${successText} . .`)
+        await sleep(500)
+        setSuccessText(`${successText} . . .`)
+        await sleep(250)
+        window.location = '/'
+      } else {
+        setShowError(true)
+        setErrorText(data.err)
+      }
     })
     .catch(error => console.log(error));
   };
