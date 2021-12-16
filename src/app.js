@@ -102,6 +102,16 @@ app.delete('/logout', (req, res) => {
   return res.json({ success: true })
 })
 
+app.get('/loggedInUser', async (req, res) => {
+  if (!req.isAuthenticated())
+    return {}
+
+  const { id, name } = await req.user
+    .then(res => res.dataValues)
+
+  return res.json({ id, name })
+})
+
 app.get('/getSubmittalPdf', async (req, res) => {
   const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
 

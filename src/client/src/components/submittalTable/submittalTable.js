@@ -65,7 +65,7 @@ export default function SubmittalTable() {
             startIcon={<AddIcon />}>
             Create Submittal
           </Button>
-          <SubmittalCreateUpdateDialog 
+          <SubmittalCreateUpdateDialog
             isDialogOpen={open}
             handleClose={handleClose}
             fetchSubmittals={fetchSubmittals}/>
@@ -75,7 +75,7 @@ export default function SubmittalTable() {
             Submittals
           </div>
         </Grid>
-      </Grid>  
+      </Grid>
       <TableContainer component={Paper} mt={2}>
         <Table size="small" >
           <TableHead>

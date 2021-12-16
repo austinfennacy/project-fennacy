@@ -92,7 +92,7 @@ export default function Login() {
 
   const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
 
-  const handleLogin = (event) => {
+  function handleLogin() {
     fetch('/login', {
       method: 'POST',
       headers: {
@@ -102,10 +102,11 @@ export default function Login() {
       body: JSON.stringify(formValues)
     })
     .then(res => res.json())
-    .then(async function (data) {
-      if (data.success) {
+    .then(async function(res) {
+      if (res.success) {
         setShowError(false)
         setShowSuccess(true)
+
         await sleep(250)
         setSuccessText(`${successText} .`)
         await sleep(500)
@@ -113,14 +114,15 @@ export default function Login() {
         await sleep(500)
         setSuccessText(`${successText} . . .`)
         await sleep(250)
+
         window.location = '/'
       } else {
         setShowError(true)
-        setErrorText(data.err)
+        setErrorText(res.err)
       }
     })
     .catch(error => console.log(error));
-  };
+  }
 
   return (
     <div className={classes.fullHeight}>

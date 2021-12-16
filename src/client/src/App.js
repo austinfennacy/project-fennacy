@@ -7,14 +7,17 @@ import Navbar from './components/navbar/navbar';
 import { Router } from "@reach/router";
 import SubmittalPdf from './components/submittal/submittalPdf';
 import NotFound from './components/notFound/notFound';
+import { AuthProvider } from './contexts/auth/AuthContext';
 
 export default function App() {
   return (
     <div className="App">
-      <Router className="Router">
-        <WebClient path="/*" />
-        <SubmittalPdf path="submittalPdf/:id" />
-      </Router>
+      <AuthProvider>
+        <Router className="Router">
+          <WebClient path="/*" />
+          <SubmittalPdf path="submittalPdf/:id" />
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
