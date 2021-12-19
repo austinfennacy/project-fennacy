@@ -104,7 +104,7 @@ app.delete('/logout', (req, res) => {
 
 app.get('/loggedInUser', async (req, res) => {
   if (!req.isAuthenticated())
-    return {}
+    return null
 
   const { id, name } = await req.user
     .then(res => res.dataValues)
