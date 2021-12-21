@@ -102,21 +102,7 @@ app.post('/login',
   })
 
 app.delete('/logout', async (req, res) => {
-  const test = req.isAuthenticated()
-  const test2 = await req.user
-
-  console.log(test, test2)
-
-
-
   req.logOut()
-
-  const test3 = req.isAuthenticated()
-  const test4 = await req.user
-  console.log(test3, test4)
-
-
-
   return res.json({ success: true })
 })
 
