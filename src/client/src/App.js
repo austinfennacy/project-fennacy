@@ -19,7 +19,7 @@ export default function App() {
 
           {/* access to SubmittalPdf here so that PDF downloads don't have
           to deal with the Navbar */}
-          <ProtectedRoute path="submittalPdf/:id" component={SubmittalPdf} />
+          <SubmittalPdf path="submittalPdf/:id" />
         </Router>
       </AuthProvider>
     </div>
