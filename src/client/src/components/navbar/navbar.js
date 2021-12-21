@@ -18,12 +18,14 @@ const useStyles = makeStyles({
 
 export default function Navbar() {
   const classes = useStyles();
-  
+
+  const showDrawer = localStorage.getItem('isAuthed')
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar variant="dense">
-          <NavDrawer />
+          {showDrawer ? <NavDrawer /> : ''}
           <Typography variant="h6" color="inherit">
             PROJECT FENNACY
           </Typography>
