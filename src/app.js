@@ -131,9 +131,12 @@ app.get('/submittals', cors(), async (req, res) => {
   try {
     const userId = await req.user
       .then(user => user.dataValues.id)
-    console.log(userId)
 
-    const submittals = await Submittal.findAll()
+    const submittals = await User.findOne({
+      where: { id: userId },
+      include: 'submittals'
+    })
+    .then(res => res.dataValues.submittals)
 
     return res.json({ success: true, submittals })
   } catch (err) {
@@ -143,6 +146,9 @@ app.get('/submittals', cors(), async (req, res) => {
 })
 
 app.post('/submittal', async (req, res) => {
+  const UserId = await req.user
+    .then(user => user.dataValues.id)
+
   const {
     submittalNumber,
     numberReceived,
@@ -168,6 +174,7 @@ app.post('/submittal', async (req, res) => {
       dateReceived,
       respondBefore,
       responseDate,
+      UserId,
     })
 
     return res.json(submittal)
