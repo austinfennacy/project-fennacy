@@ -43,7 +43,15 @@ export default function SubmittalTable() {
   useEffect(() => fetchSubmittals(), []);
   const fetchSubmittals = () => fetch('/submittals')
     .then(res => res.json())
-    .then((submittals) => setSubmittals(submittals));
+    .then((res) => {
+      if (res.success) {
+        setSubmittals(res.submittals)
+      } else {
+        sessionStorage.removeItem('isAuthed')
+        sessionStorage.removeItem('user')
+        window.location = '/login'
+      }
+    })
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {

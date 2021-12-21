@@ -127,16 +127,18 @@ async function printPdf(url) {
   return pdf
 }
 
-// todo - make sure my server routes are also checking auth? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// todo - make sure my server routes are also checking auth? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 app.get('/submittals', cors(), async (req, res) => {
   try {
+    const userId = await req.user
+      .then(user => user.dataValues.id)
+    console.log(userId)
+
     const submittals = await Submittal.findAll()
 
-    return res.json(submittals)
+    return res.json({ success: true, submittals })
   } catch (err) {
     console.log(err)
-    return res.status(500).json(err)
+    return res.status(500).json({ success: false, err })
   }
 })
 
