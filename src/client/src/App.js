@@ -9,7 +9,6 @@ import { Router, Redirect } from "@reach/router";
 import SubmittalPdf from './components/submittal/submittalPdf';
 import NotFound from './components/notFound/notFound';
 import { AuthProvider, AuthContext } from './contexts/auth/AuthContext';
-import { Toolbar } from '@material-ui/core/Toolbar';
 
 export default function App() {
   return (
@@ -62,5 +61,5 @@ function UnprotectedRoute({ component: Component, path, ...rest }){
   return (<Component {...rest} />)
 }
 
-const PublicRoute = ({ component: Component, ...rest }) =>
-  (<Component {...rest} />)
+// const PublicRoute = ({ component: Component, ...rest }) =>
+//   (<Component {...rest} />)

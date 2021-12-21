@@ -103,19 +103,23 @@ app.post('/login',
     })(req, res)
   })
 
-app.delete('/logout', (req, res) => {
+app.delete('/logout', async (req, res) => {
+  const test = req.isAuthenticated()
+  const test2 = await req.user
+
+  console.log(test, test2)
+
+
+
   req.logOut()
+
+  const test3 = req.isAuthenticated()
+  const test4 = await req.user
+  console.log(test3, test4)
+
+
+
   return res.json({ success: true })
-})
-
-app.get('/loggedInUser', async (req, res) => {
-  if (!req.isAuthenticated())
-    return null
-
-  const { id, name } = await req.user
-    .then(res => res.dataValues)
-
-  return res.json({ id, name })
 })
 
 app.get('/getSubmittalPdf', async (req, res) => {
