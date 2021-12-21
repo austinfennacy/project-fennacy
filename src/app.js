@@ -92,12 +92,13 @@ app.post('/login',
           return res.json({ success: false, err: err.message })
         }
 
+        // only share relevant info with client side
         const userInfo = {
           user: user.id,
           name: user.name,
         }
 
-        return res.json({ success: true, userInfo })
+        return res.json({ success: true, user: userInfo })
       })
     })(req, res)
   })

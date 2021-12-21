@@ -9,6 +9,7 @@ import { Router, Redirect } from "@reach/router";
 import SubmittalPdf from './components/submittal/submittalPdf';
 import NotFound from './components/notFound/notFound';
 import { AuthProvider, AuthContext } from './contexts/auth/AuthContext';
+import { Toolbar } from '@material-ui/core/Toolbar';
 
 export default function App() {
   return (
@@ -16,7 +17,10 @@ export default function App() {
       <AuthProvider>
         <Router className="Router">
           <WebClient path="/*" />
-          <SubmittalPdf path="submittalPdf/:id" />
+
+          {/* access to SubmittalPdf here so that PDF downloads don't have
+          to deal with the Navbar */}
+          <ProtectedRoute path="submittalPdf/:id" component={SubmittalPdf} />
         </Router>
       </AuthProvider>
     </div>
@@ -31,19 +35,29 @@ function WebClient() {
       <Router className="Router">
         <ProtectedRoute path="/" component={SubmittalTable} />
         <ProtectedRoute path="submittal/:id" component={Submittal} />
-        <Login path="/login" />
-        <Register path="/register" />
-        <NotFound default />
+        <ProtectedRoute default component={NotFound} />
+        <UnprotectedRoute path="/login" component={Login} />
+        <UnprotectedRoute path="/register" component={Register} />
       </Router>
     </div>
   );
 }
 
-function ProtectedRoute({ component: Component, ...rest }){
+function ProtectedRoute({ component: Component, path, ...rest }){
   const { isAuthed } = useContext(AuthContext)
 
   if (!isAuthed)
-    return (<Redirect from="" to="login" noThrow />)
+    return (<Redirect from={path} to="/login" noThrow />)
+
+  return (<Component {...rest} />)
+}
+
+function UnprotectedRoute({ component: Component, path, ...rest }){
+  // only able to view these routes if NOT authed. for login, register, etc
+  const { isAuthed } = useContext(AuthContext)
+
+  if (isAuthed)
+    return (<Redirect from={path} to="/" noThrow />)
 
   return (<Component {...rest} />)
 }
