@@ -104,8 +104,8 @@ export default function Login() {
     .then(res => res.json())
     .then(async function(res) {
       if (res.success) {
-        localStorage.setItem('isAuthed', 'true')
-        localStorage.setItem('user', JSON.stringify( res.user ))
+        sessionStorage.setItem('isAuthed', 'true')
+        sessionStorage.setItem('user', JSON.stringify( res.user ))
 
         setShowError(false)
         setShowSuccess(true)

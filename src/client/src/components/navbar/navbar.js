@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 export default function Navbar() {
   const classes = useStyles();
 
-  const isAuthed = localStorage.getItem('isAuthed')
+  const isAuthed = sessionStorage.getItem('isAuthed')
 
   return (
     <div className={classes.root}>
@@ -61,8 +61,8 @@ function Logout() {
     .then(res => res.json())
     .then(async function(res) {
       if (res.success) {
-        localStorage.removeItem('isAuthed')
-        localStorage.removeItem('user')
+        sessionStorage.removeItem('isAuthed')
+        sessionStorage.removeItem('user')
 
         window.location = '/login'
       } else {
