@@ -7,7 +7,6 @@ const puppeteer = require('puppeteer')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const initializePassport = require('./passport-config')
-const flash = require('express-flash')
 const session = require('express-session')
 
 const app = express()
@@ -17,14 +16,13 @@ const PORT = process.env.PORT || 5000
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
 
 initializePassport(passport, User, validateEmail)
-app.use(flash())
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
 }))
 app.use(passport.initialize())
-app.use(passport.session()) /////// is this needed? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+app.use(passport.session())
 
 app.post('/register', async (req, res) => {
   const {
