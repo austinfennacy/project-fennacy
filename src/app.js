@@ -92,7 +92,12 @@ app.post('/login',
           return res.json({ success: false, err: err.message })
         }
 
-        return res.json({ success: true, user })
+        const userInfo = {
+          user: user.id,
+          name: user.name,
+        }
+
+        return res.json({ success: true, userInfo })
       })
     })(req, res)
   })
