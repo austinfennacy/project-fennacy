@@ -94,6 +94,7 @@ app.post('/login',
         const userInfo = {
           user: user.id,
           name: user.name,
+          email: user.email,
         }
 
         return res.json({ success: true, user: userInfo })
