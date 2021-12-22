@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
@@ -9,6 +9,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import Button from '@material-ui/core/Button'
 import Hidden from '@material-ui/core/Hidden'
+import { SpinnerContext } from '../../contexts/spinner/SpinnerContext';
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Submittal(props) {
   const id = props.id
   const classes = useStyles()
+  const { setLoading } = useContext(SpinnerContext)
 
   const [showEdit, setShowEdit] = useState({
     isVisible: true,
@@ -89,9 +91,14 @@ export default function Submittal(props) {
     .catch(err => console.log(err))
 
   const [submittal, setSubmittal] = useState([])
-  useEffect(() => fetch(`/submittal/${id}`)
-    .then(res => res.json())
-    .then((submittalJson) => setSubmittal(submittalJson)), [id])
+  useEffect(() => {
+    setLoading(true)
+
+    fetch(`/submittal/${id}`)
+      .then(res => res.json())
+      .then((submittalJson) => setSubmittal(submittalJson))
+      .finally(() => setLoading(false))
+  }, [id])
 
   return (
     <div className={classes.fullHeight}>

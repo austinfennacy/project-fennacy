@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,6 +13,7 @@ import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { SpinnerContext } from '../../contexts/spinner/SpinnerContext';
 
 const useStyles = makeStyles({
   createSubmittal: {
@@ -40,18 +41,25 @@ export default function SubmittalTable() {
   const classes = useStyles();
 
   const [submittals, setSubmittals] = useState([]);
+  const { setLoading } = useContext(SpinnerContext)
+
   useEffect(() => fetchSubmittals(), []);
-  const fetchSubmittals = () => fetch('/submittals')
-    .then(res => res.json())
-    .then((res) => {
-      if (res.success) {
-        setSubmittals(res.submittals)
-      } else {
-        sessionStorage.removeItem('isAuthed')
-        sessionStorage.removeItem('user')
-        window.location = '/login'
-      }
-    })
+  const fetchSubmittals = () => {
+    setLoading(true)
+
+    fetch('/submittals')
+      .then(res => res.json())
+      .then((res) => {
+        if (res.success) {
+          setSubmittals(res.submittals)
+        } else {
+          sessionStorage.removeItem('isAuthed')
+          sessionStorage.removeItem('user')
+          window.location = '/login'
+        }
+      })
+      .finally(() => setLoading(false))
+  }
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {

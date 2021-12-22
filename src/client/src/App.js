@@ -9,13 +9,16 @@ import { Router, Redirect } from "@reach/router";
 import SubmittalPdf from './components/submittal/submittalPdf';
 import NotFound from './components/notFound/notFound';
 import { AuthProvider, AuthContext } from './contexts/auth/AuthContext';
+import { SpinnerProvider } from './contexts/spinner/SpinnerContext';
 
 export default function App() {
   return (
     <div className="App">
       <AuthProvider>
         <Router className="Router">
+
           <WebClient path="/*" />
+
 
           {/* access to SubmittalPdf here so that PDF downloads don't have
           to deal with the Navbar */}
@@ -31,13 +34,15 @@ function WebClient() {
     <div className="WebClient">
       <Navbar />
 
-      <Router className="Router">
-        <ProtectedRoute path="/" component={SubmittalTable} />
-        <ProtectedRoute path="submittal/:id" component={Submittal} />
-        <ProtectedRoute default component={NotFound} />
-        <UnprotectedRoute path="/login" component={Login} />
-        <UnprotectedRoute path="/register" component={Register} />
-      </Router>
+      <SpinnerProvider>
+        <Router className="Router">
+          <ProtectedRoute path="/" component={SubmittalTable} />
+          <ProtectedRoute path="submittal/:id" component={Submittal} />
+          <ProtectedRoute default component={NotFound} />
+          <UnprotectedRoute path="/login" component={Login} />
+          <UnprotectedRoute path="/register" component={Register} />
+        </Router>
+      </SpinnerProvider>
     </div>
   );
 }
