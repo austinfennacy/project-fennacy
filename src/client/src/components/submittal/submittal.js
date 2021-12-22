@@ -79,16 +79,20 @@ export default function Submittal(props) {
       }
     })
 
-  let saveSubmittalPdf = () =>
-   getSubmittalPdf()
-     .then((response) => {
-        const blob = new Blob([response.data], {type: 'application/pdf'})
-        const link = document.createElement('a')
-        link.href = window.URL.createObjectURL(blob)
-        link.download = `Submittal ${submittal.submittalNumber} - ${submittal.description}.pdf`
-        link.click()
-     })
-    .catch(err => console.log(err))
+  let saveSubmittalPdf = () => {
+    setLoading(true)
+
+    getSubmittalPdf()
+      .then((response) => {
+         const blob = new Blob([response.data], {type: 'application/pdf'})
+         const link = document.createElement('a')
+         link.href = window.URL.createObjectURL(blob)
+         link.download = `Submittal ${submittal.submittalNumber} - ${submittal.description}.pdf`
+         link.click()
+      })
+     .catch(err => console.log(err))
+     .finally(() => setLoading(false))
+  }
 
   const [submittal, setSubmittal] = useState([])
   useEffect(() => {
