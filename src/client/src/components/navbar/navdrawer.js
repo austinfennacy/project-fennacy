@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -6,9 +6,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListIcon from '@material-ui/icons/List';
+import HelpIcon from '@material-ui/icons/Help';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from '@reach/router'
+import { ReadmeContext } from '../../contexts/readme/ReadmeContext';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavDrawer() {
   const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -31,11 +34,17 @@ export default function NavDrawer() {
     setOpen(open);
   };
 
+  const { setShowReadme } = useContext(ReadmeContext)
+  const handleShowReadme = () => {
+    toggleDrawer(false)
+    setShowReadme(true)
+  }
+
   return (
     <React.Fragment>
-      <IconButton edge="start" 
+      <IconButton edge="start"
         onClick={toggleDrawer(true)}
-        className={classes.menuButton} 
+        className={classes.menuButton}
         color="inherit"
         aria-label="menu">
           <MenuIcon />
@@ -55,6 +64,13 @@ export default function NavDrawer() {
                 <ListIcon />
               </ListItemIcon>
               <ListItemText primary={'Submittals'} />
+            </ListItem>
+            <ListItem button
+              onClick={handleShowReadme}>
+              <ListItemIcon>
+                <HelpIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Help (README.md)'} />
             </ListItem>
           </List>
         </div>
