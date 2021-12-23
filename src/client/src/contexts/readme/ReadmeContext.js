@@ -1,10 +1,11 @@
-import { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
 import HelpIcon from '@material-ui/icons/Help';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/core/styles";
 import readmePath from '../../../../../README.md'
+import ReactMarkdown from 'react-markdown'
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     width: '50vw',
     maxWidth: '50vw',
     minWidth: '50vw',
+    padding: '0 24px'
   },
 }))
 
@@ -91,10 +93,11 @@ function Readme({showReadme, setShowReadme}) {
         <div
           className={classes.markdownWrapper}
           role="presentation"
-          onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
-          {markdown}
+          <ReactMarkdown>
+            {markdown}
+          </ReactMarkdown>
         </div>
       </Drawer>
     </>
