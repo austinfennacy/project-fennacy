@@ -37,8 +37,6 @@ const useStyles = makeStyles((theme) => ({
   },
   markdownWrapper: {
     width: '50vw',
-    maxWidth: '50vw',
-    minWidth: '50vw',
     padding: '0 24px'
   },
 }))
