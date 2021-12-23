@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import HelpIcon from '@material-ui/icons/Help';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/core/styles";
+import readmePath from '../../../../../README.md'
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -71,14 +72,13 @@ function Readme({showReadme, setShowReadme}) {
   }
 
   const [markdown, setMarkdown] = useState('todo fix me after commiting')
-  // const readmePath = require('../../../../../README.md')
-  // useEffect(()=>{
-  //   fetch(readmePath)
-  //     .then(res => {
-  //       return res.text()
-  //     })
-  //     .then(text => setMarkdown(text))
-  // }, [])
+  useEffect(()=>{
+    fetch(readmePath)
+      .then(res => {
+        return res.text()
+      })
+      .then(text => setMarkdown(text))
+  }, [])
 
   return (
     <>
