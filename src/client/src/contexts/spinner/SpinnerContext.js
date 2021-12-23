@@ -1,4 +1,3 @@
-import { Fade } from '@material-ui/core'
 import { createContext, useState } from 'react'
 import { FadeLoader } from 'react-spinners'
 import { css } from '@emotion/react'
@@ -30,8 +29,8 @@ export function SpinnerProvider({ children }) {
   const [loading, setLoading] = useState(false)
 
   return (
-    <SpinnerContext.Provider value={{loading, setLoading}}>
-      {loading ? <Spinner isLoading={loading} /> : ''}
+    <SpinnerContext.Provider value={{setLoading}}>
+      {loading ? <Spinner /> : ''}
       {children}
     </SpinnerContext.Provider>
   )

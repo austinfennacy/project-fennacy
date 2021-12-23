@@ -10,6 +10,7 @@ import SubmittalPdf from './components/submittal/submittalPdf';
 import NotFound from './components/notFound/notFound';
 import { AuthProvider, AuthContext } from './contexts/auth/AuthContext';
 import { SpinnerProvider } from './contexts/spinner/SpinnerContext';
+import { ReadmeProvider } from './contexts/readme/ReadmeContext';
 
 export default function App() {
   return (
@@ -32,17 +33,19 @@ export default function App() {
 function WebClient() {
   return (
     <div className="WebClient">
-      <Navbar />
+      <ReadmeProvider>
+        <Navbar />
 
-      <SpinnerProvider>
-        <Router className="Router">
-          <ProtectedRoute path="/" component={SubmittalTable} />
-          <ProtectedRoute path="submittal/:id" component={Submittal} />
-          <ProtectedRoute default component={NotFound} />
-          <UnprotectedRoute path="/login" component={Login} />
-          <UnprotectedRoute path="/register" component={Register} />
-        </Router>
-      </SpinnerProvider>
+        <SpinnerProvider>
+          <Router className="Router">
+            <ProtectedRoute path="/" component={SubmittalTable} />
+            <ProtectedRoute path="submittal/:id" component={Submittal} />
+            <ProtectedRoute default component={NotFound} />
+            <UnprotectedRoute path="/login" component={Login} />
+            <UnprotectedRoute path="/register" component={Register} />
+          </Router>
+        </SpinnerProvider>
+      </ReadmeProvider>
     </div>
   );
 }
