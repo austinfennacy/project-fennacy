@@ -709,7 +709,7 @@ function getSubmittalsToSeed(UserId) {
 
   promises.push(Submittal.create({
     UserId,
-    submittalNumber: '001',
+    submittalNumber: 1,
     description: 'Storefronts & Hardware',
     specificationSection: 084100,
     ahjRequired: 1,
@@ -753,7 +753,7 @@ function getSubmittalsToSeed(UserId) {
     copiesForOther: 0,
     architectAddress: {
       addressNameLine: 'Darden Architects',
-      addressLine1: '6790 N. Wese Ave.',
+      addressLine1: '6790 N. West Ave.',
       addressLine2: null,
       city: 'Fresno',
       state: 'CA',
@@ -793,15 +793,333 @@ function getSubmittalsToSeed(UserId) {
   promises.push(Submittal.create({
     UserId,
     submittalNumber: 2,
-    numberReceived: 3,
-    // specificationSection,
-    // ahjRequired,
-    // ahjApproved,
-    description: "test2",
-    // subcontractorSupplier,
-    // dateReceived,
-    // respondBefore,
-    // responseDate,
+    description: 'Ceramic kilk - (PD, SD)',
+    specificationSection: 100500,
+    ahjRequired: 1,
+    ahjApproved: 0,
+    subcontractorSupplier: 'Olympic Kilns',
+    dateReceived: '2019-09-04',
+    respondBefore: '2019-09-05',
+    responseDate: '2019-09-30',
+    projectNumber: '1195',
+    projectName: 'Sanger Educational Complex',
+    specificationNumber: '11082928',
+    supplierName: 'Olympic Kilns',
+    isSubstitutionUsed: 0,
+    numberReceived: 1,
+    contractorRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    hasWarranty: 1,
+    hasManuals: 0,
+    floatTime: '2 months',
+    submittalTaskNumber: '1143',
+    earlyStartDate: '2019-09-04',
+    earlyFinishDate: '2019-10-04',
+    lateFinishDate: '2019-11-04',
+    transmittedTo: 'Harris Construction Company Inc.',
+    numberSent: 1,
+    isDcNoExceptionTaken: 1,
+    isDcNoExceptionTakenWithModificationNoted: 0,
+    isDcAmmendAsNotedAndResubmit: 0,
+    isDcRejectedAndResubmit: 0,
+    isDcSeeAttachedLetter: 0,
+    dcRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectNoExceptionTaken: 0,
+    isArchitectNoExceptionTakenWithModificationNoted: 1,
+    isArchitectAmmendAsNotedAndResubmit: 1,
+    isArchitectRejectedAndResubmit: 0,
+    architectRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectApprovedSubmission: 1,
+    copiesForContractor: 1,
+    copiesForOwner: 1,
+    copiesForInspector: 1,
+    copiesForFile: 1,
+    copiesForOther: 1,
+    architectAddress: {
+      addressNameLine: 'Darden Architects',
+      addressLine1: '6790 N. West Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93711,
+    },
+    contractorAddress: {
+      addressNameLine: 'Harris Construction Company Inc',
+      addressLine1: '5286 East Home Avenue',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+    projectAddress: {
+      addressNameLine: 'Sanger Educational Complex',
+      addressLine1: '1850 S. Fowler Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+  }, {
+    include: [{
+      model: Address,
+      as: 'architectAddress'
+    },
+    {
+      model: Address,
+      as: 'contractorAddress'
+    },
+    {
+      model: Address,
+      as: 'projectAddress'
+    }]
+  }))
+
+  promises.push(Submittal.create({
+    UserId,
+    submittalNumber: 3,
+    description: 'Library Detention System (PD, SD)',
+    specificationSection: 100500,
+    ahjRequired: 1,
+    ahjApproved: 1,
+    subcontractorSupplier: 'Bibliotheca',
+    dateReceived: '2020-04-02',
+    respondBefore: '2020-04-02',
+    responseDate: '2020-04-02',
+    projectNumber: '1195',
+    projectName: 'Sanger Educational Complex',
+    specificationNumber: '11082928',
+    supplierName: 'Olympic Kilns',
+    isSubstitutionUsed: 0,
+    numberReceived: 1,
+    contractorRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    hasWarranty: 0,
+    hasManuals: 1,
+    floatTime: '5 weeks',
+    submittalTaskNumber: '1144',
+    earlyStartDate: '2020-04-02',
+    earlyFinishDate: '2020-06-02',
+    lateFinishDate: '2020-08-02',
+    transmittedTo: 'Harris Construction Company Inc.',
+    numberSent: 1,
+    isDcNoExceptionTaken: 1,
+    isDcNoExceptionTakenWithModificationNoted: 0,
+    isDcAmmendAsNotedAndResubmit: 0,
+    isDcRejectedAndResubmit: 0,
+    isDcSeeAttachedLetter: 0,
+    dcRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectNoExceptionTaken: 0,
+    isArchitectNoExceptionTakenWithModificationNoted: 1,
+    isArchitectAmmendAsNotedAndResubmit: 1,
+    isArchitectRejectedAndResubmit: 0,
+    architectRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectApprovedSubmission: 1,
+    copiesForContractor: 1,
+    copiesForOwner: 1,
+    copiesForInspector: 1,
+    copiesForFile: 1,
+    copiesForOther: 1,
+    architectAddress: {
+      addressNameLine: 'Darden Architects',
+      addressLine1: '6790 N. West Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93711,
+    },
+    contractorAddress: {
+      addressNameLine: 'Harris Construction Company Inc',
+      addressLine1: '5286 East Home Avenue',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+    projectAddress: {
+      addressNameLine: 'Sanger Educational Complex',
+      addressLine1: '1850 S. Fowler Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+  }, {
+    include: [{
+      model: Address,
+      as: 'architectAddress'
+    },
+    {
+      model: Address,
+      as: 'contractorAddress'
+    },
+    {
+      model: Address,
+      as: 'projectAddress'
+    }]
+  }))
+
+  promises.push(Submittal.create({
+    UserId,
+    submittalNumber: 4,
+    description: 'Acoustic Ceiling (Samples)',
+    specificationSection: 090500,
+    ahjRequired: 1,
+    ahjApproved: 1,
+    subcontractorSupplier: 'Western Building Materials',
+    dateReceived: '2020-04-09',
+    respondBefore: '2020-04-09',
+    responseDate: '2020-04-09',
+    projectNumber: '1195',
+    projectName: 'Sanger Educational Complex',
+    specificationNumber: '11082928',
+    supplierName: 'Western Building Materials',
+    isSubstitutionUsed: 0,
+    numberReceived: 1,
+    contractorRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    hasWarranty: 0,
+    hasManuals: 1,
+    floatTime: '5 weeks',
+    submittalTaskNumber: '1144',
+    earlyStartDate: '2020-04-02',
+    earlyFinishDate: '2020-06-02',
+    lateFinishDate: '2020-08-02',
+    transmittedTo: 'Harris Construction Company Inc.',
+    numberSent: 1,
+    isDcNoExceptionTaken: 1,
+    isDcNoExceptionTakenWithModificationNoted: 0,
+    isDcAmmendAsNotedAndResubmit: 0,
+    isDcRejectedAndResubmit: 0,
+    isDcSeeAttachedLetter: 0,
+    dcRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectNoExceptionTaken: 0,
+    isArchitectNoExceptionTakenWithModificationNoted: 1,
+    isArchitectAmmendAsNotedAndResubmit: 1,
+    isArchitectRejectedAndResubmit: 0,
+    architectRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectApprovedSubmission: 1,
+    copiesForContractor: 1,
+    copiesForOwner: 1,
+    copiesForInspector: 1,
+    copiesForFile: 1,
+    copiesForOther: 1,
+    architectAddress: {
+      addressNameLine: 'Darden Architects',
+      addressLine1: '6790 N. West Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93711,
+    },
+    contractorAddress: {
+      addressNameLine: 'Harris Construction Company Inc',
+      addressLine1: '5286 East Home Avenue',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+    projectAddress: {
+      addressNameLine: 'Sanger Educational Complex',
+      addressLine1: '1850 S. Fowler Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+  }, {
+    include: [{
+      model: Address,
+      as: 'architectAddress'
+    },
+    {
+      model: Address,
+      as: 'contractorAddress'
+    },
+    {
+      model: Address,
+      as: 'projectAddress'
+    }]
+  }))
+
+  promises.push(Submittal.create({
+    UserId,
+    submittalNumber: 5,
+    description: 'Hardware Floor - Color Chart',
+    specificationSection: 096429,
+    ahjRequired: 1,
+    ahjApproved: 1,
+    subcontractorSupplier: 'Hur Flooring',
+    dateReceived: '2020-04-09',
+    respondBefore: '2020-04-09',
+    responseDate: '2020-04-09',
+    projectNumber: '1195',
+    projectName: 'Sanger Educational Complex',
+    specificationNumber: '11082928',
+    supplierName: 'Hur Flooring',
+    isSubstitutionUsed: 0,
+    numberReceived: 1,
+    contractorRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    hasWarranty: 0,
+    hasManuals: 1,
+    floatTime: '5 weeks',
+    submittalTaskNumber: '1144',
+    earlyStartDate: '2020-04-02',
+    earlyFinishDate: '2020-06-02',
+    lateFinishDate: '2020-08-02',
+    transmittedTo: 'Interiors',
+    numberSent: 1,
+    isDcNoExceptionTaken: 1,
+    isDcNoExceptionTakenWithModificationNoted: 0,
+    isDcAmmendAsNotedAndResubmit: 0,
+    isDcRejectedAndResubmit: 0,
+    isDcSeeAttachedLetter: 0,
+    dcRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectNoExceptionTaken: 0,
+    isArchitectNoExceptionTakenWithModificationNoted: 1,
+    isArchitectAmmendAsNotedAndResubmit: 1,
+    isArchitectRejectedAndResubmit: 0,
+    architectRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectApprovedSubmission: 1,
+    copiesForContractor: 1,
+    copiesForOwner: 1,
+    copiesForInspector: 1,
+    copiesForFile: 1,
+    copiesForOther: 1,
+    architectAddress: {
+      addressNameLine: 'Darden Architects',
+      addressLine1: '6790 N. West Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93711,
+    },
+    contractorAddress: {
+      addressNameLine: 'Harris Construction Company Inc',
+      addressLine1: '5286 East Home Avenue',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+    projectAddress: {
+      addressNameLine: 'Sanger Educational Complex',
+      addressLine1: '1850 S. Fowler Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93727,
+    },
+  }, {
+    include: [{
+      model: Address,
+      as: 'architectAddress'
+    },
+    {
+      model: Address,
+      as: 'contractorAddress'
+    },
+    {
+      model: Address,
+      as: 'projectAddress'
+    }]
   }))
 
   return promises
@@ -813,9 +1131,9 @@ const db = new Sequelize(config.development.database, config.development.usernam
   })
 
 // comment out this block to prevent updates to the database schema
-async function main() {
+// async function main() {
   // note - alter: true / force: true are not reccomended for production use,
   // need to consider migration system once deploying
   // await sequelize.sync({ alter: true })
-}
-main()
+// }
+// main()
