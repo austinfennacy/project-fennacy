@@ -688,6 +688,56 @@ app.put('/submittal/updateArchitect/:id', async (req, res) => {
   }
 })
 
+app.post('/seedSubmittals', async (req, res) => {
+  const UserId = await req.user
+    .then(user => user.dataValues.id)
+
+  const createPromises = getSubmittalsToSeed(UserId)
+
+  try {
+    Promise.all(createPromises)
+
+    return res.json({ success: true })
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json(err)
+  }
+})
+
+function getSubmittalsToSeed(UserId) {
+  const promises = []
+
+  promises.push(Submittal.create({
+    UserId,
+    submittalNumber: 1,
+    numberReceived: 2,
+    // specificationSection,
+    // ahjRequired,
+    // ahjApproved,
+    description: "test1",
+    // subcontractorSupplier,
+    // dateReceived,
+    // respondBefore,
+    // responseDate,
+  }))
+
+  promises.push(Submittal.create({
+    UserId,
+    submittalNumber: 2,
+    numberReceived: 3,
+    // specificationSection,
+    // ahjRequired,
+    // ahjApproved,
+    description: "test2",
+    // subcontractorSupplier,
+    // dateReceived,
+    // respondBefore,
+    // responseDate,
+  }))
+
+  return promises
+}
+
 const db = new Sequelize(config.development.database, config.development.username, config.development.password, {
   host: config.development.host,
     dialect: 'mysql'

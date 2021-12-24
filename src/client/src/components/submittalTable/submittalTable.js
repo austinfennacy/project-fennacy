@@ -140,16 +140,23 @@ export default function SubmittalTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {(submittals.length == 0 ? <SeedSubmittals /> : '')}
+      {(submittals.length == 0 ? <SeedSubmittals fetchSubmittals={fetchSubmittals} /> : '')}
     </Container>
   );
 }
 
-function SeedSubmittals() {
+function SeedSubmittals({fetchSubmittals}) {
   const classes = useStyles()
 
   const handleSeed = () => {
-    alert('todo')
+    fetch('/seedSubmittals', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+      },
+    })
+    .catch(err => alert(`error - could not seed submittals: ${err}`))
+    .finally(() => fetchSubmittals())
   }
 
   return (
