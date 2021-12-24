@@ -119,12 +119,12 @@ export default function SubmittalTable() {
           <TableHead>
             <TableRow>
               <TableCell align="center">Submittal No.</TableCell>
-              <TableCell align="center">No. Rec'd</TableCell>
               <TableCell align="center">Spec. Section</TableCell>
-              <TableCell align="center">AHJ Req'd</TableCell>
-              <TableCell align="center">AHJ Appv.</TableCell>
               <TableCell align="center">Description</TableCell>
               <TableCell align="center">SubContr. Supplier</TableCell>
+              {/* <TableCell align="center">AHJ Req'd</TableCell>
+              <TableCell align="center">AHJ Appv.</TableCell>
+              <TableCell align="center">No. Rec'd</TableCell> */}
               <TableCell align="center">Date Rec'd</TableCell>
               <TableCell align="center">Respond Before</TableCell>
               <TableCell align="center">Respond Date</TableCell>

@@ -135,9 +135,10 @@ app.get('/submittals', cors(), async (req, res) => {
 
     const submittals = await User.findOne({
       where: { id: userId },
-      include: 'submittals'
+      include: 'submittals',
     })
     .then(res => res.dataValues.submittals)
+    .then(res => res.sort((a,b) => a.submittalNumber - b.submittalNumber))
 
     return res.json({ success: true, submittals })
   } catch (err) {
@@ -793,7 +794,7 @@ function getSubmittalsToSeed(UserId) {
   promises.push(Submittal.create({
     UserId,
     submittalNumber: 2,
-    description: 'Ceramic kilk - (PD, SD)',
+    description: 'Ceramic kiln (PD, SD)',
     specificationSection: 100500,
     ahjRequired: 1,
     ahjApproved: 0,
@@ -876,7 +877,7 @@ function getSubmittalsToSeed(UserId) {
   promises.push(Submittal.create({
     UserId,
     submittalNumber: 3,
-    description: 'Library Detention System (PD, SD)',
+    description: 'Library Detention System',
     specificationSection: 100500,
     ahjRequired: 1,
     ahjApproved: 1,

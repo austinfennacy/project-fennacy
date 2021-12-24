@@ -10,23 +10,23 @@ export default function SubmittalRow(props) {
         {props.submittal.submittalNumber}
       </TableCell>
       <TableCell>
-        {props.submittal.numberReceived}
-      </TableCell>
-      <TableCell>
         {props.submittal.specificationSection}
       </TableCell>
-      <TableCell>
+      <TableCell style={{whiteSpace:'nowrap'}}>
+        {props.submittal.description}
+      </TableCell>
+      <TableCell style={{whiteSpace:'nowrap'}}>
+        {props.submittal.subcontractorSupplier}
+      </TableCell>
+      {/* <TableCell>
         {props.submittal.ahjRequired ? "Yes" : "No"}
       </TableCell>
       <TableCell>
         {props.submittal.ahjApproved ? "Yes" : "No"}
       </TableCell>
       <TableCell>
-        {props.submittal.description}
-      </TableCell>
-      <TableCell>
-        {props.submittal.subcontractorSupplier}
-      </TableCell>
+        {props.submittal.numberReceived}
+      </TableCell> */}
       <TableCell>
         {props.submittal.dateReceived}
       </TableCell>
