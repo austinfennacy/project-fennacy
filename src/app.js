@@ -710,15 +710,87 @@ function getSubmittalsToSeed(UserId) {
   promises.push(Submittal.create({
     UserId,
     submittalNumber: 1,
-    numberReceived: 2,
-    // specificationSection,
-    // ahjRequired,
-    // ahjApproved,
-    description: "test1",
-    // subcontractorSupplier,
-    // dateReceived,
-    // respondBefore,
-    // responseDate,
+    description: 'Storefronts & Hardware',
+    createdAt: '2021-06-27 21:14:50',
+    updatedAt: '2021-06-27 21:14:50',
+    deletedAt: null,
+    specificationSection: '88000',
+    ahjRequired: 1,
+    ahjApproved: 0,
+    subcontractorSupplier: 'Atascadero Glass',
+    dateReceived: '2020-08-25',
+    respondBefore: '2020-09-25',
+    responseDate: '2021-08-25',
+    projectNumber: '112',
+    projectName: 'FUSD McLane High School CTE',
+    specificationNumber: '11082928',
+    supplierName: 'Atascadero Glass',
+    isSubstitutionUsed: 0,
+    numberReceived: 115,
+    contractorRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    hasWarranty: 1,
+    hasManuals: 0,
+    floatTime: '22 months',
+    submittalTaskNumber: '1143',
+    earlyStartDate: '2021-08-02',
+    earlyFinishDate: '2021-08-06',
+    lateFinishDate: '2021-09-06',
+    transmittedTo: 'FUSD',
+    numberSent: 115,
+    isDcNoExceptionTaken: 1,
+    isDcNoExceptionTakenWithModificationNoted: 0,
+    isDcAmmendAsNotedAndResubmit: 0,
+    isDcRejectedAndResubmit: 0,
+    isDcSeeAttachedLetter: 0,
+    dcRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectNoExceptionTaken: 0,
+    isArchitectNoExceptionTakenWithModificationNoted: 1,
+    isArchitectAmmendAsNotedAndResubmit: 1,
+    isArchitectRejectedAndResubmit: 0,
+    architectRemarks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud',
+    isArchitectApprovedSubmission: 1,
+    copiesForContractor: 1,
+    copiesForOwner: 1,
+    copiesForInspector: 3,
+    copiesForFile: 1,
+    copiesForOther: 0,
+    architectAddress: {
+      addressNameLine: 'Darden Architects',
+      addressLine1: '6790 N. Wese Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93711,
+    },
+    contractorAddress: {
+      addressNameLine: 'Atascadero Glass',
+      addressLine1: '8730 El Camino Real',
+      addressLine2: null,
+      city: 'Atascadero',
+      state: 'CA',
+      zip: 93422,
+    },
+    projectAddress: {
+      addressNameLine: 'McLane High School',
+      addressLine1: '2727 N. Cedar Ave.',
+      addressLine2: null,
+      city: 'Fresno',
+      state: 'CA',
+      zip: 93703,
+    },
+  }, {
+    include: [{
+      model: Address,
+      as: 'architectAddress'
+    },
+    {
+      model: Address,
+      as: 'contractorAddress'
+    },
+    {
+      model: Address,
+      as: 'projectAddress'
+    }]
   }))
 
   promises.push(Submittal.create({
@@ -747,6 +819,6 @@ const db = new Sequelize(config.development.database, config.development.usernam
 async function main() {
   // note - alter: true / force: true are not reccomended for production use,
   // need to consider migration system once deploying
-  await sequelize.sync({ alter: true })
+  // await sequelize.sync({ alter: true })
 }
 main()
