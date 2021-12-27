@@ -37,12 +37,18 @@ if (process.env.JAWSDB_URL) {
 }
 
 // comment out this block to prevent updates to the database schema
-// async function main() {
+async function main() {
+  await sequelize.sync()
+
   // note - alter: true / force: true are not reccomended for production use,
   // need to consider migration system once deploying
+
+  // https://sequelize.org/master/manual/model-basics.html
+
+  // await sequelize.sync({ force: true })
   // await sequelize.sync({ alter: true })
-// }
-// main()
+}
+main()
 
 app.post('/register', async (req, res) => {
   const {
