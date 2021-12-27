@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const env = process.env.NODE_ENV || 'development';
 const { Sequelize } = require('sequelize')
 const { sequelize, Submittal, Address, User } = require('./models')
 const puppeteer = require('puppeteer')
@@ -137,9 +138,12 @@ async function printPdf(url) {
 }
 
 app.get('/submittals', cors(), async (req, res) => {
+  const user = await req.user
+  if (!user)
+    return res.status(401).json({ success: false, err: 'not logged in' })
+
   try {
-    const userId = await req.user
-      .then(user => user.dataValues.id)
+    const userId = user.dataValues.id
 
     const submittals = await User.findOne({
       where: { id: userId },
