@@ -2,7 +2,6 @@ const express = require('express')
 const cors = require('cors')
 const { Sequelize } = require('sequelize')
 const { sequelize, Submittal, Address, User } = require('./models')
-const config = require('./config/config.js')
 const puppeteer = require('puppeteer')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
@@ -24,29 +23,12 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-
-let db;
-if (process.env.JAWSDB_URL) {
-  // for Heroku deployment
-  db = new Sequelize(process.env.JAWSDB_URL, {});
-} else {
-  db = new Sequelize(config.development.database, config.development.username, config.development.password, {
-    host: config.development.host,
-      dialect: 'mysql'
-    });
-}
-
-// comment out this block to prevent updates to the database schema
 async function main() {
-  await sequelize.sync()
-
-  // note - alter: true / force: true are not reccomended for production use,
-  // need to consider migration system once deploying
-
   // https://sequelize.org/master/manual/model-basics.html
+  // note - alter: true / force: true are not reccomended for production use,
+  // need to user  migration system after initial deployment
 
-  // await sequelize.sync({ force: true })
-  // await sequelize.sync({ alter: true })
+  await sequelize.sync()
 }
 main()
 

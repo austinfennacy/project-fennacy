@@ -4,15 +4,19 @@ const dir = require('node-dir');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(path.join(__dirname, '/../config/config.js'))[env];
+// const env = process.env.NODE_ENV || 'development';
+const config = require('../config/config')
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+if (process.env.JAWSDB_URL) {
+  // for Heroku deployment
+  sequelize = new Sequelize(process.env.JAWSDB_URL, {});
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
+    host: config.development.host,
+      dialect: 'mysql'
+    });
 }
 
 dir
