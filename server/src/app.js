@@ -24,6 +24,26 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+
+let db;
+if (process.env.JAWSDB_URL) {
+  // for Heroku deployment
+  db = new Sequelize(process.env.JAWSDB_URL, {});
+} else {
+  db = new Sequelize(config.development.database, config.development.username, config.development.password, {
+    host: config.development.host,
+      dialect: 'mysql'
+    });
+}
+
+// comment out this block to prevent updates to the database schema
+// async function main() {
+  // note - alter: true / force: true are not reccomended for production use,
+  // need to consider migration system once deploying
+  // await sequelize.sync({ alter: true })
+// }
+// main()
+
 app.post('/register', async (req, res) => {
   const {
     name,
@@ -1125,16 +1145,3 @@ function getSubmittalsToSeed(UserId) {
 
   return promises
 }
-
-const db = new Sequelize(config.development.database, config.development.username, config.development.password, {
-  host: config.development.host,
-    dialect: 'mysql'
-  })
-
-// comment out this block to prevent updates to the database schema
-// async function main() {
-  // note - alter: true / force: true are not reccomended for production use,
-  // need to consider migration system once deploying
-  // await sequelize.sync({ alter: true })
-// }
-// main()
