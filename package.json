@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "server": "nodemon src/app.js",
-    "client": "npm start --prefix src/client",
+    "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "init_db": "sequelize db:create"
   },

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import HelpIcon from '@material-ui/icons/Help';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/core/styles";
-import readmePath from '../../../../../README.md'
+import readmePath from '../../../../README.md'
 import ReactMarkdown from 'react-markdown'
 
 const useStyles = makeStyles((theme) => ({
