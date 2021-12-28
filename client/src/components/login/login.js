@@ -97,7 +97,7 @@ export default function Login() {
   function handleLogin() {
     setLoading(true)
 
-    fetch('/login', {
+    fetch('/api/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
