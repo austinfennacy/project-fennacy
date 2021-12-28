@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -8,6 +8,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from "@reach/router";
 import Box from '@material-ui/core/Box';
+import { SpinnerContext } from '../../contexts/spinner/SpinnerContext';
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -75,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const { setLoading } = useContext(SpinnerContext)
 
   const [formValues, setFormValues] = useState();
   const handleInputChange = (e) => {
@@ -93,6 +95,8 @@ export default function Login() {
   const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
 
   function handleLogin() {
+    setLoading(true)
+
     fetch('/login', {
       method: 'POST',
       headers: {
@@ -101,7 +105,10 @@ export default function Login() {
       },
       body: JSON.stringify(formValues)
     })
-    .then(res => res.json())
+    .then(res => {
+      setLoading(false)
+      return res.json()
+    })
     .then(async function(res) {
       if (res.success) {
         sessionStorage.setItem('isAuthed', 'true')
