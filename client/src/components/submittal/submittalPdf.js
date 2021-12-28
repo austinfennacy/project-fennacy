@@ -98,9 +98,14 @@ export default function SubmittalPdf(props) {
   const smallClass = useMediaQuery("screen")
     ? classes.smallScreen
     : classes.smallPrint
-  
+
   const [submittal, setSubmittal] = useState({})
-  useEffect(() => fetchSubmittal(), [id])
+  useEffect(() => {
+    fetchSubmittal()
+
+    // https://stackoverflow.com/questions/55840294
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
   const fetchSubmittal = () => fetch(`/submittal/${id}`)
     .then(res => res.json())
     .then((submittalJson) => setSubmittal(submittalJson))
@@ -173,12 +178,12 @@ export default function SubmittalPdf(props) {
 
   return (
     <div className={pdfClass}>
-      
+
       <h2 className={classes.title} align="center">
         SHOP DRAWING AND SUBMITTAL TRANSMITTAL
       </h2>
 
-      <EditableBox  
+      <EditableBox
         openDialog={handleDialogState.openProject}
         showEdit={showEdit}>
         <Grid container spacing={2}>
@@ -207,7 +212,7 @@ export default function SubmittalPdf(props) {
             <label>
               Description:
             </label>
-            <EditableBox  
+            <EditableBox
               openDialog={handleDialogState.openDescription}
               showEdit={showEdit}>
               <div>
@@ -232,7 +237,7 @@ export default function SubmittalPdf(props) {
               </label>
             </Grid>
             <Grid item xs={4} align="right">
-            <EditableBox  
+            <EditableBox
               openDialog={handleDialogState.openSubSpec}
               showEdit={showEdit}>
                 <div>
@@ -260,7 +265,7 @@ export default function SubmittalPdf(props) {
           <label>
             Architect:
           </label>
-          <EditableBox  
+          <EditableBox
               openDialog={handleDialogState.openArchitectAddress}
               showEdit={showEdit}>
             <FormattedAddress
@@ -271,16 +276,16 @@ export default function SubmittalPdf(props) {
             isDialogOpen={dialogState.isArchitectAddressOpen}
             handleClose={handleDialogState.closeArchitectAddress}
             fetchSubmittals={fetchSubmittal}
-            values={{ 
+            values={{
               ...submittal.architectAddress,
-              submittalId: submittal.id, 
+              submittalId: submittal.id,
             }} />
         </Grid>
         <Grid item xs={6}>
           <label>
             Project:
           </label>
-          <EditableBox  
+          <EditableBox
               openDialog={handleDialogState.openProjectAddress}
               showEdit={showEdit}>
             <FormattedAddress
@@ -291,9 +296,9 @@ export default function SubmittalPdf(props) {
             isDialogOpen={dialogState.isProjectAddressOpen}
             handleClose={handleDialogState.closeProjectAddress}
             fetchSubmittals={fetchSubmittal}
-            values={{ 
+            values={{
               ...submittal.projectAddress,
-              submittalId: submittal.id, 
+              submittalId: submittal.id,
             }} />
         </Grid>
       </Grid>
@@ -303,7 +308,7 @@ export default function SubmittalPdf(props) {
           <label>
             Contractor:
           </label>
-          <EditableBox  
+          <EditableBox
               openDialog={handleDialogState.openContractorAddress}
               showEdit={showEdit}>
             <FormattedAddress
@@ -314,16 +319,16 @@ export default function SubmittalPdf(props) {
             isDialogOpen={dialogState.isContractorAddressOpen}
             handleClose={handleDialogState.closeContractorAddress}
             fetchSubmittals={fetchSubmittal}
-            values={{ 
+            values={{
               ...submittal.contractorAddress,
-              submittalId: submittal.id, 
+              submittalId: submittal.id,
             }} />
         </Grid>
         <Grid item xs={6}>
           <label>
             Supplier:
           </label>
-          <EditableBox  
+          <EditableBox
               openDialog={handleDialogState.openSupplier}
               showEdit={showEdit}>
             <div>
@@ -342,7 +347,7 @@ export default function SubmittalPdf(props) {
                 Substitution:
               </label>
             </Grid>
-            <EditableBox  
+            <EditableBox
               openDialog={handleDialogState.openSubstitution}
               showEdit={showEdit}>
               <Grid item xs={7} className={classes.noWrap}>
@@ -359,7 +364,7 @@ export default function SubmittalPdf(props) {
       </Grid>
 
       <Box mt={1}>
-        <EditableBox  
+        <EditableBox
           openDialog={handleDialogState.openReceivedInfo}
           showEdit={showEdit}>
           <Grid container spacing={2}>
@@ -402,7 +407,7 @@ export default function SubmittalPdf(props) {
         <label>
           Contractor Remarks:
         </label>
-        <EditableBox  
+        <EditableBox
           openDialog={handleDialogState.openContractorRemarks}
           showEdit={showEdit}>
           <div className={classes.contractorRemarks}>
@@ -421,7 +426,7 @@ export default function SubmittalPdf(props) {
           <div>
             Other Required Information:
           </div>
-          <EditableBox  
+          <EditableBox
             openDialog={handleDialogState.openWarranty}
             showEdit={showEdit}>
             <Grid container spacing={2}>
@@ -472,7 +477,7 @@ export default function SubmittalPdf(props) {
                   <Grid item xs={1}>
                   </Grid>
                   <Grid item xs={4}>
-                    <EditableBox  
+                    <EditableBox
                       openDialog={handleDialogState.openTimeline}
                       showEdit={showEdit}>
                       <div className={classes.underlined}>
@@ -508,7 +513,7 @@ export default function SubmittalPdf(props) {
                   <Grid item xs={1}>
                   </Grid>
                   <Grid item xs={4}>
-                    <EditableBox  
+                    <EditableBox
                       openDialog={handleDialogState.openFloat}
                       showEdit={showEdit}>
                       <div className={classes.underlined}>
@@ -591,12 +596,12 @@ export default function SubmittalPdf(props) {
                   values={{ ...submittal }} />
               </Grid>
             </Grid>
-            
+
             <label>
               ACTION:
             </label>
 
-            <EditableBox  
+            <EditableBox
               openDialog={handleDialogState.openDcActions}
               showEdit={showEdit}>
               <div className={smallClass}>
@@ -628,7 +633,7 @@ export default function SubmittalPdf(props) {
               <label>
                 Consultant's Remarks:
               </label>
-              <EditableBox  
+              <EditableBox
                 openDialog={handleDialogState.openDcRemarks}
                 showEdit={showEdit}>
                 <div className={classes.dcRemarks}>
@@ -658,7 +663,7 @@ export default function SubmittalPdf(props) {
               ACTION:
             </label>
 
-            <EditableBox  
+            <EditableBox
               openDialog={handleDialogState.openArchitectActions}
               showEdit={showEdit}>
               <div className={smallClass}>
@@ -690,7 +695,7 @@ export default function SubmittalPdf(props) {
             <label>
               Architect's Remarks:
             </label>
-            <EditableBox  
+            <EditableBox
               openDialog={handleDialogState.openArchitectRemarks}
               showEdit={showEdit}>
               <div className={classes.architectRemarks}>

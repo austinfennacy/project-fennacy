@@ -65,7 +65,12 @@ export default function SubmittalTable() {
   const [submittals, setSubmittals] = useState([]);
   const { setLoading } = useContext(SpinnerContext)
 
-  useEffect(() => fetchSubmittals(), []);
+  useEffect(() => {
+    fetchSubmittals()
+
+    // https://stackoverflow.com/questions/55840294
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const fetchSubmittals = () => {
     setLoading(true)
 
@@ -140,7 +145,7 @@ export default function SubmittalTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {(submittals.length == 0 ? <SeedSubmittals fetchSubmittals={fetchSubmittals} /> : '')}
+      {(submittals.length === 0 ? <SeedSubmittals fetchSubmittals={fetchSubmittals} /> : '')}
     </Container>
   );
 }

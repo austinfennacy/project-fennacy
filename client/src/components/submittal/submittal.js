@@ -102,6 +102,9 @@ export default function Submittal(props) {
       .then(res => res.json())
       .then((submittalJson) => setSubmittal(submittalJson))
       .finally(() => setLoading(false))
+
+    // https://stackoverflow.com/questions/55840294
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   return (
