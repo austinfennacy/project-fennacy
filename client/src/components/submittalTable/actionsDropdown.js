@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import LaunchIcon from '@material-ui/icons/Launch';
-import { makeStyles } from '@material-ui/core/styles' 
+import { makeStyles } from '@material-ui/core/styles'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Link } from "@reach/router";
 import SubmittalCreateUpdateDialog from './submittalCreateUpdateDialog';
@@ -91,7 +91,7 @@ export default function ActionsDropdown(props) {
     setOpenDelete(false)
   }
   const handleSubmitDelete = () => {
-    fetch(`/submittal/${props.submittal.id}`, {
+    fetch(`/api/submittal/${props.submittal.id}`, {
       method: 'DELETE'
     })
       .then(res => res.json())
@@ -116,7 +116,7 @@ export default function ActionsDropdown(props) {
         className={classes.button}
       >
         Actions
-        <ArrowDropDownIcon 
+        <ArrowDropDownIcon
           className={classes.arrowDropDownIcon}
           />
       </Button>
@@ -142,7 +142,7 @@ export default function ActionsDropdown(props) {
           </ListItemIcon>
           <ListItemText primary="Edit" />
         </MenuItem>
-        <SubmittalCreateUpdateDialog 
+        <SubmittalCreateUpdateDialog
           isDialogOpen={openUpdate}
           handleClose={handleCloseUpdate}
           fetchSubmittals={props.refreshSubmittals}

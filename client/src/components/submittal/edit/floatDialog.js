@@ -20,7 +20,7 @@ export default function FloatDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateFloat/${props.values.id}`, {
+    fetch(`/api/submittal/updateFloat/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

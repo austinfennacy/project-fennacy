@@ -93,7 +93,7 @@ export default function Register() {
   const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
 
   const handleRegister = (event) => {
-    fetch('/register', {
+    fetch('/api/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

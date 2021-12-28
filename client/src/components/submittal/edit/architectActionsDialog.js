@@ -24,7 +24,7 @@ export default function ArchitectDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateArchitect/${props.values.id}`, {
+    fetch(`/api/submittal/updateArchitect/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -37,7 +37,7 @@ export default function ArchitectDialog(props) {
         props.fetchSubmittals();
       })
       .catch(error => console.log(error));
-    
+
     props.handleClose();
   };
 
@@ -127,7 +127,7 @@ export default function ArchitectDialog(props) {
               label="Approved Substitution"
             />
           </div>
-          
+
         </DialogContent>
 
         <DialogActions>

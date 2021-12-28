@@ -20,7 +20,7 @@ export default function ProjectDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateProject/${props.values.id}`, {
+    fetch(`/api/submittal/updateProject/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -33,7 +33,7 @@ export default function ProjectDialog(props) {
         props.fetchSubmittals();
       })
       .catch(error => console.log(error));
-    
+
     props.handleClose();
   };
 
@@ -77,7 +77,7 @@ export default function ProjectDialog(props) {
             </Grid>
           </Grid>
         </DialogContent>
-        
+
         <DialogActions>
           <Button onClick={props.handleClose} color="default">
             Cancel

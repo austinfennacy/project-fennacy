@@ -98,7 +98,7 @@ export default function Submittal(props) {
   useEffect(() => {
     setLoading(true)
 
-    fetch(`/submittal/${id}`)
+    fetch(`/api/submittal/${id}`)
       .then(res => res.json())
       .then((submittalJson) => setSubmittal(submittalJson))
       .finally(() => setLoading(false))

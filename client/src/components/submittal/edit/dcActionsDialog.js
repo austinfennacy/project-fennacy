@@ -24,7 +24,7 @@ export default function DcActionsDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateDcActions/${props.values.id}`, {
+    fetch(`/api/submittal/updateDcActions/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -37,7 +37,7 @@ export default function DcActionsDialog(props) {
         props.fetchSubmittals();
       })
       .catch(error => console.log(error));
-    
+
     props.handleClose();
   };
 
@@ -124,7 +124,7 @@ export default function DcActionsDialog(props) {
               label="SEE ATTACHED LETTER"
             />
           </div>
-          
+
         </DialogContent>
 
         <DialogActions>
