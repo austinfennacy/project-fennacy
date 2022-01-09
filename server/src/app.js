@@ -117,9 +117,11 @@ app.delete('/logout', async (req, res) => {
 })
 
 app.get('/getSubmittalPdf', async (req, res) => {
-  const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
+  // const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
+  // const url = `${baseUrl}/submittalPdf/${req.query.id}`
 
-  const url = `${baseUrl}/submittalPdf/${req.query.id}`
+  const url = 'https://example.com/' // this is a temporary commit to test if the 
+  // deploy can use puppeteer. REVERT THIS COMMIT AFTER TESTING
   printPdf(url).then(pdf => {
     res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length })
     res.send(pdf)
