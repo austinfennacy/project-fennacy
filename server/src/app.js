@@ -120,7 +120,7 @@ app.get('/getSubmittalPdf', async (req, res) => {
   // const baseUrl = 'http://localhost:3000' // todofix - this will break when deployed
   // const url = `${baseUrl}/submittalPdf/${req.query.id}`
 
-  const url = 'https://example.com/' // this is a temporary commit to test if the 
+  const url = 'https://example.com/' // this is a temporary commit to test if the
   // deploy can use puppeteer. REVERT THIS COMMIT AFTER TESTING
   printPdf(url).then(pdf => {
     res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length })
@@ -129,7 +129,13 @@ app.get('/getSubmittalPdf', async (req, res) => {
 })
 
 async function printPdf(url) {
-  const browser = await puppeteer.launch({ headless: true })
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
+  })
   const page = await browser.newPage()
   await page.goto(url, {waitUntil: 'networkidle0'})
 
