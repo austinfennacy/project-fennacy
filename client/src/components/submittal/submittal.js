@@ -72,7 +72,7 @@ export default function Submittal(props) {
   }
 
   let getSubmittalPdf = () =>
-    axios.get(`/getSubmittalPdf?id=${id}`, {
+    axios.get(`/api/getSubmittalPdf?id=${id}`, {
       responseType: 'arraybuffer',
       headers: {
         'Accept': 'application/pdf'
