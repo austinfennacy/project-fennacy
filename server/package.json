@@ -10,6 +10,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "init_db": "sequelize db:create"
   },
+  "engines": {
+    "node": "14.17.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/austinfennacy/project-fennacy.git"
