@@ -130,7 +130,6 @@ app.get('/getSubmittalPdf', async (req, res) => {
 
 async function printPdf(url) {
   const browser = await puppeteer.launch({
-    headless: true,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
