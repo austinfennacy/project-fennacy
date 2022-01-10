@@ -10,12 +10,13 @@ const db = {};
 let sequelize;
 if (process.env.JAWSDB_URL) {
   // for Heroku deployment
-  sequelize = new Sequelize(process.env.JAWSDB_URL, {});
+  sequelize = new Sequelize(process.env.JAWSDB_URL, {logging: false});
 } else {
   sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
     host: config.development.host,
-      dialect: 'mysql'
-    });
+    dialect: 'mysql',
+    logging: false,
+  });
 }
 
 dir
