@@ -5,4 +5,4 @@ cabextract
 debconf
 wget
 xfonts-utils
-ttf-mscorefonts-installer
+http://mirrors.kernel.org/ubuntu/pool/multiverse/m/msttcorefonts/ttf-mscorefonts-installer_3.8ubuntu2_all.deb
