@@ -2,7 +2,7 @@
 # in the build environment. I need it to get Times New Roman font on Ubuntu.
 
 cabextract
+debconf
 wget
 xfonts-utils
-fontconfig
 ttf-mscorefonts-installer
