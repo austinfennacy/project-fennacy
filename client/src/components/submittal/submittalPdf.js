@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.1vw",
   },
   pdfPrint: {
-    fontFamily: "TimesNewRoman",
+    fontFamily: "'Times New Roman', Times, serif",
     padding: theme.spacing(6),
   },
   todofix: {
