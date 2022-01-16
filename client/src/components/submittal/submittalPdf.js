@@ -351,7 +351,7 @@ export default function SubmittalPdf(props) {
               openDialog={handleDialogState.openSubstitution}
               showEdit={showEdit}>
               <Grid item xs={7} className={classes.noWrap}>
-                {submittal.isSubstitutionUsed ? "🗹 Yes" : "☐ Yes"}
+                {submittal.isSubstitutionUsed ? "✓ Yes" : "☐ Yes"}
               </Grid>
             </EditableBox>
             <SubstitutionDialog
@@ -444,10 +444,10 @@ export default function SubmittalPdf(props) {
               </Grid>
               <Grid item xs={4}>
                   <div>
-                    {submittal.hasWarranty ? "🗹 Yes" : "☐ Yes"}
+                    {submittal.hasWarranty ? "✓ Yes" : "☐ Yes"}
                   </div>
                   <div>
-                    {submittal.hasManuals ? "🗹 Yes" : "☐ Yes"}
+                    {submittal.hasManuals ? "✓ Yes" : "☐ Yes"}
                   </div>
               </Grid>
             </Grid>
@@ -606,19 +606,19 @@ export default function SubmittalPdf(props) {
               showEdit={showEdit}>
               <div className={smallClass}>
                 <div>
-                  {submittal.isDcNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
+                  {submittal.isDcNoExceptionTaken ? "✓" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
                 </div>
                 <div>
-                  {submittal.isDcNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
+                  {submittal.isDcNoExceptionTakenWithModificationNoted ? "✓" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
                 </div>
                 <div>
-                  {submittal.isDcAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
+                  {submittal.isDcAmmendAsNotedAndResubmit ? "✓" : "☐"} AMEND AS NOTED AND RESUBMIT
                 </div>
                 <div>
-                  {submittal.isDcRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
+                  {submittal.isDcRejectedAndResubmit ? "✓" : "☐"} REJECTED AND RESUBMIT
                 </div>
                 <div>
-                  {submittal.isDcSeeAttachedLetter ? "🗹" : "☐"} SEE ATTACHED LETTER
+                  {submittal.isDcSeeAttachedLetter ? "✓" : "☐"} SEE ATTACHED LETTER
                 </div>
               </div>
             </EditableBox>
@@ -668,21 +668,21 @@ export default function SubmittalPdf(props) {
               showEdit={showEdit}>
               <div className={smallClass}>
                 <div>
-                  {submittal.isArchitectNoExceptionTaken ? "🗹" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
+                  {submittal.isArchitectNoExceptionTaken ? "✓" : "☐"} NO EXCEPTION TAKEN RELATIVE TO DESIGN
                 </div>
                 <div>
-                  {submittal.isArchitectNoExceptionTakenWithModificationNoted ? "🗹" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
+                  {submittal.isArchitectNoExceptionTakenWithModificationNoted ? "✓" : "☐"} NO EXCEPTION TAKEN, MODIFICATION NOTED
                 </div>
                 <div>
-                  {submittal.isArchitectAmmendAsNotedAndResubmit ? "🗹" : "☐"} AMEND AS NOTED AND RESUBMIT
+                  {submittal.isArchitectAmmendAsNotedAndResubmit ? "✓" : "☐"} AMEND AS NOTED AND RESUBMIT
                 </div>
                 <div>
-                  {submittal.isArchitectRejectedAndResubmit ? "🗹" : "☐"} REJECTED AND RESUBMIT
+                  {submittal.isArchitectRejectedAndResubmit ? "✓" : "☐"} REJECTED AND RESUBMIT
                 </div>
               </div>
 
               <Box mt={1} className={classes.bold}>
-                Approved Substitution: {submittal.isArchitectApprovedSubmission ? "🗹" : "☐"}
+                Approved Substitution: {submittal.isArchitectApprovedSubmission ? "✓" : "☐"}
               </Box>
             </EditableBox>
             <ArchitectActionsDialog
