@@ -1,8 +1,0 @@
-# this file is used with heroku-buildpack-apt to install linux packages
-# in the build environment. I need it to get Times New Roman font on Ubuntu.
-
-cabextract
-debconf
-wget
-xfonts-utils
-http://mirrors.kernel.org/ubuntu/pool/multiverse/m/msttcorefonts/ttf-mscorefonts-installer_3.8ubuntu2_all.deb
