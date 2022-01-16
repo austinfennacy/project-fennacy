@@ -25,12 +25,12 @@ import SentDialog from './edit/sentDialog'
 
 const useStyles = makeStyles((theme) => ({
   pdfScreen: {
-    fontFamily: "TimesNewRoman",
+    fontFamily: "'Times'",
     padding: "4vw",
     fontSize: "1.1vw",
   },
   pdfPrint: {
-    fontFamily: "'Times New Roman', Times, serif",
+    fontFamily: "'Times'",
     padding: theme.spacing(6),
   },
   todofix: {

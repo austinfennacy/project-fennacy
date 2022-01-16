@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+    font-family: "Times";
+    src: local("Times"),
+     url("./fonts/Times/times.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Times";
+    src: local("Times"),
+     url("./fonts/Times/timesbd.ttf") format("truetype");
+    font-weight: bold;
+}
