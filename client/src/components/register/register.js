@@ -125,9 +125,9 @@ export default function Register() {
   return (
     <div className={classes.fullHeight}>
       <Grid container className={classes.background}>
-        <Grid item sm={4}>
+        <Grid item sm={2} lg={4}>
         </Grid>
-        <Grid item sm={4} className={classes.center}>
+        <Grid item sm={8} lg={4} className={classes.center}>
           <Paper className={classes.paper} square>
             <Grid container direction="column" alignItems="center">
               <h2>
@@ -198,7 +198,7 @@ export default function Register() {
             </Grid>
           </Paper>
         </Grid>
-        <Grid item sm={4}>
+        <Grid item sm={2} lg={4}>
         </Grid>
       </Grid>
     </div>
