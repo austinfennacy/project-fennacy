@@ -27,27 +27,59 @@ My father is an architect, and one day we were talking about how much time his o
 
 ## Project Overview
 
-Project Fennacy is a prototype of what an improved process for my father's office might look like.
+Project Fennacy is a prototype where I tried to improve upon the app my father's office is using.
 
-Before jumping into some of the technical features, lets look at the Microsoft Access app that  Mr. Fennacy's office currently uses, alongside my design:
+Before jumping into some of the features, lets look at the Microsoft Access app that Mr. Fennacy's office currently uses, alongside my design.
+
+### The Overview Table
 
 ![Submittal Table Comparison](./docs/images/submittal-table-comparison.gif)
 
 And here is an existing submittal document that my father has used in his work, compared with the web app version I made to mimic the PDF and the resulting PDF download.
 
+### An Individual Submittal
+
 ![Submittal PDF Comparison](./docs/images/submittal-pdf-comparison.gif)
 
-The existing solution can only be accessed locally on office machines, or by using a VPN into the office network. Anyone that's had to use a VPN for private office tooling knows how frustratingly slow that proces can be. My solution is a web app that can be used remotely, since it is protected via login (a non-prototype version would not allow public account registration). Passwords are hashed using bcrypt, and user sessions are managed by Passport.
+The existing solution can only be accessed locally on office machines, or by using a VPN into the office network. Anyone that's had to use a VPN for private office tooling knows how frustratingly slow that proces can be.
+
+My solution is a web app that can be used remotely, since it is protected via login (a non-prototype version would not allow public account registration). Passwords are hashed using bcrypt, and user sessions are managed by Passport.
+
+### Registration & Login
 
 ![Registration and Login](./docs/images/registration.gif)
 
-The Access app does not automatically sync data between the overview table and the linked PDF documents. Documents must be stored in Box, and architects must save the file's stored path in a field in the Access app. In order to make changes, both the app and the PDF must be separately edited.
+The Access app his office uses does not automatically sync data between the overview table and the linked PDF documents. Documents must be stored in Box, and architects must save the file's stored path in a field in the Access app. In order to make changes, both the app and the PDF must be separately edited.
 
-<!-- ![Update PDF](./docs/images/.gif) -->
+This is an obvious area for improvement, and is trivial for a web app that is also responsible for PDF generation.
 
-TODO PDF download and DRY code
+### Create, Read, Update, & Delete
 
-<!-- ![Update PDF](./docs/images/.gif) -->
+![Full CRUD](./docs/images/full-crud.gif)
+
+Didn't catch all that? Want to click through at your own pace? Try it yourself! [https://pf.austinfennacy.com](https://pf.austinfennacy.com) 
+
+Obviously, making updates propagate throughout the app would allow for architects to quickly change errors in both the PDF and the record table.
+
+### PDF Download
+
+![Update PDF](./docs/images/quick-changes.gif)
+
+(you might have noticed that PDF download doesn't support emoji's, and without users to file tickets, it's probably going to stay that way - the joys of a side project 🙏🥰)
+
+**Thank you** for reading a bit about my side project!
+
+Want more?
+
+- Lets link up on LinkedIn: [https://www.linkedin.com/in/austin-fennacy/](https://www.linkedin.com/in/austin-fennacy/)
+- Check out my personal webpage: [https://austinfennacy.com](https://austinfennacy.com)
+- Continue reading about technologies used: [What I Learned](#what-i-learned)
+- Or, click through this project at your own pace: [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
+
+### 
+
+![Bye!](./docs/images/looney.gif)
+
 
 [🔙 Table of Contents](#table-of-contents)
 
