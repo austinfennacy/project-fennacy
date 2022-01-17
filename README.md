@@ -39,7 +39,7 @@ And here is an existing submittal document that my father has used in his work, 
 
 The existing solution can only be accessed locally on office machines, or by using a VPN into the office network. Anyone that's had to use a VPN for private office tooling knows how frustratingly slow that proces can be. My solution is a web app that can be used remotely, since it is protected via login (a non-prototype version would not allow public account registration). Passwords are hashed using bcrypt, and user sessions are managed by Passport.
 
-<!-- ![Registration and Login](./docs/images/.gif) -->
+![Registration and Login](./docs/images/registration.gif)
 
 The Access app does not automatically sync data between the overview table and the linked PDF documents. Documents must be stored in Box, and architects must save the file's stored path in a field in the Access app. In order to make changes, both the app and the PDF must be separately edited.
 
