@@ -12,8 +12,8 @@ My father is an architect, and one day we were talking about how much time his o
   - 🔨 Additionally, create an account and explore the production build of Project Fennacy at [https://pf.austinfennacy.com](https://pf.austinfennacy.com).
 - **Too much time**
   - 👩‍💻 Browse the publicly-available source code for this project at [https://github.com/austinfennacy/project-fennacy](https://github.com/austinfennacy/project-fennacy).
-    - 👀 If you looking at the source code, I've provided a high-level overview of how the code is structured in the [Basic Architecture](#basic-architecture)
-  - 🏡 If you'd like to clone the project and build it locally, follow the instructions in [Usage: building from a fresh clone](#usage-building-from-a-fresh-clone).
+    - 👀 If you're looking at the source code, I've provided a high-level overview of how the code is structured in the [Basic Architecture](#basic-architecture) section.
+  - 🏡 Clone the project and build it locally (make sure to follow the instructions in [Usage: building from a fresh clone](#usage-building-from-a-fresh-clone)).
 
 ## Table of Contents
 
@@ -22,16 +22,38 @@ My father is an architect, and one day we were talking about how much time his o
 3. [Basic Architecture](#basic-architecture)
 4. [Usage: building from a fresh clone](#usage-building-from-a-fresh-clone)
 5. [FAQ: understanding an Architect's use case](#faq-understanding-an-architects-use-case)
+6. The Production Build: [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
+7. My Website: [https://austinfennacy.com](https://austinfennacy.com)
 
 ## Project Overview
 
-aa
+Project Fennacy is a prototype of what an improved process for my father's office might look like.
+
+Before jumping into some of the technical features, lets look at the Microsoft Access app that  Mr. Fennacy's office currently uses, alongside my design:
+
+![Submittal Table Comparison](./docs/images/submittal-table-comparison.gif)
+
+And here is an existing submittal document that my father has used in his work, compared with the web app version I made to mimic the PDF and the resulting PDF download.
+
+![Submittal PDF Comparison](./docs/images/submittal-pdf-comparison.gif)
+
+The existing solution can only be accessed locally on office machines, or by using a VPN into the office network. Anyone that's had to use a VPN for private office tooling knows how frustratingly slow that proces can be. My solution is a web app that can be used remotely, since it is protected via login (a non-prototype version would not allow public account registration). Passwords are hashed using bcrypt, and user sessions are managed by Passport.
+
+<!-- ![Registration and Login](./docs/images/.gif) -->
+
+The Access app does not automatically sync data between the overview table and the linked PDF documents. Documents must be stored in Box, and architects must save the file's stored path in a field in the Access app. In order to make changes, both the app and the PDF must be separately edited.
+
+<!-- ![Update PDF](./docs/images/.gif) -->
+
+TODO PDF download and DRY code
+
+<!-- ![Update PDF](./docs/images/.gif) -->
 
 [🔙 Table of Contents](#table-of-contents)
 
 ## What I Learned
 
-aa 
+aa
 
 [🔙 Table of Contents](#table-of-contents)
 
@@ -59,6 +81,7 @@ SESSION_SECRET=my_randomly_generated_secret
 
 - start MySQL server
   - if unsuccessfull, check Windows>Start>Services>MySQL80
+- ensure you are in the git branch `local-development` and not `main`, which is used for production
 - navigate to `./server` and run
 
 ```console
@@ -82,7 +105,19 @@ npm start
 
 ## FAQ: understanding an Architect's use case
 
-aa
+### What is a Submittal?
+
+A submittal is a short PDF document that acts as a cover letter for a package of documents being submitted to subcontractors. For example, if my dad was designing a building containing an auditorium, he might send out a submittal for Acoustic Ceiling Samples to Western Building Materials. The submittal acts as a high level overview of a specific material procurement request.
+
+### What is the existing solution?
+
+Currently, my dad's office is using a homebuilt Microsoft Access program to keep track of submittals.
+
+![Submittal Table Comparison](./docs/images/submittal-table-comparison.gif)
+
+This app is mostly a large table with several fields for data entry, but none of these fields are in sync with what is input in PDFs. PDFs are individually populated in Adobe Acrobat from a template Submittal PDF, uploaded to a specific folder in Box (a cloud storage platform), and then the location of that file is copied into the Access app. There is no direct linkage or syncing. Since they don't use a web application with user login, the only way to access these private documents is to VPN into the slow office network.
+
+![Submittal PDF Comparison](./docs/images/submittal-pdf-comparison.gif)
 
 [🔙 Table of Contents](#table-of-contents)
 
@@ -90,7 +125,7 @@ aa
 
 > You may have been told, or felt yourself, that JS is a deeply flawed language that was poorly designed and inconsistently implemented. Many have asserted that it's the worst most popular language in the world; that nobody writes JS because they want to, only because they have to given its place at the center of the web. That's a ridiculous, unhealthy, and wholly condescending claim. Millions of developers write JavaScript every day, and many of them appreciate and respect the language. <https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/preface.md>
 
-Almost a year ago, I recorded this quote to help me perservere with JavaScript's dynamic typing, lack of classes, and messy truthy variables. Coming from a C# background, these were deeply frustrating and challenged the way I thought about code. However, no matter how valid arguments against the language are, JavaScript is ubiquitous with the web, which makes it inherently necessary. After spending countless hours with this project, I can confidently say that I love JavaScript quirks-and-all. I am much better equipped to understand the value it and the node ecosystem provide for rapid, elegant, and powerful web development.
+Almost a year ago, I recorded this quote to help me perservere with JavaScript's dynamic typing, lack of classes, and messy truthy variables. Coming from a C# background, these were deeply frustrating and challenged the way I thought about code. However, no matter how valid arguments against the language are, JavaScript is ubiquitous with the web, which makes it inherently necessary. After spending countless hours with this project, I proudly love JavaScript, quirks-and-all. I am much better equipped to understand the value it and the node ecosystem provide for rapid, elegant, and powerful web development.8
 
 [🔙 Table of Contents](#table-of-contents)
 
