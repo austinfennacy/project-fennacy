@@ -15,6 +15,8 @@ My father is an architect, and one day we were talking about how much time his o
     - 👀 If you're looking at the source code, I've provided a high-level overview of how the code is structured in the [Basic Architecture](#basic-architecture) section.
   - 🏡 Clone the project and build it locally (make sure to follow the instructions in [Usage: building from a fresh clone](#usage-building-from-a-fresh-clone)).
 
+---
+
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
@@ -24,6 +26,9 @@ My father is an architect, and one day we were talking about how much time his o
 5. [FAQ: understanding an Architect's use case](#faq-understanding-an-architects-use-case)
 6. The Production Build: [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
 7. My Website: [https://austinfennacy.com](https://austinfennacy.com)
+8. LinkedIn: [https://www.linkedin.com/in/austin-fennacy/](https://www.linkedin.com/in/austin-fennacy/)
+
+---
 
 ## Project Overview
 
@@ -59,7 +64,7 @@ This is an obvious area for improvement, and is trivial for a web app that is al
 
 Didn't catch all that? Want to click through at your own pace? Try it yourself! [https://pf.austinfennacy.com](https://pf.austinfennacy.com) 
 
-Obviously, making updates propagate throughout the app would allow for architects to quickly change errors in both the PDF and the record table.
+Obviously, making updates propagate throughout the app would allow for architects to quickly correct errors in both the PDF and the record table.
 
 ### PDF Download
 
@@ -76,12 +81,11 @@ Want more?
 - Continue reading about technologies used: [What I Learned](#what-i-learned)
 - Or, click through this project at your own pace: [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
 
-### 
-
 ![Bye!](./docs/images/looney.gif)
 
-
 [🔙 Table of Contents](#table-of-contents)
+
+---
 
 ## What I Learned
 
@@ -89,11 +93,90 @@ aa
 
 [🔙 Table of Contents](#table-of-contents)
 
+---
+
 ## Basic Architecture
 
 Project Fennacy uses independent server and client projects, located in `./server` and `./client`.
 
+For brevity, only noteworthy paths and files have been outlined.
+
+### Server Overview
+
+from `./server/src`
+
+```console
+./server/src
+├───models
+│   └───enums
+├───app.js
+└───passport-config.js
+```
+
+`models/`: where Sequelize model templates ("classes", in a sense) are stored.
+
+`app.js`: runs an express server to handle API routing, and contains a majority of the server's logic.
+
+- The Client project will use javascript `fetch()` to retrieve data from the API built in this file.
+- Sequelize ORM is used inside various GET/POST/PUT/DELETE method to handle data
+- Puppeteer is used in the server to launch a headless browser, navigate to the URL of the "raw" submittal, generate a PDF, and return this data to the Client for downloading.
+- Crude input validation is performed.
+
+`passport-config.js`: handles bcrypt password hashing and general passport session management.
+
+- in a larger project, I would like to refactor out business logic from `app.js` into modules like this one.
+
+### Client Overview
+
+from `./client`
+
+```console
+./client
+├───public
+│   └───_redirects
+└───src
+```
+
+`public/_redirects`: contains important production redirects that allow for React to seamlessly handle reloads, as well as correctly routing `fetch()` requests to the server's API endpoints
+
+from `./client/src`
+
+```console
+./client/src
+├───components
+│   ├───login
+│   ├───navbar
+│   ├───notFound
+│   ├───register
+│   ├───submittal
+│   │   └───edit
+│   └───submittalTable
+├───contexts
+│   ├───auth
+│   ├───readme
+│   └───spinner
+├───fonts
+│   └───Times
+└───App.js
+```
+
+`components/`: where the Client project stores various React **components**.
+
+- Larger components, such as the `submittal.js` and it's 19 unique edit dialog components, are broken out into additional directories and modules
+
+`contexts/`: where the Client project stores various React **contexts**.
+
+- Using contexts was invaluable for sharing state without drilling it into each component tree.
+- `contexts/auth/` contained all auth (is user logged in?) logic, allowing for components to cleanly protect themselves against unauthorized users in a single line of code: `const { isAuthed } = useContext(AuthContext)`.
+- `contexts/spinner/` allowed code that used `fetch()` to easily show the user a spinner while waiting for the server to respond with data.
+
+`fonts/Times/`: please don't tell the Microsoft recruiter I did this
+
+`App.js`: runs the root React node, handles client-side routing, and contains additional authorization-checking logic to protect routes.
+
 [🔙 Table of Contents](#table-of-contents)
+
+---
 
 ## Usage: Building from a Fresh Clone
 
@@ -135,6 +218,8 @@ npm start
 
 [🔙 Table of Contents](#table-of-contents)
 
+---
+
 ## FAQ: understanding an Architect's use case
 
 ### What is a Submittal?
@@ -153,6 +238,8 @@ This app is mostly a large table with several fields for data entry, but none of
 
 [🔙 Table of Contents](#table-of-contents)
 
+---
+
 ## Motivation
 
 > You may have been told, or felt yourself, that JS is a deeply flawed language that was poorly designed and inconsistently implemented. Many have asserted that it's the worst most popular language in the world; that nobody writes JS because they want to, only because they have to given its place at the center of the web. That's a ridiculous, unhealthy, and wholly condescending claim. Millions of developers write JavaScript every day, and many of them appreciate and respect the language. <https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/preface.md>
@@ -160,6 +247,8 @@ This app is mostly a large table with several fields for data entry, but none of
 Almost a year ago, I recorded this quote to help me perservere with JavaScript's dynamic typing, lack of classes, and messy truthy variables. Coming from a C# background, these were deeply frustrating and challenged the way I thought about code. However, no matter how valid arguments against the language are, JavaScript is ubiquitous with the web, which makes it inherently necessary. After spending countless hours with this project, I proudly love JavaScript, quirks-and-all. I am much better equipped to understand the value it and the node ecosystem provide for rapid, elegant, and powerful web development.8
 
 [🔙 Table of Contents](#table-of-contents)
+
+---
 
 ## Thanks!
 
