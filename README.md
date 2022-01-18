@@ -7,7 +7,7 @@ My father is an architect, and one day we were talking about how much time his o
 - **1 minute**
   - 📷 Browse GIFs of the project and technologies used in the [Project Overview](#project-overview).
 - **5 minutes**
-  - 🔬 Additionally, browse a more complete list of the technologies used in [What I Learned](#what-i-learned).
+  - 🔬 Additionally, browse a more complete list of the technologies used in [Code Highlights Reel](#code-highlights-reel).
 - **10 minutes**
   - 🔨 Additionally, create an account and explore the production build of Project Fennacy at [https://pf.austinfennacy.com](https://pf.austinfennacy.com).
 - **Too much time**
@@ -20,7 +20,7 @@ My father is an architect, and one day we were talking about how much time his o
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
-2. [What I Learned](#what-i-learned)
+2. [Code Highlights Reel](#code-highlights-reel)
 3. [Basic Architecture](#basic-architecture)
 4. [Usage: building from a fresh clone](#usage-building-from-a-fresh-clone)
 5. [FAQ: understanding an Architect's use case](#faq-understanding-an-architects-use-case)
@@ -78,7 +78,7 @@ Want more?
 
 - Lets link up on LinkedIn: [https://www.linkedin.com/in/austin-fennacy/](https://www.linkedin.com/in/austin-fennacy/)
 - Check out my personal webpage: [https://austinfennacy.com](https://austinfennacy.com)
-- Continue reading about technologies used: [What I Learned](#what-i-learned)
+- Continue reading about technologies used: [Code Highlights Reel](#code-highlights-reel)
 - Or, click through this project at your own pace: [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
 
 ![Bye!](./docs/images/looney.gif)
@@ -87,9 +87,74 @@ Want more?
 
 ---
 
-## What I Learned
+## Code Highlights Reel
 
-aa
+Before this project, I had only ever used JavaScript to crudely manage state of an HTML page. My understanding was limited and my gripes were plentiful. After this project, not only do I see JavaScript's fluidity as it's superhero strength, but I also see the role the broader node ecosystem provides in fortifying this fully comprehensive web development technology.
+
+Here's a list of technology I learned from scratch on this project, followed by a brief selection of code I found delightful.
+
+| Tool | Use |
+|--|--|
+| React | Component-based user interface library for the Client |
+| Material-UI | React css templates and tools |
+| React Router | Client side routing |
+| React Spinners | Prebuilt loading spinners |
+| Express | Web server framework for Node |
+| Express Session | Handled server sessions to store user data between HTTP requests |
+| bcrypt | Industry-standard password hash generator |
+| Passport | Authentication for Express servers |
+| Puppeteer | Headless chrome browser, used to generate PDFs |
+| Sequelize | Promise-based Node ORM for MySQL |
+| MySQL | Open-source RDBMS |
+| dotenv | Loads env variables, so I don't commit my secrets 😉 |
+
+### DRY PDF Rendering
+
+There are several ways to serve a PDF of dynamic data to a user, such as [jsPDF](https://stackoverflow.com/a/778897/9193938), which allow you to write JavaScript code and turn it into a PDF. The two largest problems I have with this approach are
+
+1. users will benefit from seeing their PDF in-app before downloading it, and
+2. developers will have to write PDFs using the library's API, instead of HTML and CSS.
+
+Writing code such as
+
+```js
+var doc = new jsPDF()
+doc.text('Hello world!', 10, 10)
+doc.save('a4.pdf')
+```
+
+means not only will devs have to separately mantain a server version and a client version, but they will also be subjected to that packages microscopic community. Building a single source of truth in HTML and CSS means devs can draw upon a much larger ecosystem, and can use the same code for downloads and web rendering.
+
+Instead, I chose to write all PDF code inside of the SubmittalPdf React component. The end user sees this component in a webpage containing the navbar, sidebar, a dark background, and selectable edit boxes served at the url `https://pf.austinfennacy.com/submittal/:uuid`. The same component is reused standalone at `https://pf.austinfennacy.com/submittalPdf/:uuid` so that Puppeteer can spin up a headless Chrome browser, navigate to the submittal, generate a PDF of the webpage, and return the dynamically generated PDF to the user for downloading.
+
+![DRY PDF Rendering](./docs/images/dry-pdf-component.png)
+
+### Responsive, Reusable Edit Highlighting
+
+Another creative piece of code I enjoyed making was the EditableBox component (the light blue box which encapsulates portions of the PDF and allows a user to click and edit data).
+
+A single component neatly wraps each of the PDF portions, can be shown or hidden in the web, and opens up the correct edit dialog when clicked:
+
+![Editable Box Component](./docs/images/editable-box-component.gif)
+
+This means that the component contained in `./client/src/components/submittal/edit/editableBox.js` can cleanly encapsulate any portion of the PDF, and only needs to pass whether or not the box is shown or hidden, as well as what edit dialog should be opened upon a click.
+
+```jsx
+<Grid item xs={7}>
+  <label>
+    Description:
+  </label>
+  <EditableBox
+    openDialog={handleDialogState.openDescription}
+    showEdit={showEdit}>
+    <div>
+      {submittal.description}
+    </div>
+  </EditableBox>
+</Grid>
+```
+
+This leaves the SubmittalPdf component cleanly unaware of the messy EditableBox implementation logic.
 
 [🔙 Table of Contents](#table-of-contents)
 
@@ -117,8 +182,8 @@ from `./server/src`
 
 `app.js`: runs an express server to handle API routing, and contains a majority of the server's logic.
 
-- The Client project will use javascript `fetch()` to retrieve data from the API built in this file.
-- Sequelize ORM is used inside various GET/POST/PUT/DELETE method to handle data
+- The Client project will use javascript `fetch()` to retrieve data from the HTTP request endpoints in this file.
+- Sequelize ORM is used inside various HTTP request endpoints to handle data
 - Puppeteer is used in the server to launch a headless browser, navigate to the URL of the "raw" submittal, generate a PDF, and return this data to the Client for downloading.
 - Crude input validation is performed.
 
@@ -244,7 +309,7 @@ This app is mostly a large table with several fields for data entry, but none of
 
 > You may have been told, or felt yourself, that JS is a deeply flawed language that was poorly designed and inconsistently implemented. Many have asserted that it's the worst most popular language in the world; that nobody writes JS because they want to, only because they have to given its place at the center of the web. That's a ridiculous, unhealthy, and wholly condescending claim. Millions of developers write JavaScript every day, and many of them appreciate and respect the language. <https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/preface.md>
 
-Almost a year ago, I recorded this quote to help me perservere with JavaScript's dynamic typing, lack of classes, and messy truthy variables. Coming from a C# background, these were deeply frustrating and challenged the way I thought about code. However, no matter how valid arguments against the language are, JavaScript is ubiquitous with the web, which makes it inherently necessary. After spending countless hours with this project, I proudly love JavaScript, quirks-and-all. I am much better equipped to understand the value it and the node ecosystem provide for rapid, elegant, and powerful web development.8
+Almost a year ago, I recorded this quote to help me perservere with JavaScript's dynamic typing, lack of classes, and messy truthy variables. Coming from a C# background, these were deeply frustrating and challenged the way I thought about code. However, no matter how valid arguments against the language are, JavaScript is ubiquitous with the web, which makes it inherently necessary. After spending countless hours with this project, I proudly love JavaScript, quirks-and-all. I am much better equipped to understand the value it and the node ecosystem provide for rapid, elegant, and powerful web development.
 
 [🔙 Table of Contents](#table-of-contents)
 
