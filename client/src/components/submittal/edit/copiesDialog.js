@@ -28,7 +28,7 @@ export default function CopiesDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault()
 
-    fetch(`/api/submittal/updateCopies/${props.values.id}`, {
+    fetch(`/submittal/updateCopies/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

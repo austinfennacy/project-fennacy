@@ -64,7 +64,7 @@ function Logout() {
   const classes = useStyles();
 
   function handleLogout() {
-    fetch('/api/logout', {
+    fetch('/logout', {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',

@@ -97,7 +97,7 @@ export default function Register() {
   const handleRegister = (event) => {
     setLoading(true)
 
-    fetch('/api/register', {
+    fetch('/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

@@ -91,7 +91,7 @@ export default function ActionsDropdown(props) {
     setOpenDelete(false)
   }
   const handleSubmitDelete = () => {
-    fetch(`/api/submittal/${props.submittal.id}`, {
+    fetch(`/submittal/${props.submittal.id}`, {
       method: 'DELETE'
     })
       .then(res => res.json())

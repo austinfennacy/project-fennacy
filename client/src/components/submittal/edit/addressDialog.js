@@ -26,7 +26,7 @@ export default function AddressDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/api/submittal/updateAddress/${props.values.submittalId}`, {
+    fetch(`/submittal/updateAddress/${props.values.submittalId}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

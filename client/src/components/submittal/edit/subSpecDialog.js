@@ -20,7 +20,7 @@ export default function SubSpecDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/api/submittal/updateSubSpec/${props.values.id}`, {
+    fetch(`/submittal/updateSubSpec/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

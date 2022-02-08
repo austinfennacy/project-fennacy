@@ -28,7 +28,7 @@ export default function SentDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault()
 
-    fetch(`/api/submittal/updateSent/${props.values.id}`, {
+    fetch(`/submittal/updateSent/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
