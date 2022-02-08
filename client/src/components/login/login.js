@@ -131,7 +131,8 @@ export default function Login() {
         setErrorText(res.err)
       }
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => setLoading(false))
   }
 
   return (

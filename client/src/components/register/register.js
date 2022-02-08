@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -8,6 +8,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from "@reach/router";
 import Box from '@material-ui/core/Box';
+import { SpinnerContext } from '../../contexts/spinner/SpinnerContext';
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -75,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
   const classes = useStyles();
+  const { setLoading } = useContext(SpinnerContext)
 
   const [formValues, setFormValues] = useState();
   const handleInputChange = (e) => {
@@ -93,6 +95,8 @@ export default function Register() {
   const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
 
   const handleRegister = (event) => {
+    setLoading(true)
+
     fetch('/api/register', {
       method: 'POST',
       headers: {
@@ -101,7 +105,10 @@ export default function Register() {
       },
       body: JSON.stringify(formValues)
     })
-    .then(res => res.json())
+    .then(res => {
+      setLoading(false)
+      return res.json()
+    })
     .then(async function (data) {
       if (data.success) {
         setShowError(false)
@@ -119,7 +126,8 @@ export default function Register() {
         setErrorText(data.err)
       }
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => setLoading(false))
   };
 
   return (
