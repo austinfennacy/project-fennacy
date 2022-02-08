@@ -20,7 +20,7 @@ export default function ProjectDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/api/submittal/updateProject/${props.values.id}`, {
+    fetch(`/submittal/updateProject/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

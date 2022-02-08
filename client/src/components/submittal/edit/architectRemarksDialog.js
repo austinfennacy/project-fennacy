@@ -24,7 +24,7 @@ export default function ArchitectRemarksDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault()
 
-    fetch(`/api/submittal/updateArchitectRemarks/${props.values.id}`, {
+    fetch(`/submittal/updateArchitectRemarks/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

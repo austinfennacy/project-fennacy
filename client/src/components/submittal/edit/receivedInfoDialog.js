@@ -30,7 +30,7 @@ export default function ReceivedInfoDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault()
 
-    fetch(`/api/submittal/updateReceivedInfo/${props.values.id}`, {
+    fetch(`/submittal/updateReceivedInfo/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

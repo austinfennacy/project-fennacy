@@ -75,7 +75,7 @@ export default function SubmittalCreateUpdateDialog(props) {
   const handleCreate = (event) => {
     event.preventDefault();
 
-    fetch('/api/submittal/', {
+    fetch('/submittal/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -95,7 +95,7 @@ export default function SubmittalCreateUpdateDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/api/submittal/${props?.values?.id}`, {
+    fetch(`/submittal/${props?.values?.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

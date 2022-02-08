@@ -29,7 +29,7 @@ export default function TransmittedDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault()
 
-    fetch(`/api/submittal/updateTransmitted/${props.values.id}`, {
+    fetch(`/submittal/updateTransmitted/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
