@@ -19,7 +19,7 @@ export default function DescriptionDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateDescription/${props.values.id}`, {
+    fetch(`/api/submittal/updateDescription/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

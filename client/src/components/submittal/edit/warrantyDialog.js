@@ -24,7 +24,7 @@ export default function WarrantyDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateWarranty/${props.values.id}`, {
+    fetch(`/api/submittal/updateWarranty/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

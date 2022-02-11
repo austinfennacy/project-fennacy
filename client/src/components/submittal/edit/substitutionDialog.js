@@ -24,7 +24,7 @@ export default function SubstitutionDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateSubstitution/${props.values.id}`, {
+    fetch(`/api/submittal/updateSubstitution/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

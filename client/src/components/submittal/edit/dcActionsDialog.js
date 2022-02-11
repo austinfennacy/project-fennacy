@@ -24,7 +24,7 @@ export default function DcActionsDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    fetch(`/submittal/updateDcActions/${props.values.id}`, {
+    fetch(`/api/submittal/updateDcActions/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

@@ -74,7 +74,7 @@ export default function SubmittalTable() {
   const fetchSubmittals = () => {
     setLoading(true)
 
-    fetch('/submittals')
+    fetch('/api/submittals')
       .then(res => res.json())
       .then((res) => {
         if (res.success) {
@@ -154,7 +154,7 @@ function SeedSubmittals({fetchSubmittals}) {
   const classes = useStyles()
 
   const handleSeed = () => {
-    fetch('/seedSubmittals', {
+    fetch('/api/seedSubmittals', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

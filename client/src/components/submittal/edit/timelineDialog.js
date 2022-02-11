@@ -19,7 +19,7 @@ export default function TimelineDialog(props) {
   const handleUpdate = (event) => {
     event.preventDefault()
 
-    fetch(`/submittal/updateTimeline/${props.values.id}`, {
+    fetch(`/api/submittal/updateTimeline/${props.values.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

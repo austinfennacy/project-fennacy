@@ -72,7 +72,7 @@ export default function Submittal(props) {
   }
 
   let getSubmittalPdf = () =>
-    axios.get(`/getSubmittalPdf?id=${id}`, {
+    axios.get(`/api/getSubmittalPdf?id=${id}`, {
       responseType: 'arraybuffer',
       headers: {
         'Accept': 'application/pdf'
@@ -98,7 +98,7 @@ export default function Submittal(props) {
   useEffect(() => {
     setLoading(true)
 
-    fetch(`/submittal/${id}`)
+    fetch(`/api/submittal/${id}`)
       .then(res => res.json())
       .then((submittalJson) => setSubmittal(submittalJson))
       .finally(() => setLoading(false))

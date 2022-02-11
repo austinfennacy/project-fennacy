@@ -106,7 +106,7 @@ export default function SubmittalPdf(props) {
     // https://stackoverflow.com/questions/55840294
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
-  const fetchSubmittal = () => fetch(`/submittal/${id}`)
+  const fetchSubmittal = () => fetch(`/api/submittal/${id}`)
     .then(res => res.json())
     .then((submittalJson) => setSubmittal(submittalJson))
 
