@@ -93,8 +93,7 @@ function Readme({showReadme, setShowReadme}) {
           role="presentation"
           onKeyDown={toggleDrawer(false)}
         >
-          <ReactMarkdown
-            >
+          <ReactMarkdown>
             {markdown}
           </ReactMarkdown>
         </div>
