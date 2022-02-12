@@ -46,7 +46,7 @@ And here is an existing submittal document that my father has used in his work, 
 
 ![Submittal PDF Comparison](https://pf.austinfennacy.com/images/submittal-pdf-comparison.gif)
 
-The existing solution can only be accessed locally on office machines, or by using a VPN into the office network. Anyone that's had to use a VPN for private office tooling knows how frustratingly slow that proces can be.
+The existing solution can only be accessed locally on office machines, or by using a VPN into the office network. Anyone that's had to use a VPN for private office tooling knows how frustratingly slow that process can be.
 
 My solution is a web app that can be used remotely, since it is protected via login (a non-prototype version would not allow public account registration). Passwords are hashed using bcrypt, and user sessions are managed by Passport.
 
@@ -89,7 +89,7 @@ Want more?
 
 ## Code Highlights Reel
 
-Before this project, I had only ever used JavaScript to crudely manage state of an HTML page. My understanding was limited and my gripes were plentiful. After this project, not only do I see JavaScript's fluidity as it's superhero strength, but I also see the role the broader node ecosystem provides in fortifying this fully comprehensive web development technology.
+Before this project, I had only ever used JavaScript to crudely manage state of an HTML page. My understanding was limited and my gripes were plentiful. After this project, not only do I see JavaScript's fluidity as its superhero strength, but I also see the role the broader node ecosystem provides in fortifying this fully comprehensive web development technology.
 
 Here's a list of technology I learned from scratch on this project, followed by a brief selection of code I found delightful.
 
@@ -103,7 +103,7 @@ Here's a list of technology I learned from scratch on this project, followed by 
 | Express Session | Handled server sessions to store user data between HTTP requests |
 | bcrypt | Industry-standard password hash generator |
 | Passport | Authentication for Express servers |
-| Puppeteer | Headless chrome browser, used to generate PDFs |
+| Puppeteer | Headless Chrome browser, used to generate PDFs |
 | Sequelize | Promise-based Node ORM for MySQL |
 | MySQL | Open-source RDBMS |
 | dotenv | Loads env variables, so I don't commit my secrets 😉 |
@@ -123,7 +123,7 @@ doc.text('Hello world!', 10, 10)
 doc.save('a4.pdf')
 ```
 
-means not only will devs have to separately mantain a server version and a client version, but they will also be subjected to that packages microscopic community. Building a single source of truth in HTML and CSS means devs can draw upon a much larger ecosystem, and can use the same code for downloads and web rendering.
+means not only will devs have to separately maintain a server version and a client version, but they will also be subjected to that packages' microscopic community. Building a single source of truth in HTML and CSS means devs can draw upon a much larger ecosystem, and can use the same code for downloads and web rendering.
 
 Instead, I chose to write all PDF code inside of the SubmittalPdf React component. The end user sees this component in a webpage containing the navbar, sidebar, a dark background, and selectable edit boxes served at the url `https://pf.austinfennacy.com/submittal/:uuid`. The same component is reused standalone at `https://pf.austinfennacy.com/submittalPdf/:uuid` so that Puppeteer can spin up a headless Chrome browser, navigate to the submittal, generate a PDF of the webpage, and return the dynamically generated PDF to the user for downloading.
 
@@ -254,7 +254,7 @@ from `./client/src`
 
 `components/`: where the Client project stores various React **components**.
 
-- Larger components, such as the `submittal.js` and it's 19 unique edit dialog components, are broken out into additional directories and modules
+- Larger components, such as the `submittal.js` and its 19 unique edit dialog components, are broken out into additional directories and modules
 
 `contexts/`: where the Client project stores various React **contexts**.
 
