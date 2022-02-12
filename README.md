@@ -25,8 +25,8 @@ My father is an architect, and one day we were talking about how much time his o
 4. [Usage: building from a fresh clone](#usage-building-from-a-fresh-clone)
 5. [FAQ: understanding an Architect's use case](#faq-understanding-an-architects-use-case)
 6. The Production Build: [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
-7. My Website: [https://austinfennacy.com](https://austinfennacy.com)
-8. LinkedIn: [https://www.linkedin.com/in/austin-fennacy/](https://www.linkedin.com/in/austin-fennacy/)
+7. The Source Code: [https://github.com/austinfennacy/project-fennacy](https://github.com/austinfennacy/project-fennacy)
+8. My LinkedIn: [https://www.linkedin.com/in/austin-fennacy/](https://www.linkedin.com/in/austin-fennacy/)
 
 ---
 
