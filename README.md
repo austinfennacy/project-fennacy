@@ -62,7 +62,7 @@ This is an obvious area for improvement, and is trivial for a web app that is al
 
 ![Full CRUD](./docs/images/full-crud.gif)
 
-Didn't catch all that? Want to click through at your own pace? Try it yourself! [https://pf.austinfennacy.com](https://pf.austinfennacy.com) 
+Didn't catch all that? Want to click through at your own pace? Try it yourself! [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
 
 Obviously, making updates propagate throughout the app would allow for architects to quickly correct errors in both the PDF and the record table.
 
@@ -155,6 +155,33 @@ This means that the component contained in `./client/src/components/submittal/ed
 ```
 
 This leaves the SubmittalPdf component cleanly unaware of the messy EditableBox implementation logic.
+
+### README.md from anywhere you'd like!
+
+I wanted to write a thorough README.md for anyone that stumbles across this project in the future (including myself!). This information is important to display to anyone viewing the project on GitHub, but I realized having an overview of the application's functionality would be nice to have inside the application as well! In case you didn't notice, the overview you're reading can be seen from both GitHub, as well as inside the production build after clicking on the (?) icon in the bottom right corner.
+
+![README from Production, or from GitHub!](./docs/images/readme-production-and-github.gif)
+
+Displaying this README.md inside of HTML wasn't trivial for two reasons. First, I had to convert the README.md syntax to HTML, but a quick search lead me to the package `ReactMarkdown` to do the conversion. It worked like a charm, and I was able to simply write
+
+```jsx
+<ReactMarkdown>
+  {markdown}
+</ReactMarkdown>
+```
+
+ inside my JSX. The harder problem to overcome was reaching "outside" of the client directory to reference `/client/../README.md`, given it was not contained inside the React project's `/src` folder:
+
+```console
+./project-fennacy
+├───client
+│   └───src
+└───README.md
+```
+
+By default, `create-react-app` restricts users from doing this (and for good reasons, which I would soon discover). Nevertheless, the goal of this project was to learn, so I didn't mind experimenting with bad practices. [A StackOverflow answer](https://stackoverflow.com/a/55298684/9193938) explained that by running dev and production builds with the package `react-app-rewired` instead of `react`, I was able to "remove the ModuleScopePlugin from the used WebPack plugins, but leave the rest [and remove] the necessity to eject". Now I was able to reference my `README.md` from inside my React application, or any file in my system for that matter!
+
+While I think this hack has a charming effect, it comes with drawbacks. The main "gotcha" I encountered was that since my Netlify build was configured to only redeploy when the `client` subdirectory had changes, my project would not automatically redeploy to production if changes were only made to the unchecked `README.md` file. This is not appropriate for a serious codebase, but given the context I find manually clicking the Netlify "Trigger deploy" button quite tolerable.
 
 [🔙 Table of Contents](#table-of-contents)
 
