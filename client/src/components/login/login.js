@@ -9,6 +9,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { Link } from "@reach/router";
 import Box from '@material-ui/core/Box';
 import { SpinnerContext } from '../../contexts/spinner/SpinnerContext';
+import Alert from '@material-ui/lab/Alert';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   center: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -31,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     width: 350,
     backgroundColor: 'white',
     boxShadow: '0 0 16px 2px rgb(153, 10, 0, .3)',
+  },
+  alert: {
+    marginTop: '20px',
+    width: 420,
   },
   successBox: {
     border: '1px solid hsl(120, 100%, 40%)',
@@ -71,6 +78,16 @@ const useStyles = makeStyles((theme) => ({
     height: 36,
     padding: '0 16px',
     margin: '4px 0'
+  },
+  githubButton: {
+    background: 'linear-gradient(45deg, hsl(216, 75%, 20%) 30%, hsl(212, 60%, 30%) 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '2px 2px 5px 0px rgba(33, 203, 243, .3)',
+    color: 'white',
+    height: 36,
+    padding: '0 16px',
+    margin: '16px 0 4px 0'
   },
 }))
 
@@ -183,7 +200,6 @@ export default function Login() {
                 variant="contained"
                 className={classes.loginButton}
                 onClick={handleLogin}
-                align="center"
                 startIcon={<VpnKeyIcon />}
                 >
                 Login
@@ -193,7 +209,6 @@ export default function Login() {
                 <Button
                   variant="contained"
                   className={classes.registerButton}
-                  align="center"
                   startIcon={<AddIcon />}
                   >
                   Register
@@ -201,6 +216,22 @@ export default function Login() {
               </Link>
             </Grid>
           </Paper>
+          <Alert severity="info" icon={false} className={classes.alert}>
+            <div className={classes.center}>
+              Heads up - This project is open source, and its README contains a 60 second project overview and
+              much more! You can view this information on GitHub, or by clicking the (?) icon in the bottom
+              right corner.
+              <Button
+                variant="contained"
+                className={classes.githubButton}
+                href="https://github.com/austinfennacy/project-fennacy"
+                target="_blank"
+                startIcon={<GitHubIcon />}
+                >
+                  View on GitHub
+              </Button>
+            </div>
+          </Alert>
         </Grid>
         <Grid item sm={2} lg={4}>
         </Grid>
