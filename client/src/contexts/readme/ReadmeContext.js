@@ -6,6 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/core/styles";
 import readmePath from '../../../../README.md'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -93,7 +94,9 @@ function Readme({showReadme, setShowReadme}) {
           role="presentation"
           onKeyDown={toggleDrawer(false)}
         >
-          <ReactMarkdown>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+          >
             {markdown}
           </ReactMarkdown>
         </div>
