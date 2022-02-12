@@ -38,13 +38,13 @@ Before jumping into some of the features, lets look at the Microsoft Access app 
 
 ### The Overview Table
 
-![Submittal Table Comparison](./docs/images/submittal-table-comparison.gif)
+![Submittal Table Comparison](https://pf.austinfennacy.com/images/submittal-table-comparison.gif)
 
 And here is an existing submittal document that my father has used in his work, compared with the web app version I made to mimic the PDF and the resulting PDF download.
 
 ### An Individual Submittal
 
-![Submittal PDF Comparison](./docs/images/submittal-pdf-comparison.gif)
+![Submittal PDF Comparison](https://pf.austinfennacy.com/images/submittal-pdf-comparison.gif)
 
 The existing solution can only be accessed locally on office machines, or by using a VPN into the office network. Anyone that's had to use a VPN for private office tooling knows how frustratingly slow that proces can be.
 
@@ -52,7 +52,7 @@ My solution is a web app that can be used remotely, since it is protected via lo
 
 ### Registration & Login
 
-![Registration and Login](./docs/images/registration.gif)
+![Registration and Login](https://pf.austinfennacy.com/images/registration.gif)
 
 The Access app his office uses does not automatically sync data between the overview table and the linked PDF documents. Documents must be stored in Box, and architects must save the file's stored path in a field in the Access app. In order to make changes, both the app and the PDF must be separately edited.
 
@@ -60,7 +60,7 @@ This is an obvious area for improvement, and is trivial for a web app that is al
 
 ### Create, Read, Update, & Delete
 
-![Full CRUD](./docs/images/full-crud.gif)
+![Full CRUD](https://pf.austinfennacy.com/images/full-crud.gif)
 
 Didn't catch all that? Want to click through at your own pace? Try it yourself! [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
 
@@ -68,7 +68,7 @@ Obviously, making updates propagate throughout the app would allow for architect
 
 ### PDF Download
 
-![Update PDF](./docs/images/quick-changes.gif)
+![Update PDF](https://pf.austinfennacy.com/images/quick-changes.gif)
 
 (you might have noticed that PDF download doesn't support emoji's, and without users to file tickets, it's probably going to stay that way - the joys of a side project 🙏🥰)
 
@@ -81,7 +81,7 @@ Want more?
 - Continue reading about technologies used: [Code Highlights Reel](#code-highlights-reel)
 - Or, click through this project at your own pace: [https://pf.austinfennacy.com](https://pf.austinfennacy.com)
 
-![Bye!](./docs/images/looney.gif)
+![Bye!](https://pf.austinfennacy.com/images/looney.gif)
 
 [🔙 Table of Contents](#table-of-contents)
 
@@ -127,7 +127,7 @@ means not only will devs have to separately mantain a server version and a clien
 
 Instead, I chose to write all PDF code inside of the SubmittalPdf React component. The end user sees this component in a webpage containing the navbar, sidebar, a dark background, and selectable edit boxes served at the url `https://pf.austinfennacy.com/submittal/:uuid`. The same component is reused standalone at `https://pf.austinfennacy.com/submittalPdf/:uuid` so that Puppeteer can spin up a headless Chrome browser, navigate to the submittal, generate a PDF of the webpage, and return the dynamically generated PDF to the user for downloading.
 
-![DRY PDF Rendering](./docs/images/dry-pdf-component.png)
+![DRY PDF Rendering](https://pf.austinfennacy.com/images/dry-pdf-component.png)
 
 ### Responsive, Reusable Edit Highlighting
 
@@ -135,7 +135,7 @@ Another creative piece of code I enjoyed making was the EditableBox component (t
 
 A single component neatly wraps each of the PDF portions, can be shown or hidden in the web, and opens up the correct edit dialog when clicked:
 
-![Editable Box Component](./docs/images/editable-box-component.gif)
+![Editable Box Component](https://pf.austinfennacy.com/images/editable-box-component.gif)
 
 This means that the component contained in `./client/src/components/submittal/edit/editableBox.js` can cleanly encapsulate any portion of the PDF, and only needs to pass whether or not the box is shown or hidden, as well as what edit dialog should be opened upon a click.
 
@@ -160,7 +160,7 @@ This leaves the SubmittalPdf component cleanly unaware of the messy EditableBox 
 
 I wanted to write a thorough README.md for anyone that stumbles across this project in the future (including myself!). This information is important to display to anyone viewing the project on GitHub, but I realized having an overview of the application's functionality would be nice to have inside the application as well! In case you didn't notice, the overview you're reading can be seen from both GitHub, as well as inside the production build after clicking on the (?) icon in the bottom right corner.
 
-![README from Production, or from GitHub!](./docs/images/readme-production-and-github.gif)
+![README from Production, or from GitHub!](https://pf.austinfennacy.com/images/readme-production-and-github.gif)
 
 Displaying this README.md inside of HTML wasn't trivial for two reasons. First, I had to convert the README.md syntax to HTML, but a quick search lead me to the package `ReactMarkdown` to do the conversion. It worked like a charm, and I was able to simply write
 
@@ -322,11 +322,11 @@ A submittal is a short PDF document that acts as a cover letter for a package of
 
 Currently, my dad's office is using a homebuilt Microsoft Access program to keep track of submittals.
 
-![Submittal Table Comparison](./docs/images/submittal-table-comparison.gif)
+![Submittal Table Comparison](https://pf.austinfennacy.com/images/submittal-table-comparison.gif)
 
 This app is mostly a large table with several fields for data entry, but none of these fields are in sync with what is input in PDFs. PDFs are individually populated in Adobe Acrobat from a template Submittal PDF, uploaded to a specific folder in Box (a cloud storage platform), and then the location of that file is copied into the Access app. There is no direct linkage or syncing. Since they don't use a web application with user login, the only way to access these private documents is to VPN into the slow office network.
 
-![Submittal PDF Comparison](./docs/images/submittal-pdf-comparison.gif)
+![Submittal PDF Comparison](https://pf.austinfennacy.com/images/submittal-pdf-comparison.gif)
 
 [🔙 Table of Contents](#table-of-contents)
 
