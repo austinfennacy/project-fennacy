@@ -91,7 +91,7 @@ Want more?
 
 Before this project, I had only ever used JavaScript to crudely manage state of an HTML page. My understanding was limited and my gripes were plentiful. After this project, not only do I see JavaScript's fluidity as its superhero strength, but I also see the role the broader node ecosystem provides in fortifying this fully comprehensive web development technology.
 
-Here's a list of technology I learned from scratch on this project, followed by a brief selection of code I found delightful.
+Here's a list of technology I used in this project, followed by a brief selection of code I found delightful.
 
 | Tool | Use |
 |--|--|
