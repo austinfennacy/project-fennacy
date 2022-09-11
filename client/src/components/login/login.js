@@ -89,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 16px',
     margin: '16px 0 4px 0'
   },
+  disabled: {
+    backgroundColor: '#ECECEC',
+  }
 }))
 
 export default function Login() {
@@ -122,34 +125,34 @@ export default function Login() {
       },
       body: JSON.stringify(formValues)
     })
-    .then(res => {
-      setLoading(false)
-      return res.json()
-    })
-    .then(async function(res) {
-      if (res.success) {
-        sessionStorage.setItem('isAuthed', 'true')
-        sessionStorage.setItem('user', JSON.stringify( res.user ))
+      .then(res => {
+        setLoading(false)
+        return res.json()
+      })
+      .then(async function (res) {
+        if (res.success) {
+          sessionStorage.setItem('isAuthed', 'true')
+          sessionStorage.setItem('user', JSON.stringify(res.user))
 
-        setShowError(false)
-        setShowSuccess(true)
+          setShowError(false)
+          setShowSuccess(true)
 
-        await sleep(250)
-        setSuccessText(`${successText} .`)
-        await sleep(500)
-        setSuccessText(`${successText} . .`)
-        await sleep(500)
-        setSuccessText(`${successText} . . .`)
-        await sleep(250)
+          await sleep(250)
+          setSuccessText(`${successText} .`)
+          await sleep(500)
+          setSuccessText(`${successText} . .`)
+          await sleep(500)
+          setSuccessText(`${successText} . . .`)
+          await sleep(250)
 
-        window.location = '/'
-      } else {
-        setShowError(true)
-        setErrorText(res.err)
-      }
-    })
-    .catch(error => console.log(error))
-    .finally(() => setLoading(false))
+          window.location = '/'
+        } else {
+          setShowError(true)
+          setErrorText(res.err)
+        }
+      })
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -182,6 +185,8 @@ export default function Login() {
                 margin="normal"
                 name="email"
                 label="Email"
+                disabled
+                className={classes.disabled}
                 fullWidth
                 onChange={handleInputChange}
               />
@@ -192,6 +197,8 @@ export default function Login() {
                 name="password"
                 label="password"
                 type="password"
+                disabled
+                className={classes.disabled}
                 fullWidth
                 onChange={handleInputChange}
               />
@@ -201,7 +208,7 @@ export default function Login() {
                 className={classes.loginButton}
                 onClick={handleLogin}
                 startIcon={<VpnKeyIcon />}
-                >
+              >
                 Login
               </Button>
 
@@ -210,25 +217,29 @@ export default function Login() {
                   variant="contained"
                   className={classes.registerButton}
                   startIcon={<AddIcon />}
-                  >
+                >
                   Register
                 </Button>
               </Link>
             </Grid>
           </Paper>
-          <Alert severity="info" icon={false} className={classes.alert}>
+          <Alert severity="error" icon={false} className={classes.alert}>
             <div className={classes.center}>
-              Heads up - This project is open source, and its README contains a 60 second project overview and
-              much more! You can view this information on GitHub, or by clicking the (?) icon in the bottom
-              right corner.
+              <b style={{marginBottom:"12px"}}>Warning - project no longer live</b>
+
+              I have stopped paying to host my backend for this demo project, so I have disabled log in
+              and use for the hosted version. However, I took several screen recordings in
+              this project's README, so head on over there to see how it looked! The README also contains
+              instructions on how you can build a working version of this project locally. You can view
+              this README on GitHub, or by clicking the (?) icon in the bottom right corner.
               <Button
                 variant="contained"
                 className={classes.githubButton}
                 href="https://github.com/austinfennacy/project-fennacy"
                 target="_blank"
                 startIcon={<GitHubIcon />}
-                >
-                  View on GitHub
+              >
+                View on GitHub
               </Button>
             </div>
           </Alert>
